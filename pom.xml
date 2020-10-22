@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>genesys</name>
-	<description>GeneSys v0.1</description>
+	<description>GeneSys</description>
 
 	<properties>
 		<java.version>11</java.version>

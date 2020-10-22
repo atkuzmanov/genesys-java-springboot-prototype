@@ -8,4 +8,4 @@ ${AnsiColor.BLUE}
 
 ${application.title}
 ${application.formatted-version}
-SpringBoot version: ${spring-boot.formatted-version}
+Spring Boot version: ${spring-boot.formatted-version}
