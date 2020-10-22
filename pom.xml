@@ -40,9 +40,16 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!--actuator - for production features such as /health endpoints etc.-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!--devtools - useful for things such as automatic restart on build etc.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
 		</dependency>
 	</dependencies>
 

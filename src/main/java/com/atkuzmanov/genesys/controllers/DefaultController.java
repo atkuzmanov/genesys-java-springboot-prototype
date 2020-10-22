@@ -1,6 +1,5 @@
 package com.atkuzmanov.genesys.controllers;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @RestController
-@EnableAutoConfiguration
 public class DefaultController {
 
     @RequestMapping("/")
