@@ -12,8 +12,9 @@
 	<artifactId>genesys</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>genesys</name>
+	<name>GeneSys</name>
 	<description>GeneSys</description>
+	<url>https://github.com/atkuzmanov</url>
 
 	<properties>
 		<java.version>11</java.version>
@@ -60,6 +61,17 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>application.properties</include>
+					<include>banner.txt</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>

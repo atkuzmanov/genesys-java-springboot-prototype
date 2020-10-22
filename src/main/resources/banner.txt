@@ -7,9 +7,10 @@ ${AnsiBackground.233}
 ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ╚════██║  ╚██╔╝  ╚════██║
 ╚██████╔╝███████╗██║ ╚████║███████╗███████║   ██║   ███████║
  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-${application.title}
-${application.formatted-version}
+${application.title} ${application.formatted-version}
 ${AnsiColor.2}
+App: ${info.app.name} (v${info.app.version})
+URL: ${info.app.url}
 Spring Boot version: ${spring-boot.formatted-version}
 ${AnsiBackground.DEFAULT}
 ${AnsiColor.DEFAULT}
