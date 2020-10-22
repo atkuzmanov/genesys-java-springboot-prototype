@@ -1,11 +1,15 @@
-${AnsiColor.BLUE}
+${AnsiColor.12}
+${AnsiBackground.233}
+
  ██████╗ ███████╗███╗   ██╗███████╗███████╗██╗   ██╗███████╗
 ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔════╝╚██╗ ██╔╝██╔════╝
 ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ███████╗ ╚████╔╝ ███████╗
 ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ╚════██║  ╚██╔╝  ╚════██║
 ╚██████╔╝███████╗██║ ╚████║███████╗███████║   ██║   ███████║
  ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-
 ${application.title}
 ${application.formatted-version}
+${AnsiColor.2}
 Spring Boot version: ${spring-boot.formatted-version}
+${AnsiBackground.DEFAULT}
+${AnsiColor.DEFAULT}
