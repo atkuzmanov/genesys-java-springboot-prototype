@@ -41,12 +41,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--actuator - for production features such as /health endpoints etc.-->
+        <!-- actuator - for production features such as /health endpoints etc. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--devtools - useful for things such as automatic restart on build etc.-->
+        <!-- devtools - useful for things such as automatic restart on build etc. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -68,6 +68,7 @@
                 <configuration>
                     <delimiters>
                         <delimiter>@</delimiter>
+                        <!-- <delimiter>${*}</delimiter> -->
                     </delimiters>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
