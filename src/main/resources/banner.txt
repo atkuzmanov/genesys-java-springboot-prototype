@@ -1,14 +1,13 @@
 ${AnsiColor.12}
 ${AnsiBackground.233}
 ${AnsiBackground.233}
-${AnsiColor.12}${AnsiBackground.233}     ██████╗ ███████╗███╗   ██╗███████╗███████╗██╗   ██╗███████╗
-${AnsiColor.12}${AnsiBackground.233}    ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔════╝╚██╗ ██╔╝██╔════╝
-${AnsiColor.12}${AnsiBackground.233}    ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ███████╗ ╚████╔╝ ███████╗
-${AnsiColor.12}${AnsiBackground.233}    ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ╚════██║  ╚██╔╝  ╚════██║
-${AnsiColor.12}${AnsiBackground.233}    ╚██████╔╝███████╗██║ ╚████║███████╗███████║   ██║   ███████║
-${AnsiColor.12}${AnsiBackground.233}     ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
-${AnsiColor.2}${AnsiBackground.233}     App: ${info.app.name} (v${info.app.version})
-${AnsiColor.2}${AnsiBackground.233}     URL: ${info.app.url}
-${AnsiColor.2}${AnsiBackground.233}     Spring Boot version: ${spring-boot.formatted-version}
+     ██████╗ ███████╗███╗   ██╗███████╗███████╗██╗   ██╗███████╗
+    ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔════╝╚██╗ ██╔╝██╔════╝
+    ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ███████╗ ╚████╔╝ ███████╗
+    ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ╚════██║  ╚██╔╝  ╚════██║
+    ╚██████╔╝███████╗██║ ╚████║███████╗███████║   ██║   ███████║
+     ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
+${AnsiColor.2}      App: ${info.app.name} (v${info.app.version})
+${AnsiColor.2}      URL: ${info.app.url}
+${AnsiColor.2}      Spring Boot version: ${spring-boot.formatted-version}
 ${AnsiColor.DEFAULT}${AnsiBackground.DEFAULT}
-${AnsiColor.DEFAULT}
