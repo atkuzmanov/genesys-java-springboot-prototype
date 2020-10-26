@@ -41,12 +41,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- actuator - for production features such as /health endpoints etc. -->
+        <!-- Actuator - for production features such as /health endpoints etc. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- devtools - useful for things such as automatic restart on build etc. -->
+        <!-- Devtools - useful for things such as automatic restart on build etc. -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -56,7 +56,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-        <!-- security - uncomment to enable security
+        <!-- Security - uncomment to enable security
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -67,6 +67,17 @@
             <scope>test</scope>
         </dependency>
         -->
+        <!-- AOP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
+        </dependency>
+        <!-- Data -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
