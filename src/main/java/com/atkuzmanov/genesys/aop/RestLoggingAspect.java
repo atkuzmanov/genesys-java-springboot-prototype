@@ -22,8 +22,8 @@ import java.util.Enumeration;
 @Component
 public class RestLoggingAspect {
 
-//    private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final Logger logger = LoggerFactory.getLogger("jsonConsoleAppender");
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private final Logger logger = LoggerFactory.getLogger("jsonConsoleAppender");
 
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
@@ -35,9 +35,9 @@ public class RestLoggingAspect {
         System.out.println(">>><<< Here!");
         Class targetClass = joinPoint.getTarget().getClass();
 //        Logger requestLogger = LoggerFactory.getLogger(targetClass);
-        Logger requestLogger = LoggerFactory.getLogger(this.getClass());
-        requestLogger.info("<<< request logger!!");
-        requestLogger.debug("<<< request logger!!");
+//        Logger requestLogger = LoggerFactory.getLogger(this.getClass());
+//        requestLogger.info("<<< request logger!!");
+//        requestLogger.debug("<<< request logger!!");
 
         System.out.println(">>> targetClass" + targetClass);
 
@@ -61,7 +61,7 @@ public class RestLoggingAspect {
 
         logger.info("<<< request.getRequestURI()): " + request.getRequestURI());
         logger.info("{}", request.getLocalAddr());
-
+        logger.info("Hello, World JSON!");
         logger.debug("Hello World JSON.");
 
         Enumeration<String> params = request.getParameterNames();
