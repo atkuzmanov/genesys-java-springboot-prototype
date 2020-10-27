@@ -55,6 +55,7 @@ public class RestLoggingAspect {
         System.out.println(">>> request.getServerName()): " + request.getServerName());
         System.out.println(">>> request.getServerPort()): " + request.getServerPort());
 
+        logger.info("<<< request.getRequestURI()): " + request.getRequestURI());
 
         Enumeration<String> params = request.getParameterNames();
         while (params.hasMoreElements()) {
