@@ -28,6 +28,7 @@ public class RestLoggingAspect {
     public void requestPointcut() {
     }
 
+    // TODO: wip
     @Before("requestPointcut()")
     public void logRequest(JoinPoint joinPoint) {
         System.out.println(">>><<< Here!");
@@ -71,7 +72,7 @@ public class RestLoggingAspect {
         }
 
         StringBuilder buffer = new StringBuilder();
-        try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 buffer.append(line);
@@ -82,19 +83,12 @@ public class RestLoggingAspect {
         }
         String payload = buffer.toString();
         System.out.println(">>> payload : " + payload);
-
-//            BufferedReader reader = request.getReader();
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            buffer.append(line);
-//            buffer.append(System.lineSeparator());
-//        }
-//        String data = buffer.toString();
     }
 
 
+    // TODO: wip
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys.controllers.*.*(..))", returning = "result")
-    public void auditInfo(JoinPoint joinPoint, Object result) {
+    public void logResponse(JoinPoint joinPoint, Object result) {
 //        System.out.println(">>><<< Here! 2");
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest();
@@ -116,4 +110,6 @@ public class RestLoggingAspect {
 //            System.out.println(">>> " + requestUrl);
         }
     }
+
+    // TODO: log exception
 }
