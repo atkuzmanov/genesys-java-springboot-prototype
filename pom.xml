@@ -137,8 +137,9 @@
                 <directory>src/main/resources</directory>
                 <!-- These includes are needed if the `maven-resources-plugin` is NOT provided. -->
                 <includes>
-                    <include>application.properties</include>
-                    <include>banner.txt</include>
+<!--                    <include>application.properties</include>-->
+<!--                    <include>banner.txt</include>-->
+                    <include>*</include>
                 </includes>
             </resource>
         </resources>
