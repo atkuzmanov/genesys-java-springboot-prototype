@@ -28,8 +28,6 @@
                 <callerData>
                     <classFieldName>class</classFieldName>
                     <methodFieldName>method</methodFieldName>
-                    <lineFieldName>line</lineFieldName>
-                    <fileFieldName>file</fileFieldName>
                 </callerData>
                 <threadName>
                     <fieldName>thread</fieldName>

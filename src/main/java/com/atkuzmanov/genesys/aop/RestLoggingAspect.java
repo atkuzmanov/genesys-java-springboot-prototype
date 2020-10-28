@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 
+import static net.logstash.logback.argument.StructuredArguments.keyValue;
+import static net.logstash.logback.argument.StructuredArguments.kv;
+
 @Aspect
 @Component
 public class RestLoggingAspect {
@@ -36,7 +39,8 @@ public class RestLoggingAspect {
         Class targetClass = joinPoint.getTarget().getClass();
         Logger requestLogger = LoggerFactory.getLogger(targetClass);
 //        Logger requestLogger = LoggerFactory.getLogger(this.getClass());
-        requestLogger.info("<<< request logger!!");
+        requestLogger.info("<<< request logger!!", keyValue("orgMethod", joinPoint.getSignature().getName()),
+                kv("orgClass", targetClass));
 //        requestLogger.debug("<<< request logger!!");
 
         System.out.println(">>> targetClass" + targetClass);

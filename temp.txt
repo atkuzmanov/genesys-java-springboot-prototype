@@ -57,6 +57,25 @@
 }
 
 
+                <pattern>
+                    <pattern>
+                        {
+                        "method": "%method"
+                        }
+                    </pattern>
+                </pattern>
+
+
+                <pattern>
+<!--                    %replace(%method){'.*', 'replacement1'}-->
+                    <pattern>
+                        {
+                            "class": "%class",
+                            "method": ""
+                        }
+                    </pattern>
+                </pattern>
+
 
 
 
