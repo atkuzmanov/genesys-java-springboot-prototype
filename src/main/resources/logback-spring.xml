@@ -49,7 +49,7 @@
             </providers>
         </encoder>
     </appender>
-    <root level="INFO">
+    <root level="${logging.level.customLogbackLevel}">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

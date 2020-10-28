@@ -134,7 +134,7 @@ public class RestLoggingAspect {
         sb.append("Exception message: ").append(e.getMessage());
         sb.append("Exception cause: ").append(e.getCause());
 
-        if (exceptionLog.isTraceEnabled()) {
+        if (logger.isDebugEnabled()) {
             sb.append("Exception stacktrace: ");
             sb.append(Arrays.toString(e.getStackTrace()));
         }
