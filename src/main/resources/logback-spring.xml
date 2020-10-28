@@ -8,10 +8,17 @@
                 <contextName>
                     <fieldName>app</fieldName>
                 </contextName>
+                <uuid>
+                    <fieldName>id</fieldName>
+                    <strategy>random</strategy>
+                </uuid>
                 <timestamp>
-                    <fieldName>ts</fieldName>
+                    <fieldName>@timestamp</fieldName>
                     <timeZone>UTC</timeZone>
                 </timestamp>
+                <version>
+                    <fieldName>@version</fieldName>
+                </version>
                 <loggerName>
                     <fieldName>logger</fieldName>
                 </loggerName>

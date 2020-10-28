@@ -34,9 +34,9 @@ public class RestLoggingAspect {
     public void logRequest(JoinPoint joinPoint) {
         System.out.println(">>><<< Here!");
         Class targetClass = joinPoint.getTarget().getClass();
-//        Logger requestLogger = LoggerFactory.getLogger(targetClass);
+        Logger requestLogger = LoggerFactory.getLogger(targetClass);
 //        Logger requestLogger = LoggerFactory.getLogger(this.getClass());
-//        requestLogger.info("<<< request logger!!");
+        requestLogger.info("<<< request logger!!");
 //        requestLogger.debug("<<< request logger!!");
 
         System.out.println(">>> targetClass" + targetClass);

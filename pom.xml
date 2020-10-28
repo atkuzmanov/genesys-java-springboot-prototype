@@ -97,7 +97,12 @@
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
-            <version>5.2</version>
+            <version>6.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>4.0</version>
         </dependency>
         <!-- Data -->
         <dependency>
@@ -135,10 +140,8 @@
             <resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
-                <!-- These includes are needed if the `maven-resources-plugin` is NOT provided. -->
+                <!-- These includes are needed to copy files from resources to target dir. -->
                 <includes>
-<!--                    <include>application.properties</include>-->
-<!--                    <include>banner.txt</include>-->
                     <include>*</include>
                 </includes>
             </resource>

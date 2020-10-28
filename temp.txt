@@ -1,0 +1,64 @@
+
+{
+	"@timestamp": "2020-10-28T10:17:22.235+02:00",
+	"@version": "1",
+	"message": "<<< request.getRequestURI()): /all",
+	"logger_name": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"thread_name": "http-nio-8080-exec-1",
+	"level": "INFO",
+	"level_value": 20000
+}
+
+
+
+
+{
+	"app": "GeneSys",
+	"ts": "2020-10-28T08:29:18.708+00:00",
+	"logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"level": "INFO",
+	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"method": "logRequest",
+	"file": "RestLoggingAspect.java",
+	"line": 62,
+	"thread": "http-nio-8080-exec-2",
+	"msg": "<<< request.getRequestURI()): /all"
+}
+
+
+
+{
+	"app": "GeneSys",
+	"ts": "2020-10-28T08:33:30.858+00:00",
+	"logger": "com.atkuzmanov.genesys.controllers.DefaultController",
+	"level": "INFO",
+	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"method": "logRequest",
+	"file": "RestLoggingAspect.java",
+	"line": 39,
+	"thread": "http-nio-8080-exec-2",
+	"msg": "<<< request logger!!"
+}
+
+
+{
+	"app": "GeneSys",
+	"id": "7b89cdc7-a8c2-4147-89cd-c7a8c28147d1",
+	"@timestamp": "2020-10-28T09:39:38.247Z",
+	"@version": "1",
+	"logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"level": "INFO",
+	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"method": "logRequest",
+	"file": "RestLoggingAspect.java",
+	"line": 62,
+	"thread": "http-nio-8080-exec-2",
+	"msg": "<<< request.getRequestURI()): /all"
+}
+
+
+
+
+
+
+
