@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Enumeration;
 
-import static net.logstash.logback.argument.StructuredArguments.keyValue;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @Aspect
@@ -26,7 +25,6 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 public class RestLoggingAspect {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-//    private final Logger logger = LoggerFactory.getLogger("jsonConsoleAppender");
 
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
@@ -35,13 +33,11 @@ public class RestLoggingAspect {
     // TODO: wip
     @Before("requestPointcut()")
     public void logRequest(JoinPoint joinPoint) {
-        System.out.println(">>><<< Here!");
-        Class targetClass = joinPoint.getTarget().getClass();
+        Class<?> targetClass = joinPoint.getTarget().getClass();
         Logger requestLogger = LoggerFactory.getLogger(targetClass);
-//        Logger requestLogger = LoggerFactory.getLogger(this.getClass());
-        requestLogger.info("<<< request logger!!", keyValue("orgMethod", joinPoint.getSignature().getName()),
-                kv("orgClass", targetClass));
-//        requestLogger.debug("<<< request logger!!");
+        requestLogger.info("<<< request logger!!",
+                kv("method", joinPoint.getSignature().getName()),
+                kv("class", targetClass));
 
         System.out.println(">>> targetClass" + targetClass);
 

@@ -16,6 +16,15 @@
     <description>GeneSys</description>
     <url>https://github.com/atkuzmanov</url>
 
+    <developers>
+        <developer>
+            <name>A. Kuzmanov</name>
+            <id>atkuzmanov</id>
+            <organizationUrl>https://github.com/atkuzmanov</organizationUrl>
+            <url>https://linktr.ee/atkuzmanov</url>
+        </developer>
+    </developers>
+
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -78,22 +87,6 @@
             <version>1.9.5</version>
         </dependency>
         <!-- Logging -->
-        <!--
-        <dependency>
-            <groupId>ch.qos.logback.contrib</groupId>
-            <artifactId>logback-json-classic</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback.contrib</groupId>
-            <artifactId>logback-jackson</artifactId>
-            <version>0.1.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        -->
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
@@ -130,7 +123,7 @@
                 <configuration>
                     <delimiters>
                         <delimiter>@</delimiter>
-                        <!-- <delimiter>${*}</delimiter> -->
+                        <delimiter>${*}</delimiter>
                     </delimiters>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
