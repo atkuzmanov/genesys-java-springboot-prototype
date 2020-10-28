@@ -1,10 +1,7 @@
 package com.atkuzmanov.genesys.aop;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -125,9 +122,15 @@ public class RestLoggingAspect {
 //            responseObj.getEntity();
 // Can log whatever stuff from here in a single spot.
 //            System.out.println(">>> " + requestUrl);
-            
         }
     }
 
     // TODO: log exception
+    @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
+    public void logAfterThrowing(JoinPoint p, Exception e) throws Exception {
+        Class<?> targetClass = p.getTarget().getClass();
+        Logger exceptionLog = LoggerFactory.getLogger(targetClass);
+        exceptionLog.error(p.getTarget().getClass().getSimpleName() + " " + p.getSignature().getName() + " " +
+                e.getMessage());
+    }
 }
