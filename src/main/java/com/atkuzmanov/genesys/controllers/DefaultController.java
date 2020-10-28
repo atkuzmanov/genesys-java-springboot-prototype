@@ -26,10 +26,13 @@ public class DefaultController {
 
     @PostMapping(path = "/addTimestamp")
     public @ResponseBody
-    ResponseEntity<String> addTimestampToDB(@RequestParam String newTimestamp) {
+    ResponseEntity<String> addTimestampToDB(@RequestParam String newTimestamp) throws Exception {
         TimestampEntity tse = new TimestampEntity();
-        if (newTimestamp.isBlank()) {
-            newTimestamp = localDateTimeNowFormat_yyyyMMdddHHmmss();
+//        if (newTimestamp.isBlank()) {
+//            newTimestamp = localDateTimeNowFormat_yyyyMMdddHHmmss();
+//        }
+        if(newTimestamp.isBlank()) {
+            throw new Exception("Test ex 1");
         }
         tse.setTimestampAsString(newTimestamp);
         timestampRepo.save(tse);

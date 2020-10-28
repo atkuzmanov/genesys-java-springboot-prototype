@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.entries;
 import static net.logstash.logback.argument.StructuredArguments.kv;
@@ -130,7 +127,18 @@ public class RestLoggingAspect {
     public void logAfterThrowing(JoinPoint p, Exception e) throws Exception {
         Class<?> targetClass = p.getTarget().getClass();
         Logger exceptionLog = LoggerFactory.getLogger(targetClass);
-        exceptionLog.error(p.getTarget().getClass().getSimpleName() + " " + p.getSignature().getName() + " " +
-                e.getMessage());
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Exception: ").append(p.getTarget().getClass());
+        sb.append(".").append(p.getSignature().getName()).append(": ");
+        sb.append("Exception message: ").append(e.getMessage());
+        sb.append("Exception cause: ").append(e.getCause());
+
+        if (exceptionLog.isTraceEnabled()) {
+            sb.append("Exception stacktrace: ");
+            sb.append(Arrays.toString(e.getStackTrace()));
+        }
+
+        exceptionLog.error(sb.toString());
     }
 }
