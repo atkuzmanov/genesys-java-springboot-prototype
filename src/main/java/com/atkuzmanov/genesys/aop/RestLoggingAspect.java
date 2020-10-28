@@ -16,12 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
-import static java.lang.String.valueOf;
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 import static net.logstash.logback.argument.StructuredArguments.entries;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
@@ -34,91 +33,62 @@ public class RestLoggingAspect {
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
     }
-
-    // TODO: wip
+    
     @Before("requestPointcut()")
     public void logRequest(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         Class<?> targetClass = joinPoint.getTarget().getClass();
         Logger requestLog = LoggerFactory.getLogger(targetClass);
-//        requestLog.info("INCOMING_REQUEST",
-//                kv("uri", request.getRequestURI()),
-//                kv("url", request.getRequestURL()),
-//                kv("requestMethod", request.getMethod()),
-//                kv("requestScheme", request.getScheme()),
-//                kv("request Protocol", request.getProtocol()),
-//                kv("request LocalName", request.getLocalName()),
-//                kv("request LocalAddress", request.getLocalAddr()),
-//                kv("request Locale", request.getLocale()),
-//                kv("request Locales", request.getLocales().toString()),
-//                kv("method", joinPoint.getSignature().getName()),
-//                kv("class", targetClass)
-//
-//        );
 
+        Map<String, String> requestLogMap = new HashMap<>();
+        requestLogMap.put("uri", request.getRequestURI());
+        requestLogMap.put("url", request.getRequestURL().toString());
+        requestLogMap.put("path", request.getServletPath());
+        requestLogMap.put("requestMethod", request.getMethod());
+        requestLogMap.put("requestScheme", request.getScheme());
+        requestLogMap.put("request Protocol", request.getProtocol());
+        requestLogMap.put("request LocalName", request.getLocalName());
+        requestLogMap.put("request Locale", request.getLocale().toString());
+        requestLogMap.put("request Locales", Collections.list(request.getLocales()).toString());
+        requestLogMap.put("request QueryString", request.getQueryString());
+        requestLogMap.put("request RemoteHost ", request.getRemoteHost());
+        requestLogMap.put("request ServerName ", request.getServerName());
+        requestLogMap.put("request ServerPort ", String.valueOf(request.getServerPort()));
+        requestLogMap.put("method", joinPoint.getSignature().getName());
+        requestLogMap.put("class", targetClass.toString());
+        requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
 
-        Map<String, String> requestLogMap = new HashMap();
-        if (nonNull(request)) {
-            requestLogMap.put("uri", request.getRequestURI());
-            requestLogMap.put("url", request.getRequestURL().toString());
-            requestLogMap.put("path", request.getServletPath());
-            requestLogMap.put("requestMethod", request.getMethod());
-            requestLogMap.put("requestScheme", request.getScheme());
-            requestLogMap.put("request Protocol", request.getProtocol());
-            requestLogMap.put("request LocalName", request.getLocalName());
-            requestLogMap.put("request Locale", request.getLocale().toString());
-            requestLogMap.put("request Locales", Collections.list(request.getLocales()).toString());
-            requestLogMap.put("request QueryString", request.getQueryString());
-            requestLogMap.put("request RemoteHost ", request.getRemoteHost());
-            requestLogMap.put("request ServerName ", request.getServerName());
-            requestLogMap.put("request ServerPort ", String.valueOf(request.getServerPort()));
+        requestLog.info("INCOMING_REQUEST",
+                entries(requestLogMap),
+                kv("queryParameters", extractRequestParameters(request)),
+                kv("requestBody", extractRequestPayload(request)),
+                kv("headers", extractRequestHeaders(request))
+        );
+    }
 
-            requestLogMap.put("method", joinPoint.getSignature().getName());
-            requestLogMap.put("class", targetClass.toString());
-            requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
-        }
-
-//        requestLogMap.keySet().removeAll(
-//                requestLogMap.entrySet().stream()
-//                        .filter(a -> a.getValue().isBlank())
-//                        .map(e -> e.getKey()).collect(Collectors.toList()));
-
-
-        requestLog.info("<<< INCOMING_REQUEST", entries(requestLogMap));
-
-//        System.out.println(">>> request.getRequestURI()): " + request.getRequestURI());
-//        System.out.println(">>> request.getMethod()): " + request.getMethod());
-//        System.out.println(">>> request.getScheme()): " + request.getScheme());
-//        System.out.println(">>> request.getProtocol()): " + request.getProtocol());
-//        System.out.println(">>> request.getLocalName()): " + request.getLocalName());
-//        System.out.println(">>> request.getLocalAddr()): " + request.getLocalAddr());
-//        System.out.println(">>> request.getLocale())): " + request.getLocale());
-//        System.out.println(">>> request.getLocales())): " + request.getLocales());
-//        System.out.println(">>> request.getQueryString()): " + request.getQueryString());
-//        System.out.println(">>> request.getServletPath()): " + request.getServletPath());
-//        System.out.println(">>> request.getRemoteHost()): " + request.getRemoteHost());
-//        System.out.println(">>> request.getServerName()): " + request.getServerName());
-//        System.out.println(">>> request.getServerPort()): " + request.getServerPort());
-//        logger.info("<<< request.getRequestURI()): " + request.getRequestURI());
-//        logger.info("{}", request.getLocalAddr());
-//        logger.info("Hello, World JSON!");
-//        logger.debug("Hello World JSON.");
-
+    private Map<String, String> extractRequestParameters(HttpServletRequest request) {
+        Map<String, String> parameters = new HashMap<>();
         Enumeration<String> params = request.getParameterNames();
         while (params.hasMoreElements()) {
             String paramName = params.nextElement();
-            System.out.println("Parameter Name - " + paramName + ", Value - " + request.getParameter(paramName));
+            parameters.put(paramName, request.getParameter(paramName));
         }
+        return parameters;
+    }
 
+    private Map<String, String> extractRequestHeaders(HttpServletRequest request) {
         Enumeration<String> headerNames = request.getHeaderNames();
-
+        Map<String, String> headers = new HashMap<>();
         if (headerNames != null) {
             while (headerNames.hasMoreElements()) {
                 String headerName = headerNames.nextElement();
-                System.out.println(headerName + " : " + request.getHeader(headerName));
+                headers.put(headerName, request.getHeader(headerName));
             }
         }
+        return headers;
+    }
 
+    private String extractRequestPayload(HttpServletRequest request) {
         StringBuilder buffer = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream()))) {
             String line;
@@ -129,8 +99,7 @@ public class RestLoggingAspect {
         } catch (IOException ex) {
             logger.error(ex.getMessage(), ex);
         }
-        String payload = buffer.toString();
-        System.out.println(">>> payload : " + payload);
+        return buffer.toString();
     }
 
 
