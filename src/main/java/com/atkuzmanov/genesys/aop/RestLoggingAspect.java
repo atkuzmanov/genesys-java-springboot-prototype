@@ -95,7 +95,6 @@ public class RestLoggingAspect {
     }
 
 
-    // TODO: wip
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys.controllers.*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         Class<?> targetClass = joinPoint.getTarget().getClass();
