@@ -36,7 +36,7 @@
                     <fieldName>stack</fieldName>
                 </stackTrace>
                 <message>
-                    <fieldName>msg</fieldName>
+                    <fieldName>message</fieldName>
                 </message>
                 <pattern>
                     <pattern>

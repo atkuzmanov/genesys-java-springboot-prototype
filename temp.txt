@@ -12,3 +12,37 @@
 	"aspectMethod": "logRequest",
 	"aspectClass": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
 }
+
+
+
+{"app":"GeneSys","id":"0330c4a3-8938-4c98-b0c4-a389383c9860","@timestamp":"2020-10-28T15:13:54.854Z","@version":"1","logger":"org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]","level":"INFO","thread":"http-nio-8080-exec-1","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","aspectMethod":"log","aspectClass":"org.apache.juli.logging.DirectJDKLog"}
+{"app":"GeneSys","id":"e5e8cb8b-d36b-467b-a8cb-8bd36b767bdd","@timestamp":"2020-10-28T15:13:54.855Z","@version":"1","logger":"org.springframework.web.servlet.DispatcherServlet","level":"INFO","thread":"http-nio-8080-exec-1","message":"Initializing Servlet 'dispatcherServlet'","aspectMethod":"initServletBean","aspectClass":"org.springframework.web.servlet.FrameworkServlet"}
+{"app":"GeneSys","id":"cc17f9e0-a34f-4732-97f9-e0a34fc7323e","@timestamp":"2020-10-28T15:13:54.875Z","@version":"1","logger":"org.springframework.web.servlet.DispatcherServlet","level":"INFO","thread":"http-nio-8080-exec-1","message":"Completed initialization in 19 ms","aspectMethod":"initServletBean","aspectClass":"org.springframework.web.servlet.FrameworkServlet"}
+{"app":"GeneSys","id":"667e3bbe-a699-41a8-be3b-bea69981a816","@timestamp":"2020-10-28T15:13:54.924Z","@version":"1","logger":"com.atkuzmanov.genesys.controllers.DefaultController","level":"INFO","thread":"http-nio-8080-exec-1","uri":"/all","url":"http://localhost:8080/all","requestMethod":"GET","requestScheme":"http","request Protocol":"HTTP/1.1","request LocalName":"localhost","request LocalAddress":"0:0:0:0:0:0:0:1","request Locale":"en_GB","request Locales":{},"method":"getAllTimestamps","class":"com.atkuzmanov.genesys.controllers.DefaultController","message":"INCOMING_REQUEST","aspectMethod":"logRequest","aspectClass":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
+>>> request.getRequestURI()): /all
+>>> request.getMethod()): GET
+>>> request.getScheme()): http
+>>> request.getProtocol()): HTTP/1.1
+>>> request.getLocalName()): localhost
+>>> request.getLocalAddr()): 0:0:0:0:0:0:0:1
+>>> request.getLocale())): en_GB
+>>> request.getLocales())): java.util.Collections$3@553af09
+>>> request.getQueryString()): null
+>>> request.getLocalName()): localhost
+>>> request.getServletPath()): /all
+>>> request.getRemoteHost()): 0:0:0:0:0:0:0:1
+>>> request.getServerName()): localhost
+>>> request.getServerPort()): 8080
+{"app":"GeneSys","id":"996fc3c0-8b6e-4199-afc3-c08b6e4199a0","@timestamp":"2020-10-28T15:13:54.973Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-1","message":"<<< request.getRequestURI()): /all","aspectMethod":"logRequest","aspectClass":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
+{"app":"GeneSys","id":"7df7724a-765f-4b6c-b772-4a765f1b6cb6","@timestamp":"2020-10-28T15:13:54.974Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-1","message":"0:0:0:0:0:0:0:1","aspectMethod":"logRequest","aspectClass":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
+{"app":"GeneSys","id":"78bef678-ce96-4266-bef6-78ce96b2663b","@timestamp":"2020-10-28T15:13:54.974Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-1","message":"Hello, World JSON!","aspectMethod":"logRequest","aspectClass":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
+user-agent : PostmanRuntime/7.23.0
+accept : */*
+cache-control : no-cache
+postman-token : c5da5ee3-c28f-41b3-9ead-a0eea403baec
+host : localhost:8080
+accept-encoding : gzip, deflate, br
+connection : keep-alive
+>>> payload :
+
+
