@@ -33,7 +33,7 @@ public class RestLoggingAspect {
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
     }
-    
+
     @Before("requestPointcut()")
     public void logRequest(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
@@ -125,6 +125,7 @@ public class RestLoggingAspect {
 //            responseObj.getEntity();
 // Can log whatever stuff from here in a single spot.
 //            System.out.println(">>> " + requestUrl);
+            
         }
     }
 
