@@ -3,6 +3,7 @@ package com.atkuzmanov.genesys.controllers;
 import com.atkuzmanov.genesys.dao.TimestampEntity;
 import com.atkuzmanov.genesys.dao.TimestampRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class DefaultController {
         }
         tse.setTimestampAsString(newTimestamp);
         timestampRepo.save(tse);
+
         return new ResponseEntity<>("Saved.", HttpStatus.OK);
     }
 

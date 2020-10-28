@@ -15,8 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static net.logstash.logback.argument.StructuredArguments.entries;
-import static net.logstash.logback.argument.StructuredArguments.kv;
+import static net.logstash.logback.argument.StructuredArguments.*;
 
 @Aspect
 @Component
@@ -99,26 +98,26 @@ public class RestLoggingAspect {
     // TODO: wip
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys.controllers.*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
-//        System.out.println(">>><<< Here! 2");
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-                .getRequest();
+        Class<?> targetClass = joinPoint.getTarget().getClass();
+        ResponseEntity responseObj = (ResponseEntity) result;
 
-//        System.out.println(request.getRequestURI());
-
-        if (result instanceof ResponseEntity) {
-            ResponseEntity responseObj = (ResponseEntity) result;
-
-            String requestUrl = request.getScheme() + "://" + request.getServerName()
-                    + ":" + request.getServerPort() + request.getContextPath() + request.getRequestURI()
-                    + "?" + request.getQueryString();
-
-            String clientIp = request.getRemoteAddr();
-//            String clientRequest = reqArg.toString();
-            int httpResponseStatus = responseObj.getStatusCode().value();
-//            responseObj.getEntity();
-// Can log whatever stuff from here in a single spot.
-//            System.out.println(">>> " + requestUrl);
+        Map<String, String> responseLogMap = new HashMap<>();
+        responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
+        responseLogMap.put("originMethod", joinPoint.getSignature().getName());
+        responseLogMap.put("originClass", targetClass.toString());
+        if (responseObj.hasBody()) {
+            responseLogMap.put("responseBody", responseObj.getBody().toString());
         }
+
+        log.info("OUTGOING_RESPONSE",
+                entries(responseLogMap),
+                kv("headers", extractResponseHeaders(responseObj)));
+    }
+
+    private Map<String, String> extractResponseHeaders(ResponseEntity response) {
+        Map<String, String> headers = new HashMap<>();
+        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
+        return headers;
     }
 
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
