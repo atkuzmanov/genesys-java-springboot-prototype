@@ -22,7 +22,7 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Component
 public class RestLoggingAspect {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
@@ -51,7 +51,7 @@ public class RestLoggingAspect {
         requestLogMap.put("originClass", targetClass.toString());
         requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
 
-        logger.info("INCOMING_REQUEST",
+        log.info("INCOMING_REQUEST",
                 entries(requestLogMap),
                 kv("queryParameters", extractRequestParameters(request)),
                 kv("requestBody", extractRequestPayload(request)),
@@ -90,7 +90,7 @@ public class RestLoggingAspect {
                 buffer.append(System.lineSeparator());
             }
         } catch (IOException ex) {
-            logger.error(ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
         }
         return buffer.toString();
     }
@@ -130,11 +130,11 @@ public class RestLoggingAspect {
         sb.append("Exception message: ").append(e.getMessage());
         sb.append("Exception cause: ").append(e.getCause());
 
-        if (this.logger.isDebugEnabled()) {
+        if (this.log.isDebugEnabled()) {
             sb.append("Exception stacktrace: ");
             sb.append(Arrays.toString(e.getStackTrace()));
         }
-        logger.error(sb.toString(),
+        log.error(sb.toString(),
                 kv("originMethod", p.getSignature().getName()),
                 kv("originClass", targetClass.toString()));
     }
