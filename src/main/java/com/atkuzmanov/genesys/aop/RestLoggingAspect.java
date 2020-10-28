@@ -32,7 +32,6 @@ public class RestLoggingAspect {
     public void logRequest(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         Class<?> targetClass = joinPoint.getTarget().getClass();
-        Logger requestLog = LoggerFactory.getLogger(targetClass);
 
         Map<String, String> requestLogMap = new HashMap<>();
         requestLogMap.put("uri", request.getRequestURI());
@@ -48,11 +47,11 @@ public class RestLoggingAspect {
         requestLogMap.put("request RemoteHost ", request.getRemoteHost());
         requestLogMap.put("request ServerName ", request.getServerName());
         requestLogMap.put("request ServerPort ", String.valueOf(request.getServerPort()));
-        requestLogMap.put("method", joinPoint.getSignature().getName());
-        requestLogMap.put("class", targetClass.toString());
+        requestLogMap.put("originMethod", joinPoint.getSignature().getName());
+        requestLogMap.put("originClass", targetClass.toString());
         requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
 
-        requestLog.info("INCOMING_REQUEST",
+        logger.info("INCOMING_REQUEST",
                 entries(requestLogMap),
                 kv("queryParameters", extractRequestParameters(request)),
                 kv("requestBody", extractRequestPayload(request)),
@@ -122,23 +121,21 @@ public class RestLoggingAspect {
         }
     }
 
-    // TODO: log exception
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
-    public void logAfterThrowing(JoinPoint p, Exception e) throws Exception {
+    public void logAfterThrowing(JoinPoint p, Exception e) {
         Class<?> targetClass = p.getTarget().getClass();
-        Logger exceptionLog = LoggerFactory.getLogger(targetClass);
-
         StringBuilder sb = new StringBuilder();
         sb.append("Exception: ").append(p.getTarget().getClass());
         sb.append(".").append(p.getSignature().getName()).append(": ");
         sb.append("Exception message: ").append(e.getMessage());
         sb.append("Exception cause: ").append(e.getCause());
 
-        if (logger.isDebugEnabled()) {
+        if (this.logger.isDebugEnabled()) {
             sb.append("Exception stacktrace: ");
             sb.append(Arrays.toString(e.getStackTrace()));
         }
-
-        exceptionLog.error(sb.toString());
+        logger.error(sb.toString(),
+                kv("originMethod", p.getSignature().getName()),
+                kv("originClass", targetClass.toString()));
     }
 }

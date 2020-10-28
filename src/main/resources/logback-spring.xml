@@ -33,7 +33,7 @@
                     <includeNonStructuredArguments>false</includeNonStructuredArguments>
                 </arguments>
                 <stackTrace>
-                    <fieldName>stack</fieldName>
+                    <fieldName>stackTrace</fieldName>
                 </stackTrace>
                 <message>
                     <fieldName>message</fieldName>
@@ -41,8 +41,8 @@
                 <pattern>
                     <pattern>
                         {
-                        "aspectMethod": "%method",
-                        "aspectClass": "%class"
+                        "method": "%method",
+                        "class": "%class"
                         }
                     </pattern>
                 </pattern>
