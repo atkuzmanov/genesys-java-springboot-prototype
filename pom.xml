@@ -101,6 +101,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -141,7 +142,8 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- Security - uncomment to enable security
+        <!-- Security - uncomment to enable security -->
+        <!--
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -159,6 +161,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- See: https://github.com/spring-projects/spring-framework/issues/22814 -->
+                    <!-- See: https://github.com/spring-projects/spring-framework/issues/25382 -->
+                    <jvmArguments>--illegal-access=deny</jvmArguments>
+                </configuration>
             </plugin>
             <!-- This is needed in combination with resource filtering below
                 so that Maven project @...@ properties placeholders are replaced with values. -->

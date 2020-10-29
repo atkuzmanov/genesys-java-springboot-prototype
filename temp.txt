@@ -1,12 +1,20 @@
+
+---[REQUEST:]---
+
 {
 	"app": "GeneSys",
-	"id": "c67d0db2-fcc7-45b6-bd0d-b2fcc7d5b69a",
-	"@timestamp": "2020-10-28T17:24:43.724Z",
+	"id": "a5c4d055-6563-4185-84d0-556563218589",
+	"@timestamp": "2020-10-29T13:15:22.782Z",
 	"@version": "1",
-	"logger": "com.atkuzmanov.genesys.controllers.DefaultController",
+	"logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
 	"level": "INFO",
-	"thread": "http-nio-8080-exec-1",
-	"method": "addTimestampToDB",
+	"thread": "http-nio-8080-exec-7",
+	"traceId": "c13839abf63975fc",
+	"spanId": "c13839abf63975fc",
+	"spanExportable": "true",
+	"X-Span-Export": "true",
+	"X-B3-SpanId": "c13839abf63975fc",
+	"X-B3-TraceId": "c13839abf63975fc",
 	"requestScheme": "http",
 	"requestMethod": "POST",
 	"request Locales": "[en_GB]",
@@ -14,20 +22,21 @@
 	"request Locale": "en_GB",
 	"uri": "/addTimestamp",
 	"url": "http://localhost:8080/addTimestamp",
-	"request QueryString": "newTimestamp=4",
+	"request QueryString": "newTimestamp=1",
 	"path": "/addTimestamp",
 	"request RemoteHost ": "0:0:0:0:0:0:0:1",
 	"request ServerName ": "localhost",
 	"request Protocol": "HTTP/1.1",
+	"originClass": "class com.atkuzmanov.genesys.controllers.DefaultController",
 	"request ServerPort ": "8080",
-	"class": "class com.atkuzmanov.genesys.controllers.DefaultController",
+	"originMethod": "addTimestampToDB",
 	"queryParameters": {
-		"newTimestamp": "4"
+		"newTimestamp": "1"
 	},
 	"requestBody": "postReqBody\n",
 	"headers": {
 		"content-length": "11",
-		"postman-token": "ccaa952e-39ba-4434-aa88-bd8d1dfe307c",
+		"postman-token": "2418db5d-053e-4c28-a0a5-6a6718116ca9",
 		"host": "localhost:8080",
 		"content-type": "text/plain",
 		"connection": "keep-alive",
@@ -36,8 +45,35 @@
 		"user-agent": "PostmanRuntime/7.23.0",
 		"accept": "*/*"
 	},
-	"message": "<<< INCOMING_REQUEST",
-	"aspectMethod": "logRequest",
-	"aspectClass": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
+	"message": "INCOMING_REQUEST",
+	"method": "logRequest",
+	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
+}
+
+
+---[RESPONSE:]---
+
+{
+	"app": "GeneSys",
+	"id": "5416972c-6429-469d-9697-2c6429869dc0",
+	"@timestamp": "2020-10-29T13:15:22.828Z",
+	"@version": "1",
+	"logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
+	"level": "INFO",
+	"thread": "http-nio-8080-exec-7",
+	"traceId": "c13839abf63975fc",
+	"spanId": "c13839abf63975fc",
+	"spanExportable": "true",
+	"X-Span-Export": "true",
+	"X-B3-SpanId": "c13839abf63975fc",
+	"X-B3-TraceId": "c13839abf63975fc",
+	"responseBody": "Saved.",
+	"originClass": "class com.atkuzmanov.genesys.controllers.DefaultController",
+	"originMethod": "addTimestampToDB",
+	"status": "200",
+	"headers": {},
+	"message": "OUTGOING_RESPONSE",
+	"method": "logResponse",
+	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
 }
 
