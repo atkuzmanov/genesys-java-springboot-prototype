@@ -97,20 +97,22 @@ public class RestLoggingAspect {
 
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys.controllers.*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
-        Class<?> targetClass = joinPoint.getTarget().getClass();
-        ResponseEntity responseObj = (ResponseEntity) result;
+        if(result instanceof ResponseEntity) {
+            Class<?> targetClass = joinPoint.getTarget().getClass();
+            ResponseEntity responseObj = (ResponseEntity) result;
 
-        Map<String, String> responseLogMap = new HashMap<>();
-        responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
-        responseLogMap.put("originMethod", joinPoint.getSignature().getName());
-        responseLogMap.put("originClass", targetClass.toString());
-        if (responseObj.hasBody()) {
-            responseLogMap.put("responseBody", responseObj.getBody().toString());
+            Map<String, String> responseLogMap = new HashMap<>();
+            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
+            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
+            responseLogMap.put("originClass", targetClass.toString());
+            if (responseObj.hasBody()) {
+                responseLogMap.put("responseBody", responseObj.getBody().toString());
+            }
+
+            log.info("OUTGOING_RESPONSE",
+                    entries(responseLogMap),
+                    kv("headers", extractResponseHeaders(responseObj)));
         }
-
-        log.info("OUTGOING_RESPONSE",
-                entries(responseLogMap),
-                kv("headers", extractResponseHeaders(responseObj)));
     }
 
     private Map<String, String> extractResponseHeaders(ResponseEntity response) {
