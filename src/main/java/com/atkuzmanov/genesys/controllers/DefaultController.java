@@ -26,6 +26,9 @@ public class DefaultController {
     @PostMapping(path = "/addTimestamp")
     public @ResponseBody
     ResponseEntity<String> addTimestampToDB(@RequestParam String newTimestamp) {
+        if (Integer.parseInt(newTimestamp) <= 0) {
+            throw new InvalidParameterException("Timestamp id must be a positive integer.");
+        }
         TimestampEntity tse = new TimestampEntity();
         if (newTimestamp.isBlank()) {
             newTimestamp = localDateTimeNowFormat_yyyyMMdddHHmmss();
