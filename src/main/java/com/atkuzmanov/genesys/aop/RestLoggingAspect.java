@@ -1,9 +1,13 @@
 package com.atkuzmanov.genesys.aop;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,6 +24,7 @@ import static net.logstash.logback.argument.StructuredArguments.*;
 
 @Aspect
 @Component
+@Order(1)
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -114,6 +119,16 @@ public class RestLoggingAspect {
                     entries(responseLogMap),
                     kv("headers", extractResponseHeaders(responseObj)));
         }
+
+//        else {
+//            ObjectMapper mapper = new ObjectMapper();
+//            mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//            try {
+//                log.trace("\n<<<Response object: >>>\n" + mapper.writeValueAsString(result));
+//            } catch (JsonProcessingException e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
     }
 
     private Map<String, String> extractResponseHeaders(ResponseEntity response) {
