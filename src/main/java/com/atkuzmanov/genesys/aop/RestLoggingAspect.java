@@ -10,6 +10,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -121,14 +122,23 @@ public class RestLoggingAspect {
         return headers;
     }
 
+    // TODO: wip
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
     public void logAfterThrowing(JoinPoint p, Exception e) {
+
+//        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
+//                .getResponse();
+
         Class<?> targetClass = p.getTarget().getClass();
         StringBuilder sb = new StringBuilder();
         sb.append("Exception: ").append(p.getTarget().getClass());
         sb.append(".").append(p.getSignature().getName()).append(": ");
         sb.append("Exception message: ").append(e.getMessage());
         sb.append("Exception cause: ").append(e.getCause());
+
+//        if(response != null) {
+//            sb.append(">>> response status: [" + response.getStatus() + "]");
+//        }
 
         if (this.log.isDebugEnabled()) {
             sb.append("Exception stacktrace: ");
