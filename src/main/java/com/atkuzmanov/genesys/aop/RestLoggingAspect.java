@@ -1,8 +1,5 @@
 package com.atkuzmanov.genesys.aop;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -14,17 +11,17 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static net.logstash.logback.argument.StructuredArguments.*;
+import static net.logstash.logback.argument.StructuredArguments.entries;
+import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @Aspect
 @Component
-@Order(1)
+@Order(-1)
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -119,16 +116,6 @@ public class RestLoggingAspect {
                     entries(responseLogMap),
                     kv("headers", extractResponseHeaders(responseObj)));
         }
-
-//        else {
-//            ObjectMapper mapper = new ObjectMapper();
-//            mapper.enable(SerializationFeature.INDENT_OUTPUT);
-//            try {
-//                log.trace("\n<<<Response object: >>>\n" + mapper.writeValueAsString(result));
-//            } catch (JsonProcessingException e) {
-//                System.out.println(e.getMessage());
-//            }
-//        }
     }
 
     private Map<String, String> extractResponseHeaders(ResponseEntity response) {
@@ -140,20 +127,12 @@ public class RestLoggingAspect {
     // TODO: wip
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
     public void logAfterThrowing(JoinPoint p, Exception e) {
-
-//        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
-//                .getResponse();
-
         Class<?> targetClass = p.getTarget().getClass();
         StringBuilder sb = new StringBuilder();
         sb.append("Exception: ").append(p.getTarget().getClass());
         sb.append(".").append(p.getSignature().getName()).append(": ");
         sb.append("Exception message: ").append(e.getMessage());
         sb.append("Exception cause: ").append(e.getCause());
-
-//        if(response != null) {
-//            sb.append(">>> response status: [" + response.getStatus() + "]");
-//        }
 
         if (this.log.isDebugEnabled()) {
             sb.append("Exception stacktrace: ");
