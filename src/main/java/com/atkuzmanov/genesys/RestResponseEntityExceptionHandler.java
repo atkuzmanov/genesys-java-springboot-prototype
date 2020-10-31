@@ -22,7 +22,7 @@ import java.lang.reflect.InvocationTargetException;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
-    private static final Logger log = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
+//    private static final Logger log = LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
 
     /**
      * Catch all for any other exceptions...
@@ -39,7 +39,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler({ InvocationTargetException.class, IllegalArgumentException.class, ClassCastException.class,
             ConversionFailedException.class })
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity handleMiscFailures(Throwable t) {
         return errorResponse(t, HttpStatus.BAD_REQUEST);
     }
@@ -57,16 +57,16 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     protected ResponseEntity<Object> errorResponse(Throwable throwable,
                                                              HttpStatus status) {
         if (null != throwable) {
-            log.error("error caught: " + throwable.getMessage(), throwable);
+//            log.error("error caught: " + throwable.getMessage(), throwable);
             return response(new Exception(throwable), status);
         } else {
-            log.error("unknown error caught in RESTController, {}", status);
+//            log.error("unknown error caught in RESTController, {}", status);
             return response(null, status);
         }
     }
 
     protected <T> ResponseEntity<T> response(T body, HttpStatus status) {
-        log.debug("Responding with a status of {}", status);
+//        log.debug("Responding with a status of {}", status);
         return new ResponseEntity<>(body, new HttpHeaders(), status);
     }
 }
