@@ -1,5 +1,6 @@
 package com.atkuzmanov.genesys;
 
+import org.slf4j.MDC;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.ConversionFailedException;
@@ -12,12 +13,8 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 
 @ControllerAdvice
@@ -40,16 +37,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             ConversionFailedException.class})
     @ResponseBody
     // TODO: WIP
-    public ResponseEntity<?> handleMiscFailures(Throwable t, WebRequest webRequest) { //ServletResponse response) {
-        if (webRequest instanceof ServletWebRequest) {
-            ServletWebRequest servletWebRequest = (ServletWebRequest) webRequest;
-            HttpServletResponse response = servletWebRequest.getResponse();
-            if (response != null) {
-                System.out.println(">>> test status: " + response.getStatus());
-                System.out.println(">>> test header: " + response.getHeader("X-B3-SpanId"));
-            }
-        }
-
+    public ResponseEntity<?> handleMiscFailures(Throwable t) {
+        System.out.println(">>> X-B3-TraceId: " + MDC.get("X-B3-TraceId"));
         return errorResponse(t, HttpStatus.BAD_REQUEST);
     }
 
