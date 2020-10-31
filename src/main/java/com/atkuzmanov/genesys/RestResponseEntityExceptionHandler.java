@@ -51,7 +51,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     protected ResponseEntity<Object> errorResponse(Throwable throwable, HttpStatus status) {
         if (throwable != null) {
-            return response(new Exception(throwable), status);
+//            return response(new Exception(throwable), status);
+            ResponseDetails rd = ResponseDetails.builder().status(status.value()).responseMessage(">>> TEST1").build();
+            return response(rd, status);
         } else {
             return response(null, status);
         }

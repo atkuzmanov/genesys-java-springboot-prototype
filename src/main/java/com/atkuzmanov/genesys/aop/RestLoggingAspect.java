@@ -102,7 +102,7 @@ public class RestLoggingAspect {
     public void logResponse(JoinPoint joinPoint, Object result) {
         if(result instanceof ResponseEntity) {
             Class<?> targetClass = joinPoint.getTarget().getClass();
-            ResponseEntity responseObj = (ResponseEntity) result;
+            ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
 
             Map<String, String> responseLogMap = new HashMap<>();
             responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
@@ -118,7 +118,7 @@ public class RestLoggingAspect {
         }
     }
 
-    private Map<String, String> extractResponseHeaders(ResponseEntity response) {
+    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
         Map<String, String> headers = new HashMap<>();
         response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
         return headers;
