@@ -96,8 +96,7 @@ public class RestLoggingAspect {
         }
         return buffer.toString();
     }
-
-
+    
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         if(result instanceof ResponseEntity) {
@@ -124,7 +123,6 @@ public class RestLoggingAspect {
         return headers;
     }
 
-    // TODO: wip
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
     public void logAfterThrowing(JoinPoint p, Exception e) {
         Class<?> targetClass = p.getTarget().getClass();
