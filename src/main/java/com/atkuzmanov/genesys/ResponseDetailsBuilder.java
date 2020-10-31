@@ -64,6 +64,7 @@ public class ResponseDetailsBuilder {
         responseDetails.setHeaders(headers);
         responseDetails.setResponseBody(responseBody);
         responseDetails.setResponseMessage(responseMessage);
+        responseDetails.setThrowable(throwable);
         return responseDetails;
     }
 

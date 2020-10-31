@@ -12,6 +12,7 @@ import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,7 +36,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler({InvocationTargetException.class, IllegalArgumentException.class, ClassCastException.class,
             ConversionFailedException.class})
     @ResponseBody
-    public ResponseEntity<?> handleMiscFailures(Throwable t) {
+    // TODO: WIP
+    public ResponseEntity<?> handleMiscFailures(Throwable t, WebRequest request) {
         return errorResponse(t, HttpStatus.BAD_REQUEST);
     }
 
@@ -51,6 +53,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     protected ResponseEntity<Object> errorResponse(Throwable throwable, HttpStatus status) {
         if (throwable != null) {
+            // TODO: WIP
 //            return response(new Exception(throwable), status);
             ResponseDetails rd = ResponseDetails.builder().status(status.value()).responseMessage(">>> TEST1").build();
             return response(rd, status);
