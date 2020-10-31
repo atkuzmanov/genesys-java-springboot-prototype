@@ -98,7 +98,7 @@ public class RestLoggingAspect {
     }
 
 
-    @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys.controllers.*.*(..))", returning = "result")
+    @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         if(result instanceof ResponseEntity) {
             Class<?> targetClass = joinPoint.getTarget().getClass();
