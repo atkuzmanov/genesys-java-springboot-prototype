@@ -1,15 +1,26 @@
 package com.atkuzmanov.genesys;
 
+import org.springframework.http.HttpHeaders;
 import java.util.Map;
 
 public class ResponseDetails {
+    private int status;
     private String originMethod;
     private String originClass;
-    private int status;
     private String responseBody;
-    private Map<String, String> headers;
-    private String responseMessage;
+    private String message;
     private String path;
+    private Map<String, String> headers;
+    private HttpHeaders httpHeaders;
+    private Throwable throwable;
+
+    public HttpHeaders getHttpHeaders() {
+        return httpHeaders;
+    }
+
+    public void setHttpHeaders(HttpHeaders httpHeaders) {
+        this.httpHeaders = httpHeaders;
+    }
 
     public Throwable getThrowable() {
         return throwable;
@@ -18,8 +29,6 @@ public class ResponseDetails {
     public void setThrowable(Throwable throwable) {
         this.throwable = throwable;
     }
-
-    private Throwable throwable;
 
     public String getOriginMethod() {
         return originMethod;
@@ -61,12 +70,12 @@ public class ResponseDetails {
         this.headers = headers;
     }
 
-    public String getResponseMessage() {
-        return responseMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setResponseMessage(String responseMessage) {
-        this.responseMessage = responseMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getPath() {

@@ -1,5 +1,7 @@
 package com.atkuzmanov.genesys.aop;
 
+import com.atkuzmanov.genesys.ResponseDetails;
+import com.atkuzmanov.genesys.ResponseDetailsBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -16,8 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
-import static net.logstash.logback.argument.StructuredArguments.entries;
-import static net.logstash.logback.argument.StructuredArguments.kv;
+import static net.logstash.logback.argument.StructuredArguments.*;
 
 @Aspect
 @Component
@@ -96,24 +97,41 @@ public class RestLoggingAspect {
         }
         return buffer.toString();
     }
-    
+
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         if(result instanceof ResponseEntity) {
             Class<?> targetClass = joinPoint.getTarget().getClass();
             ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
 
-            Map<String, String> responseLogMap = new HashMap<>();
-            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
-            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
-            responseLogMap.put("originClass", targetClass.toString());
+//            Map<String, String> responseLogMap = new HashMap<>();
+//            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
+//            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
+//            responseLogMap.put("originClass", targetClass.toString());
+//            if (responseObj.hasBody()) {
+//                responseLogMap.put("responseBody", responseObj.getBody().toString());
+//            }
+//
+//            log.info("OUTGOING_RESPONSE",
+//                    entries(responseLogMap),
+//                    kv("headers", extractResponseHeaders(responseObj)));
+
+            ResponseDetailsBuilder rdb = ResponseDetails.builder()
+                    .responseMessage("OUTGOING_RESPONSE")
+                    .status(responseObj.getStatusCodeValue())
+                    .originClass(targetClass.toString())
+                    .originMethod(joinPoint.getSignature().getName())
+                    .httpHeaders(responseObj.getHeaders());
             if (responseObj.hasBody()) {
-                responseLogMap.put("responseBody", responseObj.getBody().toString());
+//                String body = Objects.requireNonNull(responseObj.getBody()).toString();
+//                rdb.responseBody(body);
+                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
             }
 
-            log.info("OUTGOING_RESPONSE",
-                    entries(responseLogMap),
-                    kv("headers", extractResponseHeaders(responseObj)));
+
+            ResponseDetails rd = rdb.build();
+            log.info(rd.getMessage(), fields(rd));
+
         }
     }
 

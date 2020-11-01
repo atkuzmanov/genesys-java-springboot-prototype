@@ -6,14 +6,20 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 
 public class ResponseDetailsBuilder {
+    private int status;
     private String originMethod;
     private String originClass;
-    private int status;
     private String responseBody;
-    private Map<String, String> headers;
-    private String responseMessage;
+    private String message;
     private String path;
+    private Map<String, String> headers;
+    private HttpHeaders httpHeaders;
     private Throwable throwable;
+
+    public ResponseDetailsBuilder httpHeaders(HttpHeaders httpHeaders) {
+        this.httpHeaders = httpHeaders;
+        return this;
+    }
 
     public ResponseDetailsBuilder throwable(Throwable throwable) {
         this.throwable = throwable;
@@ -46,7 +52,7 @@ public class ResponseDetailsBuilder {
     }
 
     public ResponseDetailsBuilder responseMessage(String responseMessage) {
-        this.responseMessage = responseMessage;
+        this.message = responseMessage;
         return this;
     }
 
@@ -62,8 +68,9 @@ public class ResponseDetailsBuilder {
         responseDetails.setStatus(status);
         responseDetails.setPath(path);
         responseDetails.setHeaders(headers);
+        responseDetails.setHttpHeaders(httpHeaders);
         responseDetails.setResponseBody(responseBody);
-        responseDetails.setResponseMessage(responseMessage);
+        responseDetails.setMessage(message);
         responseDetails.setThrowable(throwable);
         return responseDetails;
     }
