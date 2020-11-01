@@ -9,7 +9,7 @@ public class ResponseDetails {
     private String originMethod;
     private String originClass;
     private String responseBody;
-    private String message;
+    private String responseMessage;
     private String path;
     private HttpHeaders headers;
     private Throwable throwable;
@@ -62,12 +62,12 @@ public class ResponseDetails {
         this.responseBody = responseBody;
     }
 
-    public String getMessage() {
-        return message;
+    public String getResponseMessage() {
+        return responseMessage;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setResponseMessage(String responseMessage) {
+        this.responseMessage = responseMessage;
     }
 
     public String getPath() {

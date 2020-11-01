@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.*;
+import static net.logstash.logback.marker.Markers.append;
 
 @Aspect
 @Component
@@ -144,18 +145,16 @@ public class RestLoggingAspect {
             if (responseObj.hasBody()) {
                 if (responseObj.getBody() instanceof ResponseDetails) {
                     ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-                    log.info(responseDetails.getMessage(), fields(responseDetails));
+//                    log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
+                    log.info("OUTGOING_RESPONSE", append("responseDetails", responseDetails));
                 } else {
                     String body = Objects.requireNonNull(responseObj.getBody()).toString();
-
                     log.info("OUTGOING_RESPONSE", fields(
-                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)
-                    ));
+                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)));
                 }
             } else {
                 log.info("OUTGOING_RESPONSE", fields(
-                        buildResponseDetailsForLogging(responseObj, originClass, originMethod)
-                ));
+                        buildResponseDetailsForLogging(responseObj, originClass, originMethod)));
             }
         }
     }
@@ -166,7 +165,7 @@ public class RestLoggingAspect {
 
     private ResponseDetails buildResponseDetailsForLogging(ResponseEntity<?> responseObj, String body, String originClass, String originMethod) {
         ResponseDetailsBuilder rdb = ResponseDetails.builder()
-                .message("OUTGOING_RESPONSE")
+                .responseMessage("OUTGOING_RESPONSE")
                 .status(responseObj.getStatusCodeValue())
                 .originClass(originClass)
                 .originMethod(originMethod)

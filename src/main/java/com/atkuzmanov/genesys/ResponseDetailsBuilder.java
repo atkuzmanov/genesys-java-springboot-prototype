@@ -8,7 +8,7 @@ public class ResponseDetailsBuilder {
     private String originMethod;
     private String originClass;
     private String responseBody;
-    private String message;
+    private String responseMessage;
     private String path;
     private HttpHeaders headers;
     private Throwable throwable;
@@ -43,8 +43,8 @@ public class ResponseDetailsBuilder {
         return this;
     }
 
-    public ResponseDetailsBuilder message(String responseMessage) {
-        this.message = responseMessage;
+    public ResponseDetailsBuilder responseMessage(String responseMessage) {
+        this.responseMessage = responseMessage;
         return this;
     }
 
@@ -61,7 +61,7 @@ public class ResponseDetailsBuilder {
         responseDetails.setPath(path);
         responseDetails.setHeaders(headers);
         responseDetails.setResponseBody(responseBody);
-        responseDetails.setMessage(message);
+        responseDetails.setResponseMessage(responseMessage);
         responseDetails.setThrowable(throwable);
         return responseDetails;
     }

@@ -58,7 +58,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
             return ResponseDetails.builder()
                     .status(status.value())
-                    .message(throwable.getMessage())
+                    .responseMessage(throwable.getMessage())
                     .throwable(new Exception(throwable))
                     .headers(tracingResponseHeaders())
                     .responseBody(throwable.getMessage())
