@@ -126,6 +126,11 @@ public class RestLoggingAspect {
 //                String body = Objects.requireNonNull(responseObj.getBody()).toString();
 //                rdb.responseBody(body);
                 rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
+
+                if (responseObj.getBody() instanceof ResponseDetails) {
+                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
+                    rdb.responseBody(responseDetails.getResponseBody());
+                }
             }
 
 
