@@ -22,6 +22,7 @@ import static net.logstash.logback.argument.StructuredArguments.*;
 
 /**
  * TODO: Possibly obfuscate logs if needed?
+ * TODO: Documentation
  */
 @Aspect
 @Component
@@ -117,6 +118,7 @@ public class RestLoggingAspect {
                     }
                     log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
                 } else {
+                    // TODO: wip
                     String body = Objects.requireNonNull(responseObj.getBody()).toString();
                     log.info("OUTGOING_RESPONSE", fields(
                             buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)));
