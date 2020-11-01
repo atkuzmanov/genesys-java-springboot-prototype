@@ -36,7 +36,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler({InvocationTargetException.class, IllegalArgumentException.class, ClassCastException.class,
             ConversionFailedException.class})
     @ResponseBody
-    // TODO: WIP
     public ResponseEntity<?> handleMiscFailures(Throwable t) {
         return errorResponse(t, HttpStatus.BAD_REQUEST);
     }
@@ -53,9 +52,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     protected ResponseEntity<?> errorResponse(Throwable throwable, HttpStatus status) {
         if (throwable != null) {
-            // TODO: WIP
-//            return response(new Exception(throwable), status);
-
             return ResponseDetails.builder()
                     .status(status.value())
                     .responseMessage(throwable.getMessage())
@@ -63,8 +59,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                     .throwable(new Exception(throwable))
                     .headers(tracingResponseHeaders())
                     .entity();
-
-//            return response(responseDetails, status);
         } else {
             return response(null, status);
         }

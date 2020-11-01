@@ -20,6 +20,9 @@ import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.*;
 
+/**
+ * TODO: Possibly obfuscate logs if needed?
+ */
 @Aspect
 @Component
 @Order(-1)
