@@ -100,8 +100,10 @@ public class RestLoggingAspect {
 
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
-        if(result instanceof ResponseEntity) {
+        if (result instanceof ResponseEntity) {
             Class<?> targetClass = joinPoint.getTarget().getClass();
+            String originClass = targetClass.toString();
+            String originMethod = joinPoint.getSignature().getName();
             ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
 
 //            Map<String, String> responseLogMap = new HashMap<>();
@@ -116,29 +118,62 @@ public class RestLoggingAspect {
 //                    entries(responseLogMap),
 //                    kv("headers", extractResponseHeaders(responseObj)));
 
-            ResponseDetailsBuilder rdb = ResponseDetails.builder()
-                    .message("OUTGOING_RESPONSE")
-                    .status(responseObj.getStatusCodeValue())
-                    .originClass(targetClass.toString())
-                    .originMethod(joinPoint.getSignature().getName())
-                    .headers(responseObj.getHeaders());
-            if (responseObj.hasBody()) {
-//                String body = Objects.requireNonNull(responseObj.getBody()).toString();
-//                rdb.responseBody(body);
-                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
+//            ResponseDetailsBuilder rdb = ResponseDetails.builder()
+//                    .message("OUTGOING_RESPONSE")
+//                    .status(responseObj.getStatusCodeValue())
+//                    .originClass(targetClass.toString())
+//                    .originMethod(joinPoint.getSignature().getName())
+//                    .headers(responseObj.getHeaders());
+//            if (responseObj.hasBody()) {
+////                String body = Objects.requireNonNull(responseObj.getBody()).toString();
+////                rdb.responseBody(body);
+//                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
+//
+//                if (responseObj.getBody() instanceof ResponseDetails) {
+//                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
+//                    rdb.responseBody(responseDetails.getResponseBody());
+////                    rdb.headers(responseDetails.getHeaders());
+//                }
+//            }
+//
+//
+//            ResponseDetails rd = rdb.build();
+////            log.info(rd.getMessage(), fields(rd));
 
+
+            if (responseObj.hasBody()) {
                 if (responseObj.getBody() instanceof ResponseDetails) {
                     ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-                    rdb.responseBody(responseDetails.getResponseBody());
-//                    rdb.headers(responseDetails.getHeaders());
+                    log.info(responseDetails.getMessage(), fields(responseDetails));
+                } else {
+                    String body = Objects.requireNonNull(responseObj.getBody()).toString();
+
+                    log.info("OUTGOING_RESPONSE", fields(
+                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)
+                    ));
                 }
+            } else {
+                log.info("OUTGOING_RESPONSE", fields(
+                        buildResponseDetailsForLogging(responseObj, originClass, originMethod)
+                ));
             }
-
-
-            ResponseDetails rd = rdb.build();
-            log.info(rd.getMessage(), fields(rd));
-
         }
+    }
+
+    private ResponseDetails buildResponseDetailsForLogging(ResponseEntity<?> responseObj, String originClass, String originMethod) {
+        return buildResponseDetailsForLogging(responseObj, null, originClass, originMethod);
+    }
+
+    private ResponseDetails buildResponseDetailsForLogging(ResponseEntity<?> responseObj, String body, String originClass, String originMethod) {
+        ResponseDetailsBuilder rdb = ResponseDetails.builder()
+                .message("OUTGOING_RESPONSE")
+                .status(responseObj.getStatusCodeValue())
+                .originClass(originClass)
+                .originMethod(originMethod)
+                .headers(responseObj.getHeaders())
+                .responseBody(body);
+
+        return rdb.build();
     }
 
     private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {

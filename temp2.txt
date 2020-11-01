@@ -35,3 +35,58 @@ MDC >>> X-B3-TraceId : f0609b781c9c172c
 
 
 
+---
+
+    @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
+    public void logResponse(JoinPoint joinPoint, Object result) {
+        if(result instanceof ResponseEntity) {
+            Class<?> targetClass = joinPoint.getTarget().getClass();
+            ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
+
+//            Map<String, String> responseLogMap = new HashMap<>();
+//            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
+//            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
+//            responseLogMap.put("originClass", targetClass.toString());
+//            if (responseObj.hasBody()) {
+//                responseLogMap.put("responseBody", responseObj.getBody().toString());
+//            }
+//
+//            log.info("OUTGOING_RESPONSE",
+//                    entries(responseLogMap),
+//                    kv("headers", extractResponseHeaders(responseObj)));
+
+            ResponseDetailsBuilder rdb = ResponseDetails.builder()
+                    .message("OUTGOING_RESPONSE")
+                    .status(responseObj.getStatusCodeValue())
+                    .originClass(targetClass.toString())
+                    .originMethod(joinPoint.getSignature().getName())
+                    .headers(responseObj.getHeaders());
+            if (responseObj.hasBody()) {
+//                String body = Objects.requireNonNull(responseObj.getBody()).toString();
+//                rdb.responseBody(body);
+                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
+
+                if (responseObj.getBody() instanceof ResponseDetails) {
+                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
+                    rdb.responseBody(responseDetails.getResponseBody());
+//                    rdb.headers(responseDetails.getHeaders());
+                }
+            }
+
+
+            ResponseDetails rd = rdb.build();
+            log.info(rd.getMessage(), fields(rd));
+
+        }
+    }
+
+    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
+        Map<String, String> headers = new HashMap<>();
+        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
+        return headers;
+    }
+
+----
+
+
+
