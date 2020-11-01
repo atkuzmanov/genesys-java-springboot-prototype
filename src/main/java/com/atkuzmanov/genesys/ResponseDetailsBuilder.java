@@ -3,8 +3,6 @@ package com.atkuzmanov.genesys;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
-
 public class ResponseDetailsBuilder {
     private int status;
     private String originMethod;
@@ -12,12 +10,11 @@ public class ResponseDetailsBuilder {
     private String responseBody;
     private String message;
     private String path;
-    private Map<String, String> headers;
-    private HttpHeaders httpHeaders;
+    private HttpHeaders headers;
     private Throwable throwable;
 
-    public ResponseDetailsBuilder httpHeaders(HttpHeaders httpHeaders) {
-        this.httpHeaders = httpHeaders;
+    public ResponseDetailsBuilder headers(HttpHeaders httpHeaders) {
+        this.headers = httpHeaders;
         return this;
     }
 
@@ -46,12 +43,7 @@ public class ResponseDetailsBuilder {
         return this;
     }
 
-    public ResponseDetailsBuilder headers(Map<String, String> headers) {
-        this.headers = headers;
-        return this;
-    }
-
-    public ResponseDetailsBuilder responseMessage(String responseMessage) {
+    public ResponseDetailsBuilder message(String responseMessage) {
         this.message = responseMessage;
         return this;
     }
@@ -68,7 +60,6 @@ public class ResponseDetailsBuilder {
         responseDetails.setStatus(status);
         responseDetails.setPath(path);
         responseDetails.setHeaders(headers);
-        responseDetails.setHttpHeaders(httpHeaders);
         responseDetails.setResponseBody(responseBody);
         responseDetails.setMessage(message);
         responseDetails.setThrowable(throwable);
@@ -76,6 +67,6 @@ public class ResponseDetailsBuilder {
     }
 
     public ResponseEntity<ResponseDetails> entity() {
-        return ResponseEntity.status(status).headers(HttpHeaders.EMPTY).body(build());
+        return ResponseEntity.status(status).headers(headers).body(build());
     }
 }

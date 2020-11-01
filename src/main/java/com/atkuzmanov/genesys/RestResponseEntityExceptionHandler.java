@@ -5,7 +5,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.OptimisticLockingFailureException;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
@@ -52,30 +51,26 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return errorResponse(ex, HttpStatus.CONFLICT);
     }
 
-    protected ResponseEntity<Object> errorResponse(Throwable throwable, HttpStatus status) {
+    protected ResponseEntity<?> errorResponse(Throwable throwable, HttpStatus status) {
         if (throwable != null) {
             // TODO: WIP
 //            return response(new Exception(throwable), status);
 
-            ResponseDetails responseDetails = ResponseDetails.builder()
+            return ResponseDetails.builder()
                     .status(status.value())
-                    .responseMessage(throwable.getMessage())
+                    .message(throwable.getMessage())
                     .throwable(new Exception(throwable))
-                    .httpHeaders(tracingResponseHeaders())
+                    .headers(tracingResponseHeaders())
                     .responseBody(throwable.getMessage())
-                    .build();
+                    .entity();
 
-            return response(responseDetails, status);
+//            return response(responseDetails, status);
         } else {
             return response(null, status);
         }
     }
 
     protected <T> ResponseEntity<T> response(T body, HttpStatus status) {
-        HttpHeaders h = new HttpHeaders();
-        if(body instanceof ResponseDetails) {
-            h = ((ResponseDetails) body).getHttpHeaders();
-        }
-        return new ResponseEntity<>(body, h, status);
+        return new ResponseEntity<>(body, tracingResponseHeaders(), status);
     }
 }

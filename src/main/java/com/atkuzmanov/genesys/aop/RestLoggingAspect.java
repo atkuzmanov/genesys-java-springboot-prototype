@@ -117,11 +117,11 @@ public class RestLoggingAspect {
 //                    kv("headers", extractResponseHeaders(responseObj)));
 
             ResponseDetailsBuilder rdb = ResponseDetails.builder()
-                    .responseMessage("OUTGOING_RESPONSE")
+                    .message("OUTGOING_RESPONSE")
                     .status(responseObj.getStatusCodeValue())
                     .originClass(targetClass.toString())
                     .originMethod(joinPoint.getSignature().getName())
-                    .httpHeaders(responseObj.getHeaders());
+                    .headers(responseObj.getHeaders());
             if (responseObj.hasBody()) {
 //                String body = Objects.requireNonNull(responseObj.getBody()).toString();
 //                rdb.responseBody(body);
@@ -130,6 +130,7 @@ public class RestLoggingAspect {
                 if (responseObj.getBody() instanceof ResponseDetails) {
                     ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
                     rdb.responseBody(responseDetails.getResponseBody());
+//                    rdb.headers(responseDetails.getHeaders());
                 }
             }
 
