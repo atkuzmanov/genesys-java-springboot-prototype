@@ -55,7 +55,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         if (throwable != null) {
             // TODO: WIP
 //            return response(new Exception(throwable), status);
-            ResponseDetails rd = ResponseDetails.builder().status(status.value()).responseMessage(">>> TEST1").build();
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.set("Example-Header",
+                    "blah1");
+
+
+            ResponseDetails rd = ResponseDetails.builder().status(status.value()).responseMessage(">>> TEST1").httpHeaders(responseHeaders).build();
             return response(rd, status);
         } else {
             return response(null, status);
@@ -63,6 +69,10 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     protected <T> ResponseEntity<T> response(T body, HttpStatus status) {
-        return new ResponseEntity<>(body, new HttpHeaders(), status);
+        HttpHeaders h = new HttpHeaders();
+        if(body instanceof ResponseDetails) {
+            h = ((ResponseDetails) body).getHttpHeaders();
+        }
+        return new ResponseEntity<>(body, h, status);
     }
 }
