@@ -1,8 +1,10 @@
 package com.atkuzmanov.genesys;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.http.HttpHeaders;
 import java.util.Map;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponseDetails {
     private int status;
     private String originMethod;
