@@ -90,3 +90,12 @@ MDC >>> X-B3-TraceId : f0609b781c9c172c
 
 
 
+    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
+        Map<String, String> headers = new HashMap<>();
+        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
+        return headers;
+    }
+
+----
+
+

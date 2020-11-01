@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.*;
-import static net.logstash.logback.marker.Markers.append;
 
 @Aspect
 @Component
@@ -107,46 +106,13 @@ public class RestLoggingAspect {
             String originMethod = joinPoint.getSignature().getName();
             ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
 
-//            Map<String, String> responseLogMap = new HashMap<>();
-//            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
-//            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
-//            responseLogMap.put("originClass", targetClass.toString());
-//            if (responseObj.hasBody()) {
-//                responseLogMap.put("responseBody", responseObj.getBody().toString());
-//            }
-//
-//            log.info("OUTGOING_RESPONSE",
-//                    entries(responseLogMap),
-//                    kv("headers", extractResponseHeaders(responseObj)));
-
-//            ResponseDetailsBuilder rdb = ResponseDetails.builder()
-//                    .message("OUTGOING_RESPONSE")
-//                    .status(responseObj.getStatusCodeValue())
-//                    .originClass(targetClass.toString())
-//                    .originMethod(joinPoint.getSignature().getName())
-//                    .headers(responseObj.getHeaders());
-//            if (responseObj.hasBody()) {
-////                String body = Objects.requireNonNull(responseObj.getBody()).toString();
-////                rdb.responseBody(body);
-//                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
-//
-//                if (responseObj.getBody() instanceof ResponseDetails) {
-//                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-//                    rdb.responseBody(responseDetails.getResponseBody());
-////                    rdb.headers(responseDetails.getHeaders());
-//                }
-//            }
-//
-//
-//            ResponseDetails rd = rdb.build();
-////            log.info(rd.getMessage(), fields(rd));
-
-
             if (responseObj.hasBody()) {
                 if (responseObj.getBody() instanceof ResponseDetails) {
                     ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-//                    log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
-                    log.info("OUTGOING_RESPONSE", append("responseDetails", responseDetails));
+                    if (!this.log.isDebugEnabled()) {
+                        responseDetails.setThrowable(null);
+                    }
+                    log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
                 } else {
                     String body = Objects.requireNonNull(responseObj.getBody()).toString();
                     log.info("OUTGOING_RESPONSE", fields(
@@ -165,7 +131,6 @@ public class RestLoggingAspect {
 
     private ResponseDetails buildResponseDetailsForLogging(ResponseEntity<?> responseObj, String body, String originClass, String originMethod) {
         ResponseDetailsBuilder rdb = ResponseDetails.builder()
-                .responseMessage("OUTGOING_RESPONSE")
                 .status(responseObj.getStatusCodeValue())
                 .originClass(originClass)
                 .originMethod(originMethod)
@@ -173,12 +138,6 @@ public class RestLoggingAspect {
                 .responseBody(body);
 
         return rdb.build();
-    }
-
-    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
-        Map<String, String> headers = new HashMap<>();
-        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
-        return headers;
     }
 
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
