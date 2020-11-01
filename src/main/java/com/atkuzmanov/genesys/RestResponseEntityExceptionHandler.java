@@ -57,13 +57,6 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             // TODO: WIP
 //            return response(new Exception(throwable), status);
 
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Example-Header",
-                    "blah1");
-
-
-            ResponseDetails rd = ResponseDetails.builder().status(status.value()).responseMessage(">>> TEST1").httpHeaders(responseHeaders).build();
-
             ResponseDetails responseDetails = ResponseDetails.builder()
                     .status(status.value())
                     .responseMessage(throwable.getMessage())

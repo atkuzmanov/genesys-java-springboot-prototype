@@ -1,19 +1,13 @@
 package com.atkuzmanov.genesys.controllers;
 
 import org.slf4j.MDC;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-//@Component
 public class ResponseHeadersUtil {
-
-//    @Value("${application.name}")
-//    private static String applicationName;
 
     public static HttpHeaders tracingResponseHeaders() {
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -25,7 +19,7 @@ public class ResponseHeadersUtil {
         try {
             appName = getProps().getProperty("spring.application.name");
         } catch (IOException ioe) {
-            appName = ioe.getMessage();
+            appName = "Could not obtain service name: " + ioe.getMessage();
         }
         responseHeaders.set("serviceName", appName);
 
