@@ -10,3 +10,12 @@
 {"app":"GeneSys","id":"9066080e-701c-441c-a608-0e701c641c64","@timestamp":"2020-10-31T12:22:09.273Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-2","traceId":"41dfb97d641fc826","spanId":"41dfb97d641fc826","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"41dfb97d641fc826","X-B3-TraceId":"41dfb97d641fc826","responseBody":"java.lang.Exception: java.security.InvalidParameterException: Timestamp id must be a positive integer.","originClass":"class com.atkuzmanov.genesys.RestResponseEntityExceptionHandler","originMethod":"handleMiscFailures","status":"400","headers":{},"message":"OUTGOING_RESPONSE","method":"logResponse","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
 
 
+
+MDC >>> traceId : f0609b781c9c172c
+MDC >>> spanId : f0609b781c9c172c
+MDC >>> spanExportable : true
+MDC >>> X-Span-Export : true
+MDC >>> X-B3-SpanId : f0609b781c9c172c
+MDC >>> X-B3-TraceId : f0609b781c9c172c
+
+

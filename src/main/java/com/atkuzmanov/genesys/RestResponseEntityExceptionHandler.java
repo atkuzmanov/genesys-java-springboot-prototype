@@ -38,7 +38,12 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ResponseBody
     // TODO: WIP
     public ResponseEntity<?> handleMiscFailures(Throwable t) {
-        System.out.println(">>> X-B3-TraceId: " + MDC.get("X-B3-TraceId"));
+//        System.out.println(">>> X-B3-TraceId: " + MDC.get("X-B3-TraceId"));
+
+        for (String key :MDC.getCopyOfContextMap().keySet()) {
+            System.out.println("MDC >>> " + key + " : " + MDC.get(key));
+        }
+
         return errorResponse(t, HttpStatus.BAD_REQUEST);
     }
 
