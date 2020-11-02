@@ -5,6 +5,8 @@ import com.atkuzmanov.genesys.ResponseDetailsBuilder;
 import com.atkuzmanov.genesys.dao.TimestampEntity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeCreator;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -126,6 +128,7 @@ public class RestLoggingAspect {
 
 
                     ObjectMapper objectMapper = new ObjectMapper();
+                    JsonNode node = JsonNodeFactory.instance.objectNode();
                     try {
 
                         // get Oraganisation object as a json string
@@ -138,7 +141,7 @@ public class RestLoggingAspect {
 //                        body = jsonStr.toString();
 
 
-                        JsonNode node = objectMapper.readTree(jsonStr);
+                        node = objectMapper.readTree(jsonStr);
 
                         System.out.println(">>> JSON NODE: " + node.toString());
 
@@ -156,7 +159,8 @@ public class RestLoggingAspect {
                     }
 
                     log.info("OUTGOING_RESPONSE", fields(
-                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)));
+                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)),
+                    kv(">>>TEST1: ", node));
                 }
             } else {
                 log.info("OUTGOING_RESPONSE", fields(
