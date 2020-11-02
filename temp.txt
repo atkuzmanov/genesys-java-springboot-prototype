@@ -10,3 +10,4 @@
 	"method": "log",
 	"class": "org.apache.juli.logging.DirectJDKLog"
 }
+

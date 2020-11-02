@@ -22,7 +22,7 @@ import java.util.*;
 import static net.logstash.logback.argument.StructuredArguments.*;
 
 /**
- * TODO: Documentation
+ * TODO: Documentation - add comments
  */
 @Aspect
 @Component
