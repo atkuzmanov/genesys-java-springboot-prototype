@@ -2,10 +2,8 @@ package com.atkuzmanov.genesys.aop;
 
 import com.atkuzmanov.genesys.ResponseDetails;
 import com.atkuzmanov.genesys.ResponseDetailsBuilder;
-import com.atkuzmanov.genesys.dao.TimestampEntity;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeCreator;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -136,16 +134,17 @@ public class RestLoggingAspect {
                         String jsonStr = objectMapper.writeValueAsString(responseObj.getBody());
 
                         // Displaying JSON String
-//                        System.out.println(">>> JSON: " + jsonStr);
+                        System.out.println(">>> JSON: " + jsonStr);
 
 //                        body = jsonStr.toString();
 
 
-                        node = objectMapper.readTree(jsonStr);
+//                        node = objectMapper.readTree(jsonStr);
 
-                        System.out.println(">>> JSON NODE: " + node.toString());
+//                        System.out.println(">>> JSON NODE: " + node.toString());
 
-                        body = node.toString();
+//                        body = node.toString();
+                        body = jsonStr;
 
 //                        List<TimestampEntity> lte = new ArrayList<>();
 //                        for (Object e : Arrays.asList(responseObj.getBody())) {

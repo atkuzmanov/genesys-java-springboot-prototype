@@ -1,6 +1,7 @@
 package com.atkuzmanov.genesys;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import org.springframework.http.HttpHeaders;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -54,10 +55,12 @@ public class ResponseDetails {
         this.status = status;
     }
 
+    @JsonRawValue
     public String getResponseBody() {
         return responseBody;
     }
 
+    @JsonRawValue
     public void setResponseBody(String responseBody) {
         this.responseBody = responseBody;
     }

@@ -11,7 +11,6 @@ public class TimestampEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
     private String timestampAsString;
 
     public Integer getId() {
