@@ -2,8 +2,13 @@ package com.atkuzmanov.genesys.aop;
 
 import com.atkuzmanov.genesys.ResponseDetails;
 import com.atkuzmanov.genesys.ResponseDetailsBuilder;
+import com.atkuzmanov.genesys.dao.TimestampEntity;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -16,12 +21,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Time;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static net.logstash.logback.argument.StructuredArguments.*;
 
 /**
- * TODO: Possibly obfuscate logs if needed?
  * TODO: Documentation
  */
 @Aspect
@@ -120,6 +126,32 @@ public class RestLoggingAspect {
                 } else {
                     // TODO: wip
                     String body = Objects.requireNonNull(responseObj.getBody()).toString();
+//                    String body = Arrays.asList(Objects.requireNonNull(responseObj.getBody())).toString();
+
+
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    try {
+
+                        // get Oraganisation object as a json string
+                        String jsonStr = objectMapper.writeValueAsString(Arrays.asList(responseObj.getBody()));
+
+                        // Displaying JSON String
+                        System.out.println(">>> JSON: " + jsonStr);
+
+                        body = jsonStr.toString();
+
+
+                        List<TimestampEntity> lte = new ArrayList<>();
+                        for (Object e : Arrays.asList(responseObj.getBody())) {
+                            List<TimestampEntity> tel = (List<TimestampEntity>) e;
+                            lte.addAll(tel);
+                        }
+                        System.out.println(">>> lte: " + Arrays.asList(lte).toString());
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
                     log.info("OUTGOING_RESPONSE", fields(
                             buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)));
                 }
