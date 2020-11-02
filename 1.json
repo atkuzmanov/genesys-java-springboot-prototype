@@ -1,23 +1,28 @@
 {
   "app": "GeneSys",
-  "id": "9066080e-701c-441c-a608-0e701c641c64",
-  "@timestamp": "2020-10-31T12:22:09.273Z",
+  "id": "f616f31e-c03f-4db7-96f3-1ec03ffdb7c3",
+  "@timestamp": "2020-11-02T21:22:25.163Z",
   "@version": "1",
   "logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
   "level": "INFO",
-  "thread": "http-nio-8080-exec-2",
-  "traceId": "41dfb97d641fc826",
-  "spanId": "41dfb97d641fc826",
+  "thread": "http-nio-8080-exec-5",
+  "traceId": "d39ffb79bb191476",
+  "spanId": "d39ffb79bb191476",
   "spanExportable": "true",
   "X-Span-Export": "true",
-  "X-B3-SpanId": "41dfb97d641fc826",
-  "X-B3-TraceId": "41dfb97d641fc826",
-  "responseBody": "java.lang.Exception: java.security.InvalidParameterException: Timestamp id must be a positive integer.",
-  "originClass": "class com.atkuzmanov.genesys.RestResponseEntityExceptionHandler",
-  "originMethod": "handleMiscFailures",
-  "status": "400",
-  "headers": {},
+  "X-B3-SpanId": "d39ffb79bb191476",
+  "X-B3-TraceId": "d39ffb79bb191476",
+  "responseDetails": {
+    "status": 400,
+    "responseMessage": "Timestamp id must be a positive integer.",
+    "headers": {
+      "X-Span-Export": ["true"],
+      "X-B3-SpanId": ["d39ffb79bb191476"],
+      "X-B3-TraceId": ["d39ffb79bb191476"],
+      "serviceName": ["GeneSys"]
+    }
+  },
   "message": "OUTGOING_RESPONSE",
-  "method": "logResponse",
+  "method": "logResponseWithResponseDetails",
   "class": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
 }

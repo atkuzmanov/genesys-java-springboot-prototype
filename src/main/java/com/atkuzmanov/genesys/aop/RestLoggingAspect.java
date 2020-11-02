@@ -2,9 +2,7 @@ package com.atkuzmanov.genesys.aop;
 
 import com.atkuzmanov.genesys.ResponseDetails;
 import com.atkuzmanov.genesys.ResponseDetailsBuilder;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -32,6 +30,8 @@ import static net.logstash.logback.argument.StructuredArguments.*;
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+
+    /*----------------[Request logging]----------------*/
 
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
     public void requestPointcut() {
@@ -104,68 +104,47 @@ public class RestLoggingAspect {
         return buffer.toString();
     }
 
+    /*----------------[Response logging]----------------*/
+
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         if (result instanceof ResponseEntity) {
             Class<?> targetClass = joinPoint.getTarget().getClass();
             String originClass = targetClass.toString();
             String originMethod = joinPoint.getSignature().getName();
-            ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
+            ResponseEntity<?> responseEntity = (ResponseEntity<?>) result;
 
-            if (responseObj.hasBody()) {
-                if (responseObj.getBody() instanceof ResponseDetails) {
-                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-                    if (!this.log.isDebugEnabled()) {
-                        responseDetails.setThrowable(null);
-                    }
-                    log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
+            if (responseEntity.hasBody()) {
+                if (responseEntity.getBody() instanceof ResponseDetails) {
+                    logResponseWithResponseDetails(responseEntity);
                 } else {
-                    // TODO: wip
-                    String body = Objects.requireNonNull(responseObj.getBody()).toString();
-//                    String body = Arrays.asList(Objects.requireNonNull(responseObj.getBody())).toString();
-
-
-                    ObjectMapper objectMapper = new ObjectMapper();
-                    JsonNode node = JsonNodeFactory.instance.objectNode();
-                    try {
-
-                        // get Oraganisation object as a json string
-//                        String jsonStr = objectMapper.writeValueAsString(Arrays.asList(responseObj.getBody()));
-                        String jsonStr = objectMapper.writeValueAsString(responseObj.getBody());
-
-                        // Displaying JSON String
-                        System.out.println(">>> JSON: " + jsonStr);
-
-//                        body = jsonStr.toString();
-
-
-//                        node = objectMapper.readTree(jsonStr);
-
-//                        System.out.println(">>> JSON NODE: " + node.toString());
-
-//                        body = node.toString();
-                        body = jsonStr;
-
-//                        List<TimestampEntity> lte = new ArrayList<>();
-//                        for (Object e : Arrays.asList(responseObj.getBody())) {
-//                            List<TimestampEntity> tel = (List<TimestampEntity>) e;
-//                            lte.addAll(tel);
-//                        }
-//                        System.out.println(">>> lte: " + Arrays.asList(lte).toString());
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    log.info("OUTGOING_RESPONSE", fields(
-                            buildResponseDetailsForLogging(responseObj, body, originClass, originMethod)),
-                    kv(">>>TEST1: ", node));
+                    logResponseWithJSONBody(responseEntity, originClass, originMethod);
                 }
             } else {
                 log.info("OUTGOING_RESPONSE", fields(
-                        buildResponseDetailsForLogging(responseObj, originClass, originMethod)));
+                        buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
             }
         }
+    }
+
+    private void logResponseWithResponseDetails(ResponseEntity<?> responseEntity) {
+        ResponseDetails responseDetails = (ResponseDetails) responseEntity.getBody();
+        if (!this.log.isDebugEnabled()) {
+            responseDetails.setThrowable(null);
+        }
+        log.info("OUTGOING_RESPONSE", kv("responseDetails", responseDetails));
+    }
+
+    private void logResponseWithJSONBody(ResponseEntity<?> responseEntity, String originClass, String originMethod) {
+        String bodyJSONstr = "";
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            bodyJSONstr = objectMapper.writeValueAsString(responseEntity.getBody());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("OUTGOING_RESPONSE", fields(
+                buildResponseDetailsForLogging(responseEntity, bodyJSONstr, originClass, originMethod)));
     }
 
     private ResponseDetails buildResponseDetailsForLogging(ResponseEntity<?> responseObj, String originClass, String originMethod) {
@@ -183,17 +162,19 @@ public class RestLoggingAspect {
         return rdb.build();
     }
 
+    /*----------------[Exception logging]----------------*/
+
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
     public void logAfterThrowing(JoinPoint p, Exception e) {
         Class<?> targetClass = p.getTarget().getClass();
         StringBuilder sb = new StringBuilder();
         sb.append("Exception: ").append(p.getTarget().getClass());
         sb.append(".").append(p.getSignature().getName()).append(": ");
-        sb.append("Exception message: ").append(e.getMessage());
-        sb.append("Exception cause: ").append(e.getCause());
+        sb.append(" Exception message: ").append(e.getMessage());
+        sb.append(" Exception cause: ").append(e.getCause());
 
         if (this.log.isDebugEnabled()) {
-            sb.append("Exception stacktrace: ");
+            sb.append(" Exception stacktrace: ");
             sb.append(Arrays.toString(e.getStackTrace()));
         }
         log.error(sb.toString(),
