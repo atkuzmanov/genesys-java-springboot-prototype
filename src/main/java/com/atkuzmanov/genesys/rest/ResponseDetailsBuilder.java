@@ -1,4 +1,4 @@
-package com.atkuzmanov.genesys;
+package com.atkuzmanov.genesys.rest;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

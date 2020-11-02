@@ -10,7 +10,7 @@
                     <fieldName>app</fieldName>
                 </contextName>
                 <uuid>
-                    <fieldName>id</fieldName>
+                    <fieldName>logMsgId</fieldName>
                     <strategy>random</strategy>
                 </uuid>
                 <timestamp>

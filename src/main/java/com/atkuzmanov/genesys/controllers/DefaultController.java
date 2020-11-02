@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import static com.atkuzmanov.genesys.controllers.ResponseHeadersUtil.tracingResponseHeaders;
+
 @RestController
 public class DefaultController {
 
@@ -36,14 +38,14 @@ public class DefaultController {
         tse.setTimestampAsString(newTimestamp);
         timestampRepo.save(tse);
 
-        return new ResponseEntity<>("Saved.", HttpStatus.OK);
+        return new ResponseEntity<>("Saved.", tracingResponseHeaders(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/all")
     public @ResponseBody
     ResponseEntity<Iterable<TimestampEntity>> getAllTimestamps() {
         // This returns a JSON or XML with all the timestamps.
-        return new ResponseEntity<Iterable<TimestampEntity>>(timestampRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<Iterable<TimestampEntity>>(timestampRepo.findAll(), tracingResponseHeaders(), HttpStatus.OK);
     }
 
     @PutMapping(path = "/updateTimestamp")
@@ -54,12 +56,12 @@ public class DefaultController {
         }
         Optional<TimestampEntity> optTse = timestampRepo.findById(timestampId);
         if (!optTse.isPresent()) {
-            return new ResponseEntity<>("Not found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found.", tracingResponseHeaders(), HttpStatus.NOT_FOUND);
         }
         TimestampEntity tse = optTse.get();
         tse.setTimestampAsString(localDateTimeNowFormat_yyyyMMdddHHmmss());
         timestampRepo.save(tse);
-        return new ResponseEntity<>("Updated.", HttpStatus.OK);
+        return new ResponseEntity<>("Updated.", tracingResponseHeaders(), HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/delete")
@@ -70,10 +72,10 @@ public class DefaultController {
         }
         Optional<TimestampEntity> optTse = timestampRepo.findById(timestampId);
         if (!optTse.isPresent()) {
-            return new ResponseEntity<>("Not found.", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found.", tracingResponseHeaders(),  HttpStatus.NOT_FOUND);
         }
         timestampRepo.deleteById(timestampId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(tracingResponseHeaders(), HttpStatus.NO_CONTENT);
     }
 
     private static String localDateTimeNowFormat_yyyyMMdddHHmmss() {

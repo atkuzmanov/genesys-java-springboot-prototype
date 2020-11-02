@@ -1,4 +1,4 @@
-package com.atkuzmanov.genesys;
+package com.atkuzmanov.genesys.rest;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

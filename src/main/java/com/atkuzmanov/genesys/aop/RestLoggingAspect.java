@@ -1,7 +1,7 @@
 package com.atkuzmanov.genesys.aop;
 
-import com.atkuzmanov.genesys.ResponseDetails;
-import com.atkuzmanov.genesys.ResponseDetailsBuilder;
+import com.atkuzmanov.genesys.rest.ResponseDetails;
+import com.atkuzmanov.genesys.rest.ResponseDetailsBuilder;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;

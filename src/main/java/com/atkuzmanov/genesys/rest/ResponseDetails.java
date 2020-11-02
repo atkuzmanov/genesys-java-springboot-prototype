@@ -1,4 +1,4 @@
-package com.atkuzmanov.genesys;
+package com.atkuzmanov.genesys.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRawValue;
