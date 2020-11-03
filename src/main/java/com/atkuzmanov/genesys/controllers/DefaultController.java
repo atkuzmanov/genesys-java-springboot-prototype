@@ -78,6 +78,8 @@ public class DefaultController {
         return new ResponseEntity<>(tracingResponseHeaders(), HttpStatus.NO_CONTENT);
     }
 
+
+
     private static String localDateTimeNowFormat_yyyyMMdddHHmmss() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localDateTime = LocalDateTime.now();
