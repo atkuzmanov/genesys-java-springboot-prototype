@@ -16,17 +16,11 @@ import java.util.Optional;
 
 import static com.atkuzmanov.genesys.controllers.ResponseHeadersUtil.tracingResponseHeaders;
 
-//@RestController
 @Controller
 public class DefaultController {
 
     @Autowired
     private TimestampRepository timestampRepo;
-
-//    @RequestMapping("/")
-//    public String index1() {
-//        return localDateTimeNowFormat_yyyyMMdddHHmmss();
-//    }
 
     @PostMapping(path = "/addTimestamp")
     public @ResponseBody
@@ -83,7 +77,7 @@ public class DefaultController {
 
     @RequestMapping({"/", "/index"})
     public String returnIndexPage(Model model) {
-
+        model.addAttribute("timestamp", localDateTimeNowFormat_yyyyMMdddHHmmss());
         return "index";
     }
 
