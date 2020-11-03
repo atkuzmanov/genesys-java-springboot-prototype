@@ -5,6 +5,8 @@ import com.atkuzmanov.genesys.dao.TimestampRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.InvalidParameterException;
@@ -14,16 +16,17 @@ import java.util.Optional;
 
 import static com.atkuzmanov.genesys.controllers.ResponseHeadersUtil.tracingResponseHeaders;
 
-@RestController
+//@RestController
+@Controller
 public class DefaultController {
 
     @Autowired
     private TimestampRepository timestampRepo;
 
-    @RequestMapping("/")
-    public String index() {
-        return localDateTimeNowFormat_yyyyMMdddHHmmss();
-    }
+//    @RequestMapping("/")
+//    public String index1() {
+//        return localDateTimeNowFormat_yyyyMMdddHHmmss();
+//    }
 
     @PostMapping(path = "/addTimestamp")
     public @ResponseBody
@@ -78,7 +81,11 @@ public class DefaultController {
         return new ResponseEntity<>(tracingResponseHeaders(), HttpStatus.NO_CONTENT);
     }
 
+    @RequestMapping({"/", "/index"})
+    public String returnIndexPage(Model model) {
 
+        return "index";
+    }
 
     private static String localDateTimeNowFormat_yyyyMMdddHHmmss() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

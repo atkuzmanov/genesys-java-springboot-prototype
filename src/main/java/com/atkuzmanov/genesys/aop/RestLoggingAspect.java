@@ -125,6 +125,7 @@ public class RestLoggingAspect {
                         buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
             }
         }
+        // todo: capture non RE results
     }
 
     private void logResponseWithResponseDetails(ResponseEntity<?> responseEntity) {
