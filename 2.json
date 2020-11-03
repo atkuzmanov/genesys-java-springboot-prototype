@@ -1,55 +1,19 @@
 {
   "app": "GeneSys",
-  "logMsgId": "6599f0fb-7ce4-434f-99f0-fb7ce4034fcf",
-  "@timestamp": "2020-11-03T13:27:24.056Z",
-  "@version": "1",
-  "logger": "com.atkuzmanov.genesys.GenesysApplication",
-  "level": "INFO",
-  "thread": "restartedMain",
-  "message": "No active profile set, falling back to default profiles: default",
-  "method": "logStartupProfileInfo",
-  "class": "org.springframework.boot.SpringApplication"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "5b5a3c07-b2db-40fd-9a3c-07b2dbd0fd77",
-  "@timestamp": "2020-11-03T13:27:25.913Z",
-  "@version": "1",
-  "logger": "org.apache.catalina.core.StandardService",
-  "level": "INFO",
-  "thread": "restartedMain",
-  "message": "Starting service [Tomcat]",
-  "method": "log",
-  "class": "org.apache.juli.logging.DirectJDKLog"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "d6f3e4a9-6d99-4d5f-b3e4-a96d998d5f30",
-  "@timestamp": "2020-11-03T13:27:25.913Z",
-  "@version": "1",
-  "logger": "org.apache.catalina.core.StandardEngine",
-  "level": "INFO",
-  "thread": "restartedMain",
-  "message": "Starting Servlet engine: [Apache Tomcat/9.0.38]",
-  "method": "log",
-  "class": "org.apache.juli.logging.DirectJDKLog"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "6072689b-aae4-481b-b268-9baae4981b57",
-  "@timestamp": "2020-11-03T13:27:26.785Z",
+  "logMsgId": "282a5aa0-d6a8-47ed-aa5a-a0d6a8f7edf6",
+  "@timestamp": "2020-11-03T15:42:41.633Z",
   "@version": "1",
   "logger": "org.springframework.cloud.sleuth.zipkin2.ZipkinAutoConfiguration",
   "level": "WARN",
   "thread": "restartedMain",
-  "message": "Check result of the [RestTemplateSender{http://localhost:9411/api/v2/spans}] contains an error [CheckResult{ok=false, error=org.springframework.web.client.ResourceAccessException: I/O error on POST request for \"http://localhost:9411/api/v2/spans\": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)}]",
+  "message": "Check result of the [RestTemplateSender{http://localhost:9411/api/v2/spans}] contains an error [CheckResult{ok=false, error=org.springframework.web.client.HttpClientErrorException$BadRequest: 400 Bad Request: [Empty JSON_V2 message]}]",
   "method": "logCheckResult",
   "class": "org.springframework.cloud.sleuth.zipkin2.ZipkinAutoConfiguration"
 }
 {
   "app": "GeneSys",
-  "logMsgId": "941ee49a-86da-4dbf-9ee4-9a86da7dbfb0",
-  "@timestamp": "2020-11-03T13:27:27.475Z",
+  "logMsgId": "c79e9478-2116-46ad-9e94-78211686ad5b",
+  "@timestamp": "2020-11-03T15:42:42.287Z",
   "@version": "1",
   "logger": "org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration",
   "level": "WARN",
@@ -57,64 +21,4 @@
   "message": "spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning",
   "method": "openEntityManagerInViewInterceptor",
   "class": "org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "ace2133e-6b69-4606-a213-3e6b6926069e",
-  "@timestamp": "2020-11-03T13:27:27.592Z",
-  "@version": "1",
-  "logger": "com.zaxxer.hikari.HikariDataSource",
-  "level": "INFO",
-  "thread": "task-1",
-  "message": "HikariPool-1 - Starting...",
-  "method": "getConnection",
-  "class": "com.zaxxer.hikari.HikariDataSource"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "0f911cf4-fd09-4541-911c-f4fd0935415e",
-  "@timestamp": "2020-11-03T13:27:28.169Z",
-  "@version": "1",
-  "logger": "org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration",
-  "level": "WARN",
-  "thread": "restartedMain",
-  "message": "Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)",
-  "method": "checkTemplateLocationExists",
-  "class": "org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "7e3cbe39-e4e1-4dba-bcbe-39e4e11dba3f",
-  "@timestamp": "2020-11-03T13:27:28.285Z",
-  "@version": "1",
-  "logger": "com.zaxxer.hikari.HikariDataSource",
-  "level": "INFO",
-  "thread": "task-1",
-  "message": "HikariPool-1 - Start completed.",
-  "method": "getConnection",
-  "class": "com.zaxxer.hikari.HikariDataSource"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "429d5dc1-7126-41a8-9d5d-c1712621a8ee",
-  "@timestamp": "2020-11-03T13:27:29.595Z",
-  "@version": "1",
-  "logger": "com.atkuzmanov.genesys.GenesysApplication",
-  "level": "INFO",
-  "thread": "restartedMain",
-  "message": "Started GenesysApplication in 6.469 seconds (JVM running for 8.432)",
-  "method": "logStarted",
-  "class": "org.springframework.boot.StartupInfoLogger"
-}
-{
-  "app": "GeneSys",
-  "logMsgId": "6e25fef3-561d-41ee-a5fe-f3561d11eeae",
-  "@timestamp": "2020-11-03T13:27:29.713Z",
-  "@version": "1",
-  "logger": "com.atkuzmanov.genesys.GenesysApplication",
-  "level": "INFO",
-  "thread": "restartedMain",
-  "message": "Application started.",
-  "method": "main",
-  "class": "com.atkuzmanov.genesys.GenesysApplication"
 }
