@@ -180,6 +180,7 @@
                 <!-- These includes are needed to copy files from resources to target dir. -->
                 <includes>
                     <include>*</include>
+                    <include>**/*.*</include>
                 </includes>
             </resource>
             <resource>
