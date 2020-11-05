@@ -33,7 +33,7 @@ public class RestLoggingAspect {
 
     /*----------------[Request logging]----------------*/
 
-    @Pointcut("execution(* com.atkuzmanov.genesys.controllers.*.*(..))")
+    @Pointcut("execution(* com.atkuzmanov.genesys.controllers..*.*(..))")
     public void requestPointcut() {
     }
 
