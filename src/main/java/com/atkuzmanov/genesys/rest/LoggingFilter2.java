@@ -1,0 +1,96 @@
+package com.atkuzmanov.genesys.rest;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.ContentCachingResponseWrapper;
+
+import javax.servlet.DispatcherType;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.EnumSet;
+import java.util.Enumeration;
+import java.util.Map;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static net.logstash.logback.argument.StructuredArguments.kv;
+import static net.logstash.logback.marker.Markers.appendFields;
+
+@Component
+@Configuration
+public class LoggingFilter2 extends OncePerRequestFilter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
+
+    @Bean
+    public FilterRegistrationBean<LoggingFilter2> initFilter() {
+        FilterRegistrationBean<LoggingFilter2> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new LoggingFilter2());
+
+        // *1* make sure you sett all dispatcher types if you want the filter to log upon
+        registrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
+
+        // *2* this should put your filter above any other filter
+        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+
+        return registrationBean;
+    }
+
+    ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
+
+        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpServletRequest);
+        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
+
+        filterChain.doFilter(requestWrapper, responseWrapper);
+
+        String requestUrl = requestWrapper.getRequestURL().toString();
+        HttpHeaders requestHeaders = new HttpHeaders();
+        Enumeration headerNames = requestWrapper.getHeaderNames();
+        while (headerNames.hasMoreElements()) {
+            String headerName = (String) headerNames.nextElement();
+            requestHeaders.add(headerName, requestWrapper.getHeader(headerName));
+        }
+        HttpMethod httpMethod = HttpMethod.valueOf(requestWrapper.getMethod());
+        Map<String, String[]> requestParams = requestWrapper.getParameterMap();
+
+        String requestBody = IOUtils.toString(requestWrapper.getInputStream(),UTF_8);
+//        JsonNode requestJson = objectMapper.readTree(requestBody);
+
+//        RequestEntity<JsonNode> requestEntity = new RequestEntity<>(requestJson,requestHeaders, httpMethod, URI.create(requestUrl));
+//        LOGGER.info(appendFields(requestEntity),"Logging Http Request");
+
+
+        HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
+        HttpHeaders responseHeaders = new HttpHeaders();
+        for (String headerName : responseWrapper.getHeaderNames()) {
+            responseHeaders.add(headerName, responseWrapper.getHeader(headerName));
+        }
+        String responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
+//        JsonNode responseJson = objectMapper.readTree(responseBody);
+        String str = objectMapper.writeValueAsString(responseBody);
+        ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
+        LOGGER.info("Logging Http Response", kv("re", responseEntity));
+        responseWrapper.copyBodyToResponse();
+    }
+}

@@ -1,220 +1,43 @@
+package com.atkuzmanov.genesys.rest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@Component
+public class LoggingFilter implements Filter {
+
+    private static final Logger log = LoggerFactory.getLogger(LoggingFilter.class);
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain chain) throws IOException, ServletException {
+        try {
+            HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
 
-{"app":"GeneSys","id":"b689b777-0e7e-43f8-89b7-770e7e33f80a","@timestamp":"2020-10-31T12:22:09.146Z","@version":"1","logger":"org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]","level":"INFO","thread":"http-nio-8080-exec-2","message":"Initializing Spring DispatcherServlet 'dispatcherServlet'","method":"log","class":"org.apache.juli.logging.DirectJDKLog"}
-
-
-
-
-{"app":"GeneSys","id":"d70daeb0-b239-4dde-8dae-b0b2399ddecb","@timestamp":"2020-10-31T12:22:09.244Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-2","traceId":"41dfb97d641fc826","spanId":"41dfb97d641fc826","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"41dfb97d641fc826","X-B3-TraceId":"41dfb97d641fc826","requestScheme":"http","requestMethod":"POST","request Locales":"[en_GB]","request LocalName":"localhost","request Locale":"en_GB","uri":"/addTimestamp","url":"http://localhost:8080/addTimestamp","request QueryString":"newTimestamp=-1","path":"/addTimestamp","request RemoteHost ":"0:0:0:0:0:0:0:1","request ServerName ":"localhost","request Protocol":"HTTP/1.1","originClass":"class com.atkuzmanov.genesys.controllers.DefaultController","request ServerPort ":"8080","originMethod":"addTimestampToDB","queryParameters":{"newTimestamp":"-1"},"requestBody":"postReqBody
-","headers":{"content-length":"11","postman-token":"66923aaa-aa08-4268-8e3d-7a7e36212d16","host":"localhost:8080","content-type":"text/plain","connection":"keep-alive","cache-control":"no-cache","accept-encoding":"gzip, deflate, br","user-agent":"PostmanRuntime/7.23.0","accept":"*/*"},"message":"INCOMING_REQUEST","method":"logRequest","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-{"app":"GeneSys","id":"cf69ca97-7656-4cb9-a9ca-9776562cb93e","@timestamp":"2020-10-31T12:22:09.257Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"ERROR","thread":"http-nio-8080-exec-2","traceId":"41dfb97d641fc826","spanId":"41dfb97d641fc826","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"41dfb97d641fc826","X-B3-TraceId":"41dfb97d641fc826","originMethod":"addTimestampToDB","originClass":"class com.atkuzmanov.genesys.controllers.DefaultController","message":"Exception: class com.atkuzmanov.genesys.controllers.DefaultController.addTimestampToDB: Exception message: Timestamp id must be a positive integer.Exception cause: null","method":"logAfterThrowing","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-{"app":"GeneSys","id":"9066080e-701c-441c-a608-0e701c641c64","@timestamp":"2020-10-31T12:22:09.273Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-2","traceId":"41dfb97d641fc826","spanId":"41dfb97d641fc826","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"41dfb97d641fc826","X-B3-TraceId":"41dfb97d641fc826","responseBody":"java.lang.Exception: java.security.InvalidParameterException: Timestamp id must be a positive integer.","originClass":"class com.atkuzmanov.genesys.controllers.RestResponseEntityExceptionHandler","originMethod":"handleMiscFailures","status":"400","headers":{},"message":"OUTGOING_RESPONSE","method":"logResponse","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-
-
-
-MDC >>> traceId : f0609b781c9c172c
-MDC >>> spanId : f0609b781c9c172c
-MDC >>> spanExportable : true
-MDC >>> X-Span-Export : true
-MDC >>> X-B3-SpanId : f0609b781c9c172c
-MDC >>> X-B3-TraceId : f0609b781c9c172c
-
-
-//        System.out.println(">>> X-B3-TraceId: " + MDC.get("X-B3-TraceId"));
-
-        for (String key :MDC.getCopyOfContextMap().keySet()) {
-            System.out.println("MDC >>> " + key + " : " + MDC.get(key));
-        }
-
-
-----
-
-
-{"app":"GeneSys","id":"49e2e5c2-3dff-4fc1-a2e5-c23dff5fc1d6","@timestamp":"2020-11-01T10:08:30.742Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-2","traceId":"dd57457f48dd870c","spanId":"dd57457f48dd870c","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"dd57457f48dd870c","X-B3-TraceId":"dd57457f48dd870c","requestScheme":"http","requestMethod":"POST","request Locales":"[en_GB]","request LocalName":"localhost","request Locale":"en_GB","uri":"/addTimestamp","url":"http://localhost:8080/addTimestamp","request QueryString":"newTimestamp=-1","path":"/addTimestamp","request RemoteHost ":"0:0:0:0:0:0:0:1","request ServerName ":"localhost","request Protocol":"HTTP/1.1","originClass":"class com.atkuzmanov.genesys.controllers.DefaultController","request ServerPort ":"8080","originMethod":"addTimestampToDB","queryParameters":{"newTimestamp":"-1"},"requestBody":"postReqBody
-","headers":{"content-length":"11","postman-token":"b1544593-f257-4544-948b-70dd0d78581b","host":"localhost:8080","content-type":"text/plain","connection":"keep-alive","cache-control":"no-cache","accept-encoding":"gzip, deflate, br","user-agent":"PostmanRuntime/7.23.0","accept":"*/*"},"message":"INCOMING_REQUEST","method":"logRequest","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-{"app":"GeneSys","id":"6422838b-4dc5-4425-a283-8b4dc58425ff","@timestamp":"2020-11-01T10:08:30.761Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"ERROR","thread":"http-nio-8080-exec-2","traceId":"dd57457f48dd870c","spanId":"dd57457f48dd870c","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"dd57457f48dd870c","X-B3-TraceId":"dd57457f48dd870c","originMethod":"addTimestampToDB","originClass":"class com.atkuzmanov.genesys.controllers.DefaultController","message":"Exception: class com.atkuzmanov.genesys.controllers.DefaultController.addTimestampToDB: Exception message: Timestamp id must be a positive integer.Exception cause: null","method":"logAfterThrowing","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-{"app":"GeneSys","id":"c0cbe5b1-c757-4816-8be5-b1c7573816e3","@timestamp":"2020-11-01T10:08:30.779Z","@version":"1","logger":"com.atkuzmanov.genesys.aop.RestLoggingAspect","level":"INFO","thread":"http-nio-8080-exec-2","traceId":"dd57457f48dd870c","spanId":"dd57457f48dd870c","spanExportable":"true","X-Span-Export":"true","X-B3-SpanId":"dd57457f48dd870c","X-B3-TraceId":"dd57457f48dd870c","status":400,"originMethod":"handleMiscFailures","originClass":"class com.atkuzmanov.genesys.controllers.RestResponseEntityExceptionHandler","responseBody":"com.atkuzmanov.genesys.controllers.ResponseDetails@1dd34e74","message":"OUTGOING_RESPONSE","path":null,"headers":null,"httpHeaders":{},"throwable":null,"message":"OUTGOING_RESPONSE","method":"logResponse","class":"com.atkuzmanov.genesys.aop.RestLoggingAspect"}
-
-
-
----
-
-    @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
-    public void logResponse(JoinPoint joinPoint, Object result) {
-        if(result instanceof ResponseEntity) {
-            Class<?> targetClass = joinPoint.getTarget().getClass();
-            ResponseEntity<?> responseObj = (ResponseEntity<?>) result;
-
-//            Map<String, String> responseLogMap = new HashMap<>();
-//            responseLogMap.put("status", String.valueOf(responseObj.getStatusCodeValue()));
-//            responseLogMap.put("originMethod", joinPoint.getSignature().getName());
-//            responseLogMap.put("originClass", targetClass.toString());
-//            if (responseObj.hasBody()) {
-//                responseLogMap.put("responseBody", responseObj.getBody().toString());
-//            }
-//
-//            log.info("OUTGOING_RESPONSE",
-//                    entries(responseLogMap),
-//                    kv("headers", extractResponseHeaders(responseObj)));
-
-            ResponseDetailsBuilder rdb = ResponseDetails.builder()
-                    .message("OUTGOING_RESPONSE")
-                    .status(responseObj.getStatusCodeValue())
-                    .originClass(targetClass.toString())
-                    .originMethod(joinPoint.getSignature().getName())
-                    .headers(responseObj.getHeaders());
-            if (responseObj.hasBody()) {
-//                String body = Objects.requireNonNull(responseObj.getBody()).toString();
-//                rdb.responseBody(body);
-                rdb.responseBody(Objects.requireNonNull(responseObj.getBody()).toString());
-
-                if (responseObj.getBody() instanceof ResponseDetails) {
-                    ResponseDetails responseDetails = (ResponseDetails) responseObj.getBody();
-                    rdb.responseBody(responseDetails.getResponseBody());
-//                    rdb.headers(responseDetails.getHeaders());
-                }
+            System.out.println(">>> req: " + httpServletRequest);
+            if(!(httpServletResponse instanceof ResponseEntity)) {
+                System.out.println(">>> resp: " + httpServletResponse);
             }
 
-
-            ResponseDetails rd = rdb.build();
-            log.info(rd.getMessage(), fields(rd));
-
+            chain.doFilter(httpServletRequest, httpServletResponse);
+        } catch (Throwable a) {
+            log.error(a.getMessage());
         }
     }
-
-    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
-        Map<String, String> headers = new HashMap<>();
-        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
-        return headers;
-    }
-
-----
-
-
-
-    private Map<String, String> extractResponseHeaders(ResponseEntity<?> response) {
-        Map<String, String> headers = new HashMap<>();
-        response.getHeaders().forEach((key, value) -> headers.put(key, Arrays.toString(value.toArray())));
-        return headers;
-    }
-
-----
-
-
-
-{
-	"app": "GeneSys",
-	"id": "ec285f83-46f4-4f1b-a85f-8346f4cf1b39",
-	"@timestamp": "2020-11-02T21:35:06.272Z",
-	"@version": "1",
-	"logger": "com.atkuzmanov.genesys.aop.RestLoggingAspect",
-	"level": "ERROR",
-	"thread": "http-nio-8080-exec-3",
-	"traceId": "69ac5b0ff6e9e08f",
-	"spanId": "69ac5b0ff6e9e08f",
-	"spanExportable": "true",
-	"X-Span-Export": "true",
-	"X-B3-SpanId": "69ac5b0ff6e9e08f",
-	"X-B3-TraceId": "69ac5b0ff6e9e08f",
-	"stackTrace": "java.io.IOException: Stream closed
-\tat org.apache.catalina.connector.InputBuffer.read(InputBuffer.java:359)
-\tat org.apache.catalina.connector.CoyoteInputStream.read(CoyoteInputStream.java:132)
-\tat java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:284)
-\tat java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:326)
-\tat java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:178)
-\tat java.base/java.io.InputStreamReader.read(InputStreamReader.java:185)
-\tat java.base/java.io.BufferedReader.fill(BufferedReader.java:161)
-\tat java.base/java.io.BufferedReader.readLine(BufferedReader.java:326)
-\tat java.base/java.io.BufferedReader.readLine(BufferedReader.java:392)
-\tat com.atkuzmanov.genesys.aop.RestLoggingAspect.extractRequestPayload(RestLoggingAspect.java:97)
-\tat com.atkuzmanov.genesys.aop.RestLoggingAspect.logRequest(RestLoggingAspect.java:66)
-\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)
-\tat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:644)
-\tat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:626)
-\tat org.springframework.aop.aspectj.AspectJMethodBeforeAdvice.before(AspectJMethodBeforeAdvice.java:44)
-\tat org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor.invoke(MethodBeforeAdviceInterceptor.java:55)
-\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
-\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
-\tat org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:95)
-\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
-\tat org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:749)
-\tat org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:691)
-\tat com.atkuzmanov.genesys.controllers.RestResponseEntityExceptionHandler$$EnhancerBySpringCGLIB$$9c34bfba.handleMiscFailures(<generated>)
-\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)
-\tat org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
-\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
-\tat org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:105)
-\tat org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver.doResolveHandlerMethodException(ExceptionHandlerExceptionResolver.java:407)
-\tat org.springframework.web.servlet.handler.AbstractHandlerMethodExceptionResolver.doResolveException(AbstractHandlerMethodExceptionResolver.java:61)
-\tat org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver.resolveException(AbstractHandlerExceptionResolver.java:141)
-\tat org.springframework.web.servlet.handler.HandlerExceptionResolverComposite.resolveException(HandlerExceptionResolverComposite.java:80)
-\tat org.springframework.web.servlet.DispatcherServlet.processHandlerException(DispatcherServlet.java:1300)
-\tat org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1111)
-\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1057)
-\tat org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
-\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-\tat org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
-\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:652)
-\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat brave.servlet.TracingFilter.doFilter(TracingFilter.java:68)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:88)
-\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat brave.servlet.TracingFilter.doFilter(TracingFilter.java:87)
-\tat org.springframework.cloud.sleuth.instrument.web.LazyTracingFilter.doFilter(TraceWebServletAutoConfiguration.java:139)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:93)
-\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-\tat org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-\tat org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-\tat org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-\tat org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-\tat org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-\tat org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
-\tat org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-\tat org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-\tat org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-\tat org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-\tat org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-\tat org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-\tat org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
-\tat org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
-\tat org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-\tat java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
-\tat java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
-\tat org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-\tat java.base/java.lang.Thread.run(Thread.java:834)
-",
-	"message": "Stream closed",
-	"method": "extractRequestPayload",
-	"class": "com.atkuzmanov.genesys.aop.RestLoggingAspect"
 }
+
 
 

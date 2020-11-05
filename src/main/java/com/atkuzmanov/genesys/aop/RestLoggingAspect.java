@@ -12,11 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.ContentCachingResponseWrapper;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.*;
@@ -106,6 +110,59 @@ public class RestLoggingAspect {
 
     /*----------------[Response logging]----------------*/
 
+
+//    @AfterReturning(pointcut = "@annotation(com.atkuzmanov.genesys.aop.LogRequestOrResponse) && args(request, response, handler, ex)",
+//            returning = "result")
+//    public void logInterceptedResponse(JoinPoint joinPoint, HttpServletRequest request, HttpServletResponse response,
+//                                       Object handler, Exception ex, Object result) {
+//
+//        System.out.println(">>> HERE " + response);
+//
+//        String originClass = joinPoint.getTarget().getClass().toString();
+//        String originMethod = joinPoint.getSignature().getName();
+//
+//
+//
+//
+//        ContentCachingResponseWrapper wres =
+//                new ContentCachingResponseWrapper(
+//                        (HttpServletResponse) response);
+//
+//
+//        ResponseDetailsBuilder rdb = null;
+//        try {
+//            rdb = ResponseDetails.builder()
+//                    .status(response.getStatus())
+//                    .originClass(originClass)
+//                    .originMethod(originMethod)
+//    //                .headers(response.get)
+//                    .responseBody(wres.getContentAsByteArray().toString());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        log.info(">>>> OUTGOING_RESPONSE >>>>", fields(rdb.build()));
+//    }
+
+
+
+
+
+    private String getContentAsString(byte[] buf, String charsetName) {
+        if (buf == null || buf.length == 0) {
+            return "";
+        }
+
+        try {
+            int length = Math.min(buf.length, 1000);
+
+            return new String(buf, 0, length, charsetName);
+        } catch (UnsupportedEncodingException ex) {
+            return "Unsupported Encoding";
+        }
+    }
+
+
     @AfterReturning(pointcut = "execution(* com.atkuzmanov.genesys..*.*(..))", returning = "result")
     public void logResponse(JoinPoint joinPoint, Object result) {
         if (result instanceof ResponseEntity) {
@@ -124,8 +181,10 @@ public class RestLoggingAspect {
                 log.info("OUTGOING_RESPONSE", fields(
                         buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
             }
+        } else {
+            // Everything else is captured by the LoggingInterceptor.
+//            log.info("UNKNOWN_RESPONSE", kv("unknownResponse", result));
         }
-        // todo: capture non RE results
     }
 
     private void logResponseWithResponseDetails(ResponseEntity<?> responseEntity) {
