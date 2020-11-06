@@ -24,7 +24,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static net.logstash.logback.argument.StructuredArguments.fields;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
 public class LoggingService {
@@ -66,8 +65,8 @@ public class LoggingService {
             e.printStackTrace();
         }
 
-        log.info(">>> INCOMING_REQUEST >>>",
-                kv("request", rootNode));
+        log.info("INCOMING_REQUEST",
+                kv("requestDetails", rootNode));
     }
 
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {
@@ -132,7 +131,7 @@ public class LoggingService {
                 .headers(responseHeaders)
                 .responseBody(str);
 
-        log.info("<<<<OUTGOING_RESPONSE>>>>", fields(rdb.build()));
+        log.info("OUTGOING_RESPONSE", kv("responseDetails", rdb.build()));
     }
 
     /*----------------[ResponseEntity<?> logging]----------------*/
@@ -145,7 +144,7 @@ public class LoggingService {
                 logResponseWithJSONBody(responseEntity, originClass, originMethod);
             }
         } else {
-            log.info("OUTGOING_RESPONSE", fields(
+            log.info("OUTGOING_RESPONSE", kv("responseDetails",
                     buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
         }
     }
@@ -166,7 +165,7 @@ public class LoggingService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        log.info("OUTGOING_RESPONSE", fields(
+        log.info("OUTGOING_RESPONSE", kv("responseDetails",
                 buildResponseDetailsForLogging(responseEntity, bodyJSONstr, originClass, originMethod)));
     }
 
