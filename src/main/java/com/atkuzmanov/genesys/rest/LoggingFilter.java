@@ -1,5 +1,6 @@
 package com.atkuzmanov.genesys.rest;
 
+import brave.Tracer;
 import com.atkuzmanov.genesys.aop.LogRequestOrResponse;
 import com.atkuzmanov.genesys.aop.LoggingService;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -7,11 +8,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.sleuth.instrument.web.TraceWebServletAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -34,23 +39,36 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 
 @Component
 @Configuration
+//@Order(TraceWebServletAutoConfiguration.TRACING_FILTER_ORDER + 1)
 public class LoggingFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
 
+//    @Autowired
+    private final Tracer tracer;
+
+    LoggingFilter(Tracer tracer) {
+        this.tracer = tracer;
+    }
+
+
     @Bean
     public FilterRegistrationBean<LoggingFilter> initFilter() {
         FilterRegistrationBean<LoggingFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new LoggingFilter());
+        registrationBean.setFilter(new LoggingFilter(tracer));
 
         // *1* make sure you sett all dispatcher types if you want the filter to log upon
         registrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
 
         // *2* this should put your filter above any other filter
-        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        registrationBean.setOrder(TraceWebServletAutoConfiguration.TRACING_FILTER_ORDER + 1);
 
         return registrationBean;
     }
+
+
+
 
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -68,7 +86,6 @@ public class LoggingFilter extends OncePerRequestFilter {
      * @throws ServletException
      * @throws IOException
      */
-    @LogRequestOrResponse
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpServletRequest);
@@ -94,7 +111,12 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        RequestEntity<JsonNode> requestEntity = new RequestEntity<>(requestJson,requestHeaders, httpMethod, URI.create(requestUrl));
 //        LOGGER.info(appendFields(requestEntity),"Logging Http Request");
 
-        doLog();
+
+        if(tracer != null) {
+            if(tracer.currentSpan() == null){
+                System.out.println(">>> MDC >>>" + MDC.getCopyOfContextMap().toString());
+            }
+        }
 
         HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -105,14 +127,9 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        JsonNode responseJson = objectMapper.readTree(responseBody);
         String str = objectMapper.writeValueAsString(responseBody);
         ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
-//        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
+        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
 
         // The line below is very important!
         responseWrapper.copyBodyToResponse();
-    }
-
-    @LogRequestOrResponse
-    public void doLog() {
-        System.out.println("IN HERE >>> ");
     }
 }
