@@ -1,4 +1,4 @@
-package com.atkuzmanov.genesys.rest;
+package com.atkuzmanov.genesys.trashtodelete;
 
 import com.atkuzmanov.genesys.aop.LogRequestOrResponse;
 import org.slf4j.Logger;

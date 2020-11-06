@@ -1,4 +1,4 @@
-package com.atkuzmanov.genesys.rest;
+package com.atkuzmanov.genesys.trashtodelete;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
