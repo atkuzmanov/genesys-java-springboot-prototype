@@ -108,7 +108,7 @@ public class LoggingService {
     /*----------------[Response logging]----------------*/
 
     public void logContentCachingResponse(ContentCachingResponseWrapper responseWrapper, String originClass, String originMethod) {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
         HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -116,10 +116,19 @@ public class LoggingService {
             responseHeaders.add(headerName, responseWrapper.getHeader(headerName));
         }
 
-        String str = null;
+        String responseBody = null;
         try {
-            String responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
-             str = objectMapper.writeValueAsString(responseBody);
+            responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
+
+            if (!this.log.isDebugEnabled() && isValidJSON(responseBody)) {
+                JsonNode jNode = mapper.readTree(responseBody);
+                if (jNode.has("responseMessage")) {
+                    responseBody = jNode.path("responseMessage").asText();
+                }
+            } else {
+                responseBody = mapper.writeValueAsString(responseBody);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,9 +138,20 @@ public class LoggingService {
                 .originClass(originClass)
                 .originMethod(originMethod)
                 .headers(responseHeaders)
-                .responseBody(str);
+                .responseBody(responseBody);
 
         log.info("OUTGOING_RESPONSE", kv("responseDetails", rdb.build()));
+    }
+
+    public static boolean isValidJSON(final String json) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        boolean valid = true;
+        try {
+            mapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            valid = false;
+        }
+        return valid;
     }
 
     /*----------------[ResponseEntity<?> logging]----------------*/

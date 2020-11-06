@@ -1,28 +1,252 @@
 {
   "app": "GeneSys",
-  "logMsgId": "6a02c192-19ed-4b68-82c1-9219edab686a",
-  "@timestamp": "2020-11-06T15:00:02.082Z",
+  "logMsgId": "e32779ae-1433-44de-a779-ae1433b4de12",
+  "@timestamp": "2020-11-06T15:42:04.739Z",
   "@version": "1",
   "logger": "com.atkuzmanov.genesys.aop.LoggingService",
   "level": "INFO",
   "thread": "http-nio-8080-exec-2",
-  "traceId": "a6a4b5a43cf52a47",
-  "spanId": "a6a4b5a43cf52a47",
+  "traceId": "fc7b9bccb8dacd12",
+  "spanId": "fc7b9bccb8dacd12",
   "spanExportable": "true",
   "X-Span-Export": "true",
-  "X-B3-SpanId": "a6a4b5a43cf52a47",
-  "X-B3-TraceId": "a6a4b5a43cf52a47",
-  "status": 200,
-  "originMethod": "updateTimestamp",
-  "originClass": "class com.atkuzmanov.genesys.controllers.DefaultController",
-  "responseBody": "Updated.",
-  "headers": {
-    "X-Span-Export": ["true"],
-    "X-B3-SpanId": ["a6a4b5a43cf52a47"],
-    "X-B3-TraceId": ["a6a4b5a43cf52a47"],
-    "serviceName": ["GeneSys"]
+  "X-B3-SpanId": "fc7b9bccb8dacd12",
+  "X-B3-TraceId": "fc7b9bccb8dacd12",
+  "responseDetails": {
+    "status": 200,
+    "originMethod": "doFilterInternal",
+    "originClass": "com.atkuzmanov.genesys.rest.LoggingFilter",
+    "responseBody": [{
+      "id": 1,
+      "timestampAsString": "2020-11-06 17:40:43"
+    }, {
+      "id": 2,
+      "timestampAsString": "2020-10-25 23:40:17"
+    }, {
+      "id": 3,
+      "timestampAsString": "2020-10-26 09:26:43"
+    }, {
+      "id": 7,
+      "timestampAsString": "2020-10-26 09:27:21"
+    }, {
+      "id": 8,
+      "timestampAsString": "2020-10-26 09:27:41"
+    }, {
+      "id": 9,
+      "timestampAsString": "2020-10-26 09:27:41"
+    }, {
+      "id": 10,
+      "timestampAsString": "2020-10-26 11:11:35"
+    }, {
+      "id": 11,
+      "timestampAsString": "2020-10-26 11:11:38"
+    }, {
+      "id": 12,
+      "timestampAsString": "2020-10-26 11:16:39"
+    }, {
+      "id": 16,
+      "timestampAsString": "2020-10-26 15:27:48"
+    }, {
+      "id": 17,
+      "timestampAsString": "2020-10-26 15:33:05"
+    }, {
+      "id": 18,
+      "timestampAsString": "2020-10-27 10:34:14"
+    }, {
+      "id": 19,
+      "timestampAsString": "2020-10-27 10:35:09"
+    }, {
+      "id": 20,
+      "timestampAsString": "2020-10-27 10:38:13"
+    }, {
+      "id": 21,
+      "timestampAsString": "2020-10-27 10:58:16"
+    }, {
+      "id": 22,
+      "timestampAsString": "2020-10-27 11:01:40"
+    }, {
+      "id": 23,
+      "timestampAsString": "2020-10-27 11:04:13"
+    }, {
+      "id": 24,
+      "timestampAsString": "2020-10-27 11:17:02"
+    }, {
+      "id": 25,
+      "timestampAsString": "2020-10-27 13:06:12"
+    }, {
+      "id": 26,
+      "timestampAsString": "2020-10-27 13:07:19"
+    }, {
+      "id": 27,
+      "timestampAsString": "2020-10-27 13:09:44"
+    }, {
+      "id": 28,
+      "timestampAsString": "2020-10-27 13:19:51"
+    }, {
+      "id": 29,
+      "timestampAsString": "4"
+    }, {
+      "id": 30,
+      "timestampAsString": "4"
+    }, {
+      "id": 31,
+      "timestampAsString": "4"
+    }, {
+      "id": 32,
+      "timestampAsString": "4"
+    }, {
+      "id": 33,
+      "timestampAsString": "4"
+    }, {
+      "id": 34,
+      "timestampAsString": "4"
+    }, {
+      "id": 35,
+      "timestampAsString": "4"
+    }, {
+      "id": 36,
+      "timestampAsString": "4"
+    }, {
+      "id": 37,
+      "timestampAsString": "4"
+    }, {
+      "id": 38,
+      "timestampAsString": "4"
+    }, {
+      "id": 39,
+      "timestampAsString": "4"
+    }, {
+      "id": 40,
+      "timestampAsString": "4"
+    }, {
+      "id": 41,
+      "timestampAsString": "4"
+    }, {
+      "id": 42,
+      "timestampAsString": "4"
+    }, {
+      "id": 43,
+      "timestampAsString": "4"
+    }, {
+      "id": 44,
+      "timestampAsString": "4"
+    }, {
+      "id": 45,
+      "timestampAsString": "4"
+    }, {
+      "id": 46,
+      "timestampAsString": "4"
+    }, {
+      "id": 47,
+      "timestampAsString": "4"
+    }, {
+      "id": 48,
+      "timestampAsString": "4"
+    }, {
+      "id": 49,
+      "timestampAsString": "4"
+    }, {
+      "id": 50,
+      "timestampAsString": "4"
+    }, {
+      "id": 51,
+      "timestampAsString": "4"
+    }, {
+      "id": 52,
+      "timestampAsString": "4"
+    }, {
+      "id": 53,
+      "timestampAsString": "4"
+    }, {
+      "id": 54,
+      "timestampAsString": "4"
+    }, {
+      "id": 55,
+      "timestampAsString": "4"
+    }, {
+      "id": 56,
+      "timestampAsString": "4"
+    }, {
+      "id": 57,
+      "timestampAsString": "4"
+    }, {
+      "id": 58,
+      "timestampAsString": "4"
+    }, {
+      "id": 59,
+      "timestampAsString": "4"
+    }, {
+      "id": 60,
+      "timestampAsString": "4"
+    }, {
+      "id": 61,
+      "timestampAsString": "2020-10-28 23:33:42"
+    }, {
+      "id": 62,
+      "timestampAsString": "2020-10-28 23:45:25"
+    }, {
+      "id": 63,
+      "timestampAsString": "2020-10-28 23:53:32"
+    }, {
+      "id": 64,
+      "timestampAsString": "2020-10-28 23:56:02"
+    }, {
+      "id": 65,
+      "timestampAsString": "2020-10-29 10:05:55"
+    }, {
+      "id": 66,
+      "timestampAsString": "2020-10-29 10:26:00"
+    }, {
+      "id": 67,
+      "timestampAsString": "2020-10-29 10:55:21"
+    }, {
+      "id": 68,
+      "timestampAsString": "-1"
+    }, {
+      "id": 69,
+      "timestampAsString": "-1"
+    }, {
+      "id": 70,
+      "timestampAsString": "1"
+    }, {
+      "id": 71,
+      "timestampAsString": "1"
+    }, {
+      "id": 72,
+      "timestampAsString": "1"
+    }, {
+      "id": 73,
+      "timestampAsString": "1"
+    }, {
+      "id": 74,
+      "timestampAsString": "1"
+    }, {
+      "id": 75,
+      "timestampAsString": "1"
+    }, {
+      "id": 76,
+      "timestampAsString": "1"
+    }, {
+      "id": 77,
+      "timestampAsString": "1"
+    }, {
+      "id": 78,
+      "timestampAsString": "1"
+    }, {
+      "id": 79,
+      "timestampAsString": "1"
+    }, {
+      "id": 80,
+      "timestampAsString": "1"
+    }],
+    "headers": {
+      "X-Span-Export": ["true"],
+      "X-B3-SpanId": ["fc7b9bccb8dacd12"],
+      "X-B3-TraceId": ["fc7b9bccb8dacd12"],
+      "serviceName": ["GeneSys"]
+    }
   },
   "message": "OUTGOING_RESPONSE",
-  "method": "logResponseWithJSONBody",
+  "method": "logContentCachingResponse",
   "class": "com.atkuzmanov.genesys.aop.LoggingService"
 }
