@@ -1,5 +1,6 @@
 package com.atkuzmanov.genesys.rest;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ import static net.logstash.logback.argument.StructuredArguments.kv;
 @Configuration
 public class LoggingFilter extends OncePerRequestFilter {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(com.atkuzmanov.genesys.trashtodelete.LoggingFilter2.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
 
     @Bean
     public FilterRegistrationBean<LoggingFilter> initFilter() {

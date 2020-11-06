@@ -227,18 +227,22 @@ public class RestLoggingAspect {
     @AfterThrowing(pointcut = ("within(com.atkuzmanov.genesys..*)"), throwing = "e")
     public void logAfterThrowing(JoinPoint p, Exception e) {
         Class<?> targetClass = p.getTarget().getClass();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Exception: ").append(p.getTarget().getClass());
-        sb.append(".").append(p.getSignature().getName()).append(": ");
-        sb.append(" Exception message: ").append(e.getMessage());
-        sb.append(" Exception cause: ").append(e.getCause());
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("Exception: ").append(p.getTarget().getClass());
+//        sb.append(".").append(p.getSignature().getName()).append(": ");
+//        sb.append(" Exception message: ").append(e.getMessage());
+//        sb.append(" Exception cause: ").append(e.getCause());
+//
+//        if (this.log.isDebugEnabled()) {
+//            sb.append(" Exception stacktrace: ");
+//            sb.append(Arrays.toString(e.getStackTrace()));
+//        }
+//        log.error(sb.toString(),
+//                kv("originMethod", p.getSignature().getName()),
+//                kv("originClass", targetClass.toString()));
 
-        if (this.log.isDebugEnabled()) {
-            sb.append(" Exception stacktrace: ");
-            sb.append(Arrays.toString(e.getStackTrace()));
-        }
-        log.error(sb.toString(),
-                kv("originMethod", p.getSignature().getName()),
-                kv("originClass", targetClass.toString()));
+        LoggingService ls = new LoggingService();
+
+        ls.logException(e, p.getSignature().getName(), targetClass.getName());
     }
 }
