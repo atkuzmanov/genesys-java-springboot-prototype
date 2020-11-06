@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.WebUtils;
 
@@ -46,30 +47,34 @@ public class RestLoggingAspect {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         Class<?> targetClass = joinPoint.getTarget().getClass();
 
-        Map<String, String> requestLogMap = new HashMap<>();
-        requestLogMap.put("uri", request.getRequestURI());
-        requestLogMap.put("url", request.getRequestURL().toString());
-        requestLogMap.put("path", request.getServletPath());
-        requestLogMap.put("requestMethod", request.getMethod());
-        requestLogMap.put("requestScheme", request.getScheme());
-        requestLogMap.put("request Protocol", request.getProtocol());
-        requestLogMap.put("request LocalName", request.getLocalName());
-        requestLogMap.put("request Locale", request.getLocale().toString());
-        requestLogMap.put("request Locales", Collections.list(request.getLocales()).toString());
-        requestLogMap.put("request QueryString", request.getQueryString());
-        requestLogMap.put("request RemoteHost ", request.getRemoteHost());
-        requestLogMap.put("request ServerName ", request.getServerName());
-        requestLogMap.put("request ServerPort ", String.valueOf(request.getServerPort()));
-        requestLogMap.put("originMethod", joinPoint.getSignature().getName());
-        requestLogMap.put("originClass", targetClass.toString());
-        requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
+//        Map<String, String> requestLogMap = new HashMap<>();
+//        requestLogMap.put("uri", request.getRequestURI());
+//        requestLogMap.put("url", request.getRequestURL().toString());
+//        requestLogMap.put("path", request.getServletPath());
+//        requestLogMap.put("requestMethod", request.getMethod());
+//        requestLogMap.put("requestScheme", request.getScheme());
+//        requestLogMap.put("request Protocol", request.getProtocol());
+//        requestLogMap.put("request LocalName", request.getLocalName());
+//        requestLogMap.put("request Locale", request.getLocale().toString());
+//        requestLogMap.put("request Locales", Collections.list(request.getLocales()).toString());
+//        requestLogMap.put("request QueryString", request.getQueryString());
+//        requestLogMap.put("request RemoteHost ", request.getRemoteHost());
+//        requestLogMap.put("request ServerName ", request.getServerName());
+//        requestLogMap.put("request ServerPort ", String.valueOf(request.getServerPort()));
+//        requestLogMap.put("originMethod", joinPoint.getSignature().getName());
+//        requestLogMap.put("originClass", targetClass.toString());
+//        requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
+//
+//        log.info("INCOMING_REQUEST",
+//                entries(requestLogMap),
+//                kv("queryParameters", extractRequestParameters(request)),
+//                kv("requestBody", extractRequestPayload(request)),
+//                kv("headers", extractRequestHeaders(request))
+//        );
 
-        log.info("INCOMING_REQUEST",
-                entries(requestLogMap),
-                kv("queryParameters", extractRequestParameters(request)),
-                kv("requestBody", extractRequestPayload(request)),
-                kv("headers", extractRequestHeaders(request))
-        );
+        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+        LoggingService ls = new LoggingService();
+        ls.logContentCachingRequest(requestWrapper, targetClass.getName(), joinPoint.getSignature().getName());
     }
 
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {

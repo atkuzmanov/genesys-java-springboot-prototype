@@ -52,14 +52,28 @@ public class LoggingFilter extends OncePerRequestFilter {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * Note: Regarding Distributed Tracing, Sleuth and Zipkin
+     * The @traceId @spanId etc. are added when logging through the AOP Aspect.
+     * If the logging is not going through there, then they need to be manuallya added here.
+     * See:
+     * https://cloud.spring.io/spring-cloud-sleuth/2.0.x/single/spring-cloud-sleuth.html#__literal_tracingfilter_literal
+     * https://stackoverflow.com/questions/41222405/adding-the-traceid-from-spring-cloud-sleuth-to-response
+     *
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpServletRequest);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
         filterChain.doFilter(requestWrapper, responseWrapper);
 
-        LoggingService ls = new LoggingService();
-        ls.logContentCachingRequest(requestWrapper, this.getClass().getName(), "test1");
+//        LoggingService ls = new LoggingService();
+//        ls.logContentCachingRequest(requestWrapper, this.getClass().getName(), "test1");
 
         String requestUrl = requestWrapper.getRequestURL().toString();
         HttpHeaders requestHeaders = new HttpHeaders();
