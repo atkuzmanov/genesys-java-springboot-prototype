@@ -50,13 +50,10 @@ public class LoggingService {
         requestLogMap.put("originMethod", originMethod);
         requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
 
-//        ObjectNode objNode = JsonNodeFactory.instance.
-
         JsonNode jNode = JsonNodeFactory.instance.nullNode();
         try {
             String mapAsJSONStr = mapper.writeValueAsString(requestLogMap);
             jNode = mapper.readTree(mapAsJSONStr);
-//            rootNode = (ObjectNode) mapper.readTree(jNode.asText());
             rootNode = jNode.deepCopy();
             rootNode.put("queryParameters", requestWrapper.getParameterMap().toString());
             rootNode.put("requestBody", extractRequestPayload(requestWrapper));
@@ -66,12 +63,10 @@ public class LoggingService {
         }
 
         log.info(">>> INCOMING_REQUEST >>>",
-                kv("request", rootNode)
-        );
+                kv("request", rootNode));
     }
 
-
-    /*----------------[Request logging]----------------*/
+    /*----------------[Request logging utility helper methods]----------------*/
 
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {
         Map<String, String> parameters = new HashMap<>();
