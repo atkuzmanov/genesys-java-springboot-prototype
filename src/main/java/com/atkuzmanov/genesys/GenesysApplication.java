@@ -9,7 +9,6 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy
-//@EnableAspectJAutoProxy(proxyTargetClass=true)
 public class GenesysApplication {
 
     public static void main(String[] args) {
