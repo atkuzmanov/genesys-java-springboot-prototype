@@ -44,18 +44,10 @@ public class LoggingFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoggingFilter.class);
 
-//    @Autowired
-    private final Tracer tracer;
-
-    LoggingFilter(Tracer tracer) {
-        this.tracer = tracer;
-    }
-
-
     @Bean
     public FilterRegistrationBean<LoggingFilter> initFilter() {
         FilterRegistrationBean<LoggingFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new LoggingFilter(tracer));
+        registrationBean.setFilter(new LoggingFilter());
 
         // *1* make sure you sett all dispatcher types if you want the filter to log upon
         registrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
@@ -112,12 +104,6 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        LOGGER.info(appendFields(requestEntity),"Logging Http Request");
 
 
-        if(tracer != null) {
-            if(tracer.currentSpan() == null){
-                System.out.println(">>> MDC >>>" + MDC.getCopyOfContextMap().toString());
-            }
-        }
-
         HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
         HttpHeaders responseHeaders = new HttpHeaders();
         for (String headerName : responseWrapper.getHeaderNames()) {
@@ -127,7 +113,10 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        JsonNode responseJson = objectMapper.readTree(responseBody);
         String str = objectMapper.writeValueAsString(responseBody);
         ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
-        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
+//        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
+
+        LoggingService ls = new LoggingService();
+        ls.logContentCachingResponse(responseWrapper, this.getClass().getName(), "doFilterInternal");
 
         // The line below is very important!
         responseWrapper.copyBodyToResponse();

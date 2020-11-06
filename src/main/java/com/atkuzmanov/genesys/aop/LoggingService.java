@@ -7,10 +7,14 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.ContentCachingRequestWrapper;
+import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
@@ -19,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static net.logstash.logback.argument.StructuredArguments.fields;
 import static net.logstash.logback.argument.StructuredArguments.kv;
 
@@ -65,8 +70,6 @@ public class LoggingService {
                 kv("request", rootNode));
     }
 
-    /*----------------[Request logging utility helper methods]----------------*/
-
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {
         Map<String, String> parameters = new HashMap<>();
         Enumeration<String> params = request.getParameterNames();
@@ -105,7 +108,32 @@ public class LoggingService {
 
     /*----------------[Response logging]----------------*/
 
+    public void logContentCachingResponse(ContentCachingResponseWrapper responseWrapper, String originClass, String originMethod) {
+        ObjectMapper objectMapper = new ObjectMapper();
 
+        HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
+        HttpHeaders responseHeaders = new HttpHeaders();
+        for (String headerName : responseWrapper.getHeaderNames()) {
+            responseHeaders.add(headerName, responseWrapper.getHeader(headerName));
+        }
+
+        String str = null;
+        try {
+            String responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
+             str = objectMapper.writeValueAsString(responseBody);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ResponseDetailsBuilder rdb = ResponseDetails.builder()
+                .status(responseStatus.value())
+                .originClass(originClass)
+                .originMethod(originMethod)
+                .headers(responseHeaders)
+                .responseBody(str);
+
+        log.info("<<<<OUTGOING_RESPONSE>>>>", fields(rdb.build()));
+    }
 
     /*----------------[ResponseEntity<?> logging]----------------*/
 
