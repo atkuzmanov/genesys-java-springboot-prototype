@@ -2,22 +2,22 @@ package com.atkuzmanov.genesys.aop;
 
 import com.atkuzmanov.genesys.rest.ResponseDetails;
 import com.atkuzmanov.genesys.rest.ResponseDetailsBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static net.logstash.logback.argument.StructuredArguments.fields;
 import static net.logstash.logback.argument.StructuredArguments.kv;
@@ -27,6 +27,51 @@ public class LoggingService {
 
     /*----------------[Request logging]----------------*/
 
+
+    public void logContentCachingRequest(ContentCachingRequestWrapper requestWrapper, String originClass, String originMethod) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode rootNode = mapper.createObjectNode();
+
+        Map<String, String> requestLogMap = new HashMap<>();
+        requestLogMap.put("uri", requestWrapper.getRequestURI());
+        requestLogMap.put("url", requestWrapper.getRequestURL().toString());
+        requestLogMap.put("path", requestWrapper.getServletPath());
+        requestLogMap.put("requestMethod", requestWrapper.getMethod());
+        requestLogMap.put("requestScheme", requestWrapper.getScheme());
+        requestLogMap.put("request Protocol", requestWrapper.getProtocol());
+        requestLogMap.put("request LocalName", requestWrapper.getLocalName());
+        requestLogMap.put("request Locale", requestWrapper.getLocale().toString());
+        requestLogMap.put("request Locales", Collections.list(requestWrapper.getLocales()).toString());
+        requestLogMap.put("request QueryString", requestWrapper.getQueryString());
+        requestLogMap.put("request RemoteHost ", requestWrapper.getRemoteHost());
+        requestLogMap.put("request ServerName ", requestWrapper.getServerName());
+        requestLogMap.put("request ServerPort ", String.valueOf(requestWrapper.getServerPort()));
+        requestLogMap.put("originClass", originClass);
+        requestLogMap.put("originMethod", originMethod);
+        requestLogMap.values().removeIf(value -> value == null || value.trim().length() == 0);
+
+//        ObjectNode objNode = JsonNodeFactory.instance.
+
+        JsonNode jNode = JsonNodeFactory.instance.nullNode();
+        try {
+            String mapAsJSONStr = mapper.writeValueAsString(requestLogMap);
+            jNode = mapper.readTree(mapAsJSONStr);
+//            rootNode = (ObjectNode) mapper.readTree(jNode.asText());
+            rootNode = jNode.deepCopy();
+            rootNode.put("queryParameters", requestWrapper.getParameterMap().toString());
+            rootNode.put("requestBody", extractRequestPayload(requestWrapper));
+            rootNode.put("headers", extractRequestHeaders(requestWrapper).toString());
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        log.info(">>> INCOMING_REQUEST >>>",
+                kv("request", rootNode)
+        );
+    }
+
+
+    /*----------------[Request logging]----------------*/
 
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {
         Map<String, String> parameters = new HashMap<>();
@@ -119,7 +164,7 @@ public class LoggingService {
 
     /*----------------[Exception logging]----------------*/
 
-    public void logException(Exception e, String originMethod, String originClass) {
+    public void logException(Exception e, String originClass, String originMethod) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode rootNode = mapper.createObjectNode();
         rootNode.put("Exception in class", originClass);
@@ -130,8 +175,8 @@ public class LoggingService {
         }
         log.error("Exception occurred",
                 kv("exception", rootNode),
-                kv("originMethod", originMethod),
-                kv("originClass", originClass));
+                kv("originClass", originClass),
+                kv("originMethod", originMethod));
     }
 
 }

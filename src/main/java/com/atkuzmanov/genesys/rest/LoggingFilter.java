@@ -1,5 +1,6 @@
 package com.atkuzmanov.genesys.rest;
 
+import com.atkuzmanov.genesys.aop.LoggingService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
@@ -53,11 +54,12 @@ public class LoggingFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpServletRequest);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
-
         filterChain.doFilter(requestWrapper, responseWrapper);
+
+        LoggingService ls = new LoggingService();
+        ls.logContentCachingRequest(requestWrapper, this.getClass().getName(), "test1");
 
         String requestUrl = requestWrapper.getRequestURL().toString();
         HttpHeaders requestHeaders = new HttpHeaders();

@@ -1,18 +1,4 @@
-package com.atkuzmanov.genesys.trashtodelete;
-
-import com.atkuzmanov.genesys.aop.LogRequestOrResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.web.util.ContentCachingResponseWrapper;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-
-import static net.logstash.logback.argument.StructuredArguments.fields;
+package com.atkuzmanov.genesys.temporarytodelete;
 
 //@Component
 //public class LoggingInterceptor extends HandlerInterceptorAdapter {

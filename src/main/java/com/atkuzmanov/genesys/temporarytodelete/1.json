@@ -1,0 +1,32 @@
+{
+  "app": "GeneSys",
+  "logMsgId": "6d26b68a-94af-42f5-a6b6-8a94afb2f5c0",
+  "@timestamp": "2020-11-06T09:45:05.224Z",
+  "@version": "1",
+  "logger": "com.atkuzmanov.genesys.aop.LoggingService",
+  "level": "INFO",
+  "thread": "http-nio-8080-exec-2",
+  "request": {
+    "requestScheme": "http",
+    "requestMethod": "PUT",
+    "request Locales": "[en_GB]",
+    "request LocalName": "localhost",
+    "request Locale": "en_GB",
+    "uri": "/updateTimestamp",
+    "url": "http://localhost:8080/updateTimestamp",
+    "request QueryString": "timestampId=1",
+    "path": "/updateTimestamp",
+    "request RemoteHost ": "0:0:0:0:0:0:0:1",
+    "request ServerName ": "localhost",
+    "request Protocol": "HTTP/1.1",
+    "originClass": "com.atkuzmanov.genesys.rest.LoggingFilter",
+    "request ServerPort ": "8080",
+    "originMethod": "test1",
+    "queryParameters": "org.apache.catalina.util.ParameterMap@7326cf0a",
+    "requestBody": "",
+    "headers": "{content-length=0, postman-token=c6a8ed51-7a39-4e47-8cef-289cac9e6dcf, host=localhost:8080, connection=keep-alive, cache-control=no-cache, accept-encoding=gzip, deflate, br, user-agent=PostmanRuntime/7.23.0, accept=*/*}"
+  },
+  "message": ">>> INCOMING_REQUEST >>>",
+  "method": "logContentCachingRequest",
+  "class": "com.atkuzmanov.genesys.aop.LoggingService"
+}

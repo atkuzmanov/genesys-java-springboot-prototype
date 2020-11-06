@@ -1,9 +1,4 @@
-package com.atkuzmanov.genesys.trashtodelete;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+package com.atkuzmanov.genesys.temporarytodelete;
 
 //@Configuration
 //public class WebMvcConfig implements WebMvcConfigurer {
