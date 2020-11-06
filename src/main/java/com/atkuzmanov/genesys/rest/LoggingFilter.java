@@ -29,9 +29,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.EnumSet;
-import java.util.Enumeration;
-import java.util.Map;
+import java.util.*;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static net.logstash.logback.argument.StructuredArguments.fields;
@@ -59,8 +57,12 @@ public class LoggingFilter extends OncePerRequestFilter {
         return registrationBean;
     }
 
+    private static final List<String> EXCLUDE_URL = Arrays.asList("/health", "/httptrace", "/info", "/updateTimestamp");
 
-
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        return EXCLUDE_URL.stream().anyMatch(exclude -> exclude.equalsIgnoreCase(request.getServletPath()));
+    }
 
     ObjectMapper objectMapper = new ObjectMapper();
 
