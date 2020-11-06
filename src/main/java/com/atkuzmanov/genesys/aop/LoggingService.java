@@ -27,7 +27,6 @@ public class LoggingService {
 
     /*----------------[Request logging]----------------*/
 
-
     public void logContentCachingRequest(ContentCachingRequestWrapper requestWrapper, String originClass, String originMethod) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode rootNode = mapper.createObjectNode();
@@ -107,6 +106,22 @@ public class LoggingService {
     /*----------------[Response logging]----------------*/
 
 
+
+    /*----------------[ResponseEntity<?> logging]----------------*/
+
+    public void logResponseEntity(ResponseEntity<?> responseEntity, String originClass, String originMethod) {
+        if (responseEntity.hasBody()) {
+            if (responseEntity.getBody() instanceof ResponseDetails) {
+                logResponseWithResponseDetails(responseEntity);
+            } else {
+                logResponseWithJSONBody(responseEntity, originClass, originMethod);
+            }
+        } else {
+            log.info("OUTGOING_RESPONSE", fields(
+                    buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
+        }
+    }
+
     private void logResponseWithResponseDetails(ResponseEntity<?> responseEntity) {
         ResponseDetails responseDetails = (ResponseDetails) responseEntity.getBody();
         if (!this.log.isDebugEnabled()) {
@@ -142,7 +157,6 @@ public class LoggingService {
         return rdb.build();
     }
 
-
     private String getContentAsString(byte[] buf, String charsetName) {
         if (buf == null || buf.length == 0) {
             return "";
@@ -173,5 +187,4 @@ public class LoggingService {
                 kv("originClass", originClass),
                 kv("originMethod", originMethod));
     }
-
 }

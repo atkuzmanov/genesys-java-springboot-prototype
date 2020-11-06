@@ -35,6 +35,7 @@ import static net.logstash.logback.argument.StructuredArguments.*;
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final LoggingService logServ = new LoggingService();
 
     /*----------------[Request logging]----------------*/
 
@@ -73,8 +74,7 @@ public class RestLoggingAspect {
 //        );
 
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
-        LoggingService ls = new LoggingService();
-        ls.logContentCachingRequest(requestWrapper, targetClass.getName(), joinPoint.getSignature().getName());
+        logServ.logContentCachingRequest(requestWrapper, targetClass.getName(), joinPoint.getSignature().getName());
     }
 
     private Map<String, String> extractRequestParameters(HttpServletRequest request) {
@@ -176,16 +176,19 @@ public class RestLoggingAspect {
             String originMethod = joinPoint.getSignature().getName();
             ResponseEntity<?> responseEntity = (ResponseEntity<?>) result;
 
-            if (responseEntity.hasBody()) {
-                if (responseEntity.getBody() instanceof ResponseDetails) {
-                    logResponseWithResponseDetails(responseEntity);
-                } else {
-                    logResponseWithJSONBody(responseEntity, originClass, originMethod);
-                }
-            } else {
-                log.info("OUTGOING_RESPONSE", fields(
-                        buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
-            }
+//            if (responseEntity.hasBody()) {
+//                if (responseEntity.getBody() instanceof ResponseDetails) {
+//                    logResponseWithResponseDetails(responseEntity);
+//                } else {
+//                    logResponseWithJSONBody(responseEntity, originClass, originMethod);
+//                }
+//            } else {
+//                log.info("OUTGOING_RESPONSE", fields(
+//                        buildResponseDetailsForLogging(responseEntity, originClass, originMethod)));
+//            }
+
+            logServ.logResponseEntity(responseEntity, originClass, originMethod);
+
         } else {
             // Everything else is captured by the LoggingInterceptor.
 //            log.info("UNKNOWN_RESPONSE", kv("unknownResponse", result));
@@ -246,8 +249,6 @@ public class RestLoggingAspect {
 //                kv("originMethod", p.getSignature().getName()),
 //                kv("originClass", targetClass.toString()));
 
-        LoggingService ls = new LoggingService();
-
-        ls.logException(e, p.getSignature().getName(), targetClass.getName());
+        logServ.logException(e, targetClass.getName(), p.getSignature().getName());
     }
 }
