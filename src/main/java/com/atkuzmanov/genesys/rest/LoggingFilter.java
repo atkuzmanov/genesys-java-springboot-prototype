@@ -1,5 +1,6 @@
 package com.atkuzmanov.genesys.rest;
 
+import com.atkuzmanov.genesys.aop.LogRequestOrResponse;
 import com.atkuzmanov.genesys.aop.LoggingService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.Ordered;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -66,6 +68,7 @@ public class LoggingFilter extends OncePerRequestFilter {
      * @throws ServletException
      * @throws IOException
      */
+    @LogRequestOrResponse
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(httpServletRequest);
@@ -91,6 +94,7 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        RequestEntity<JsonNode> requestEntity = new RequestEntity<>(requestJson,requestHeaders, httpMethod, URI.create(requestUrl));
 //        LOGGER.info(appendFields(requestEntity),"Logging Http Request");
 
+        doLog();
 
         HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -101,7 +105,14 @@ public class LoggingFilter extends OncePerRequestFilter {
 //        JsonNode responseJson = objectMapper.readTree(responseBody);
         String str = objectMapper.writeValueAsString(responseBody);
         ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
-        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
+//        LOGGER.info("<<< Logging Http Response >>>", fields(responseEntity));
+
+        // The line below is very important!
         responseWrapper.copyBodyToResponse();
+    }
+
+    @LogRequestOrResponse
+    public void doLog() {
+        System.out.println("IN HERE >>> ");
     }
 }

@@ -2,12 +2,18 @@ package com.atkuzmanov.genesys.aop;
 
 import com.atkuzmanov.genesys.rest.ResponseDetails;
 import com.atkuzmanov.genesys.rest.ResponseDetailsBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.IOUtils;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -16,6 +22,8 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
 import org.springframework.web.util.WebUtils;
 
+import javax.persistence.criteria.Join;
+import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
@@ -24,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static net.logstash.logback.argument.StructuredArguments.*;
 
 /**
@@ -31,7 +40,7 @@ import static net.logstash.logback.argument.StructuredArguments.*;
  */
 @Aspect
 @Component
-@Order(-1)
+@Order(Ordered.HIGHEST_PRECEDENCE - 1)
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -228,6 +237,45 @@ public class RestLoggingAspect {
                 .responseBody(body);
 
         return rdb.build();
+    }
+
+    /*----------------[Response logging 2]----------------*/
+
+//    @Before("execution(* com.atkuzmanov.genesys..*.*(..)) && @annotation(com.atkuzmanov.genesys.aop.LogRequestOrResponse) && args(httpServletRequest, httpServletResponse, filterChain)")
+//    @Around("execution(* com.atkuzmanov.genesys.rest.LoggingFilter.doLog(..))")
+//    @Around("@annotation(com.atkuzmanov.genesys.aop.LogRequestOrResponse)")
+//    public void logFilterResponse(ProceedingJoinPoint joinPoint) {
+//    public void logFilterResponse(JoinPoint joinPoint, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) {
+
+    @Before("execution(* com.atkuzmanov.genesys.rest.LoggingFilter.doLog(..))")
+    public void logBlah(JoinPoint joinPoint) {
+
+        System.out.println(">>> HERE!");
+        log.info(">>> HERE! 2");
+
+        try {
+//            joinPoint.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+//
+//        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
+//        ObjectMapper objectMapper = new ObjectMapper();
+//
+//        HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        for (String headerName : responseWrapper.getHeaderNames()) {
+//            responseHeaders.add(headerName, responseWrapper.getHeader(headerName));
+//        }
+//        String str = null;
+//        try {
+//            String responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
+//            str = objectMapper.writeValueAsString(responseBody);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
+//        log.info("<<< Logging Http Response >>>", fields(responseEntity));
     }
 
     /*----------------[Exception logging]----------------*/
