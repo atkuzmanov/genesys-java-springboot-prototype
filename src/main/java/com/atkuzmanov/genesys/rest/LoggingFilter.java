@@ -81,12 +81,17 @@ public class LoggingFilter extends OncePerRequestFilter {
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
 
         /* The line below is very important!
+         * RE: Difficulty in ContentCachingResponseWrapper Produces Empty Response
+         * - <https://stackoverflow.com/questions/39935190/contentcachingresponsewrapper-produces-empty-response>
          */
         filterChain.doFilter(requestWrapper, responseWrapper);
 
         logServ.logContentCachingResponse(responseWrapper, this.getClass().getName(), "doFilterInternal");
 
-        // The line below is very important!
+        /* The line below is very important!
+         * RE: Difficulty in ContentCachingResponseWrapper Produces Empty Response
+         * - <https://stackoverflow.com/questions/39935190/contentcachingresponsewrapper-produces-empty-response>
+         */
         responseWrapper.copyBodyToResponse();
     }
 
