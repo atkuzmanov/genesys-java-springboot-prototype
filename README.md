@@ -201,23 +201,17 @@ RE: Problems for Spring MVC and Spring WebFlux
 
 - <https://github.com/zalando/problem-spring-web>
 
-RE: Logging REST Exceptions with Spring
-
-- <https://objectpartners.com/2014/10/21/logging-rest-exceptions-with-spring/>
-
-RE: Exception Handling in Spring MVC
-
-- <https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc>
-
-RE: Guide to Spring Boot REST API Error Handling
-
-- <https://www.toptal.com/java/spring-boot-rest-api-error-handling>
-
 RE: Customize HTTP Error Responses in Spring Boot
 - <https://dzone.com/articles/customize-error-responses-in-spring-boot>
 
-RE: Spring Boot Exception Handling for RESTful Services Errors
+RE: Spring Boot Exception Handling for REST and MVC
+
+- <https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc>
+- <https://www.toptal.com/java/spring-boot-rest-api-error-handling>
+- <https://objectpartners.com/2014/10/21/logging-rest-exceptions-with-spring/>
+- <https://mflash.dev/blog/2020/07/26/error-handling-for-a-spring-based-rest-api/>
 - <https://www.springboottutorial.com/spring-boot-exception-handling-for-rest-services>
+- <https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#server-properties>
 
 RE: Error Handling for REST with Spring
 
