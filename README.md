@@ -46,6 +46,7 @@ RE: Here is one good alternative using `ResponseBodyAdvice`:
 
 - <https://frandorado.github.io/spring/2018/11/15/log-request-response-with-body-spring.html>
 - <https://github.com/frandorado/spring-projects/tree/master/log-request-response-with-body>
+- <https://github.com/frandorado/spring-projects/blob/master/log-request-response-with-body/src/main/java/com/frandorado/loggingrequestresponsewithbody/interceptor/CustomResponseBodyAdviceAdapter.java>
 
 ### Difficulties with AOP and Controlelrs
 
@@ -105,6 +106,7 @@ RE: Difficulty in ContentCachingResponseWrapper Produces Empty Response
 RE: Here you can exclude urls, so the response does not get logged twice, once by doFilterInternal() and once by the Aspect.
 - <https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring>
 - <https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam>
+- <https://www.programmergate.com/how-to-exclude-a-url-from-a-filter/>
 
 RE: Bypassing the HttpServletRequest issue
 RE: Adding CachedBodyHttpServletRequest to Spring Boot Filter
@@ -114,6 +116,7 @@ RE: Filters/Filtering
 
 - <https://www.baeldung.com/spring-boot-add-filter>
 - <https://www.mdeditor.tw/pl/2w1V>
+- <https://gist.github.com/int128/e47217bebdb4c402b2ffa7cc199307ba>
 
 ### Interceptors/Intercepting
 
@@ -121,6 +124,7 @@ RE: Exclude Spring Request HandlerInterceptor by Path-Pattern
 - <https://stackoverflow.com/questions/34970179/exclude-spring-request-handlerinterceptor-by-path-pattern/34974725>
 
 RE: Interceptor
+- <https://github.com/glaudiston/spring-boot-rest-payload-logging>
 - <https://github.com/glaudiston/spring-boot-rest-payload-logging/blob/master/src/main/java/com/example/restservice/util/LogApiInterceptor.java>
 - <https://stackoverflow.com/questions/21193380/get-requestbody-and-responsebody-at-handlerinterceptor>
 

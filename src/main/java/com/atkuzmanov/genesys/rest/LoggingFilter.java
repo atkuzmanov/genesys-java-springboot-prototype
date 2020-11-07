@@ -35,10 +35,10 @@ import java.util.List;
 public class LoggingFilter extends OncePerRequestFilter {
 
     private final LoggingService logServ = new LoggingService();
-    /* Here you can exclude urls, so the response does not get logged twice,
-     * once by doFilterInternal() and once by the Aspect.
-     * See:
-     * https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring
+    /* RE: Here you can exclude urls, so the response does not get logged twice, once by doFilterInternal() and once by the Aspect.
+     * - <https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring>
+     * - <https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam>
+     * - <https://www.programmergate.com/how-to-exclude-a-url-from-a-filter/>
      * TODO: Possible improvement - extract excluded urls to properties configuration for different profiles.
      */
     private static final List<String> EXCLUDE_URL = Arrays.asList("/health", "/httptrace", "/info", "/updateTimestamp");
