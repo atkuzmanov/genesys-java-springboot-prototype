@@ -107,6 +107,11 @@ RE: Filters/Filtering
 
 - <https://www.mdeditor.tw/pl/2w1V>
 
+### Interceptors/Intercepting
+
+RE: Exclude Spring Request HandlerInterceptor by Path-Pattern
+- <https://stackoverflow.com/questions/34970179/exclude-spring-request-handlerinterceptor-by-path-pattern/34974725>
+
 ### Distributed Tracing
 
 RE: Distributed Tracing
