@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Aspect
 @Component
-@Order(Ordered.HIGHEST_PRECEDENCE - 1)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class RestLoggingAspect {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -53,45 +53,6 @@ public class RestLoggingAspect {
             logServ.logResponseEntity(responseEntity, originClass, originMethod);
 
         }
-    }
-
-    /*----------------[Response logging 2]----------------*/
-
-//    @Before("execution(* com.atkuzmanov.genesys..*.*(..)) && @annotation(com.atkuzmanov.genesys.aop.LogRequestOrResponse) && args(httpServletRequest, httpServletResponse, filterChain)")
-//    @Around("execution(* com.atkuzmanov.genesys.rest.LoggingFilter.doLog(..))")
-//    @Around("@annotation(com.atkuzmanov.genesys.aop.LogRequestOrResponse)")
-//    public void logFilterResponse(ProceedingJoinPoint joinPoint) {
-//    public void logFilterResponse(JoinPoint joinPoint, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) {
-
-    @Before("execution(* com.atkuzmanov.genesys.rest.LoggingFilter.doLog(..))")
-    public void logBlah(JoinPoint joinPoint) {
-
-        System.out.println(">>> HERE!");
-        log.info(">>> HERE! 2");
-
-        try {
-//            joinPoint.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-//
-//        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(httpServletResponse);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//
-//        HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
-//        HttpHeaders responseHeaders = new HttpHeaders();
-//        for (String headerName : responseWrapper.getHeaderNames()) {
-//            responseHeaders.add(headerName, responseWrapper.getHeader(headerName));
-//        }
-//        String str = null;
-//        try {
-//            String responseBody = IOUtils.toString(responseWrapper.getContentInputStream(), UTF_8);
-//            str = objectMapper.writeValueAsString(responseBody);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        ResponseEntity<?> responseEntity = new ResponseEntity<>(str,responseHeaders,responseStatus);
-//        log.info("<<< Logging Http Response >>>", fields(responseEntity));
     }
 
     /*----------------[Exception logging]----------------*/
