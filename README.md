@@ -74,7 +74,7 @@ RE: AOP
 - <https://www.baeldung.com/spring-aop-pointcut-tutorial>
 - <https://www.javaguides.net/2019/05/spring-boot-spring-aop-logging-example-tutorial.html>
 - <https://stackoverflow.com/questions/30335563/spring-boot-logger-aspects>
-
+- <http://blog.marcinchwedczuk.pl/overview-of-spring-annotation-driven-aop>
 
 RE: Aspect Weaving
 
@@ -83,17 +83,18 @@ RE: Aspect Weaving
 RE: Logging Requests/Responses
 
 - <https://www.baeldung.com/spring-http-logging>
+- <https://github.com/sjkhullar/RequestLogging/blob/master/RequestLogging/src/main/java/org/learn/log/aspect/LoggingHandler.java>
 
-### References
+### Filters
 
-> References:
-> <https://stackoverflow.com/questions/33744875/spring-boot-how-to-log-all-requests-and-responses-with-exceptions-in-single-pl>
->
-> <https://frandorado.github.io/spring/2018/11/15/log-request-response-with-body-spring.html>
->
-> <https://github.com/frandorado/spring-projects/tree/master/log-request-response-with-body>
->
-> <>
+RE: Difficulty injecting Request scope object into @Aspect
+
+- <https://stackoverflow.com/questions/41151546/inject-request-scope-object-into-aspect>
+
+RE: Filters/Filtering
+
+- <https://www.mdeditor.tw/pl/2w1V>
+
 
 ---
 
@@ -102,5 +103,7 @@ RE: Logging Requests/Responses
 > <https://spring.io/>
 >
 > <http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20>
+>
+> <https://www.mdeditor.tw/pl/2w1V>
 
 ---

@@ -20,6 +20,10 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
+/**
+ * Difficulty injecting Request scope object into @Aspect
+ * See: https://stackoverflow.com/questions/41151546/inject-request-scope-object-into-aspect
+ */
 @Component
 @Configuration
 public class LoggingFilter extends OncePerRequestFilter {
