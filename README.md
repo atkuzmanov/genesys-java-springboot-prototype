@@ -4,7 +4,7 @@
 
 ---
 
-## Setup
+## SETUP
 
 - Setting up the Maven wrapper
 
@@ -13,9 +13,9 @@ mvn -N io.takari:maven:wrapper
 ```
 ---
 
-## Notes
+## NOTES
 
-### ASPECT LOGGING and DISTRIBUTED TRACING
+### ASPECT LOGGING, STRUCTURED LOGGING and DISTRIBUTED TRACING
 
 This [StackOverflow question/thread](https://stackoverflow.com/questions/33744875/spring-boot-how-to-log-all-requests-and-responses-with-exceptions-in-single-pl) 
 demonstrates how hard the problem of combining LOGGING with DISTRIBUTED TRACING is, especially when you are using ASPECT ORIENTED PROGRAMMING (AOP) with Java and Spring Boot.
@@ -99,6 +99,10 @@ RE: Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
 - <https://blog.michaelstrasser.com/2017/07/using-sleuth-trace-id/>
 - <https://github.com/robert07ravikumar/sleuth-sample/blob/master/src/main/java/com/example/demo/AddResponseHeaderFilter.java>
 
+RE: Here you can exclude urls, so the response does not get logged twice, once by doFilterInternal() and once by the Aspect.
+- <https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring>
+- <https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam>
+
 RE: Filters/Filtering
 
 - <https://www.mdeditor.tw/pl/2w1V>
@@ -162,7 +166,7 @@ RE: A way to get traceId into an SLF4j MDC
 
 ---
 
-# References
+# REFERENCES
 
 > <https://spring.io/>
 >
