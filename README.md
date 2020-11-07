@@ -1,5 +1,7 @@
 # GeneSys
 
+![GeneSys Logo v1.0](GeneSys_Logo_v1.0.png)
+
 ---
 
 ## Setup
