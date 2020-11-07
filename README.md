@@ -42,12 +42,30 @@ together, the third next thing you need for the next functionality breaks one of
 
 ### Difficulties capturing Response body
 
-Here is one good alternative using `ResponseBodyAdvice`:
+RE: Here is one good alternative using `ResponseBodyAdvice`:
 
 - <https://frandorado.github.io/spring/2018/11/15/log-request-response-with-body-spring.html>
-
 - <https://github.com/frandorado/spring-projects/tree/master/log-request-response-with-body>
 
+### Difficulties with AOP and Controlelrs
+
+RE: Spring AOP does not work when the request is not mapped or valid
+- <https://stackoverflow.com/questions/59817236/spring-aop-around-controllers-does-not-work-when-request-input-are-invalid>
+
+### Apsects
+
+RE: AOP
+
+- <https://docs.spring.io/spring-framework/docs/4.3.15.RELEASE/spring-framework-reference/html/aop.html>
+- <https://dzone.com/articles/implementing-aop-with-spring-boot-and-aspectj>
+- <https://www.baeldung.com/spring-aop-annotation>
+- <https://www.baeldung.com/spring-aop-pointcut-tutorial>
+- <https://www.javaguides.net/2019/05/spring-boot-spring-aop-logging-example-tutorial.html>
+
+
+RE: Aspect Weaving
+
+- <https://www.baeldung.com/aspectj>
 
 ### References
 

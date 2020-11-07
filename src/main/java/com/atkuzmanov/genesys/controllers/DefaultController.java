@@ -16,11 +16,22 @@ import java.util.Optional;
 
 import static com.atkuzmanov.genesys.controllers.ResponseHeadersUtil.tracingResponseHeaders;
 
+/**
+ * Spring AOP does not work when the request is not mapped or valid.
+ * See:
+ * https://stackoverflow.com/questions/59817236/spring-aop-around-controllers-does-not-work-when-request-input-are-invalid
+ */
 @Controller
 public class DefaultController {
 
     @Autowired
     private TimestampRepository timestampRepo;
+
+    @RequestMapping({"/", "/index"})
+    public String returnIndexPage(Model model) {
+        model.addAttribute("timestamp", localDateTimeNowFormat_yyyyMMdddHHmmss());
+        return "index";
+    }
 
     @PostMapping(path = "/addTimestamp")
     public @ResponseBody
@@ -69,16 +80,10 @@ public class DefaultController {
         }
         Optional<TimestampEntity> optTse = timestampRepo.findById(timestampId);
         if (!optTse.isPresent()) {
-            return new ResponseEntity<>("Not found.", tracingResponseHeaders(),  HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Not found.", tracingResponseHeaders(), HttpStatus.NOT_FOUND);
         }
         timestampRepo.deleteById(timestampId);
         return new ResponseEntity<>(tracingResponseHeaders(), HttpStatus.NO_CONTENT);
-    }
-
-    @RequestMapping({"/", "/index"})
-    public String returnIndexPage(Model model) {
-        model.addAttribute("timestamp", localDateTimeNowFormat_yyyyMMdddHHmmss());
-        return "index";
     }
 
     private static String localDateTimeNowFormat_yyyyMMdddHHmmss() {
