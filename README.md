@@ -19,7 +19,7 @@ mvn -N io.takari:maven:wrapper
 
 This [StackOverflow question/thread](https://stackoverflow.com/questions/33744875/spring-boot-how-to-log-all-requests-and-responses-with-exceptions-in-single-pl) 
 demonstrates how hard the problem of combining LOGGING with DISTRIBUTED TRACING is, especially when you are using ASPECT ORIENTED PROGRAMMING (AOP) with Java and Spring Boot.
-Furthermore this thread is only about logging all requests, things get really "fun", when you start adding DISTRIBUTED TRACING etc.
+Furthermore, this thread is only about logging all requests, things get really "fun", when you start adding DISTRIBUTED TRACING etc.
 
 While you have many individual options for just one or the other, the difficulty arises when you try to combine them and make them play nice.
 I am referring to combining the following:
