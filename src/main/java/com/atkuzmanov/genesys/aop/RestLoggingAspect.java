@@ -27,10 +27,17 @@ public class RestLoggingAspect {
 
     /*----------------[Request logging]----------------*/
 
+    /* Pointcut double dots ".." to include sub packages.
+     * See: https://stackoverflow.com/questions/30335563/spring-boot-logger-aspects
+     */
     @Pointcut("execution(* com.atkuzmanov.genesys.controllers..*.*(..))")
     public void requestPointcut() {
     }
 
+
+    /* Injecting HttpServletRequest into a Spring AOP request
+     * See: https://stackoverflow.com/questions/19271807/how-to-inject-httpservletrequest-into-a-spring-aop-request-custom-scenario
+     */
     @Before("requestPointcut()")
     public void logRequest(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();

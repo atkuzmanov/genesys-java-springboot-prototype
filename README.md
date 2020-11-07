@@ -52,6 +52,18 @@ RE: Here is one good alternative using `ResponseBodyAdvice`:
 RE: Spring AOP does not work when the request is not mapped or valid
 - <https://stackoverflow.com/questions/59817236/spring-aop-around-controllers-does-not-work-when-request-input-are-invalid>
 
+### Difficulties with injecting HttpServletRequest into a Spring AOP request
+
+- <https://stackoverflow.com/questions/19271807/how-to-inject-httpservletrequest-into-a-spring-aop-request-custom-scenario>
+    And I quote:
+    > "Not easily. Actually, it would require a lot of effort.
+    > 
+    > The easy way to do it is to rely on RequestContextHolder. In every request, the DispatcherServlet binds the current HttpServletRequest to a static ThreadLocal object in the RequestContextHolder. You can retrieve it when executing within the same Thread with
+    > 
+    > `HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();`                                                                                                                                           > 
+    > You can do this in the advice() method and therefore don't need to declare a parameter."
+
+
 ### Apsects
 
 RE: AOP
@@ -61,11 +73,16 @@ RE: AOP
 - <https://www.baeldung.com/spring-aop-annotation>
 - <https://www.baeldung.com/spring-aop-pointcut-tutorial>
 - <https://www.javaguides.net/2019/05/spring-boot-spring-aop-logging-example-tutorial.html>
+- <https://stackoverflow.com/questions/30335563/spring-boot-logger-aspects>
 
 
 RE: Aspect Weaving
 
 - <https://www.baeldung.com/aspectj>
+
+RE: Logging Requests/Responses
+
+- <https://www.baeldung.com/spring-http-logging>
 
 ### References
 
