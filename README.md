@@ -99,6 +99,9 @@ RE: Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
 - <https://blog.michaelstrasser.com/2017/07/using-sleuth-trace-id/>
 - <https://github.com/robert07ravikumar/sleuth-sample/blob/master/src/main/java/com/example/demo/AddResponseHeaderFilter.java>
 
+RE: Difficulty in ContentCachingResponseWrapper Produces Empty Response
+- <https://stackoverflow.com/questions/39935190/contentcachingresponsewrapper-produces-empty-response>
+
 RE: Here you can exclude urls, so the response does not get logged twice, once by doFilterInternal() and once by the Aspect.
 - <https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring>
 - <https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam>
