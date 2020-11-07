@@ -117,6 +117,14 @@ RE: Filters/Filtering
 RE: Exclude Spring Request HandlerInterceptor by Path-Pattern
 - <https://stackoverflow.com/questions/34970179/exclude-spring-request-handlerinterceptor-by-path-pattern/34974725>
 
+RE: Interceptor
+- <https://github.com/glaudiston/spring-boot-rest-payload-logging/blob/master/src/main/java/com/example/restservice/util/LogApiInterceptor.java>
+- <https://stackoverflow.com/questions/21193380/get-requestbody-and-responsebody-at-handlerinterceptor>
+
+### Filter Interceptor Request Response Wrapping
+
+- <https://github.com/gadapa-rakesh/spring-request-response-body-auditing>
+
 ### Distributed Tracing
 
 RE: Distributed Tracing
