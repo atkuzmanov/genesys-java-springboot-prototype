@@ -22,7 +22,10 @@ import java.util.List;
 
 /**
  * Difficulty injecting Request scope object into @Aspect
- * See: https://stackoverflow.com/questions/41151546/inject-request-scope-object-into-aspect
+ * - <https://stackoverflow.com/questions/41151546/inject-request-scope-object-into-aspect>
+ *
+ * Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
+ * - <https://stackoverflow.com/questions/41222405/adding-the-traceid-from-spring-cloud-sleuth-to-response>
  */
 @Component
 @Configuration

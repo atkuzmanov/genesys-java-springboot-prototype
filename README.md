@@ -92,6 +92,10 @@ RE: Difficulty injecting Request scope object into @Aspect
 
 - <https://stackoverflow.com/questions/41151546/inject-request-scope-object-into-aspect>
 
+RE: Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
+
+- <https://stackoverflow.com/questions/41222405/adding-the-traceid-from-spring-cloud-sleuth-to-response>
+
 RE: Filters/Filtering
 
 - <https://www.mdeditor.tw/pl/2w1V>
@@ -143,6 +147,8 @@ RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 - <http://www.javabyexamples.com/logging-with-request-correlation-using-mdc>
 
 - <https://stackoverflow.com/questions/43787815/how-to-log-mdc-with-spring-sleuth>
+
+- <https://www.baeldung.com/mdc-in-log4j-2-logback>
 
 RE: A way to get traceId into an SLF4j MDC
 - <https://github.com/openzipkin/brave/issues/150>
