@@ -48,10 +48,11 @@ public class LoggingFilter extends OncePerRequestFilter {
         FilterRegistrationBean<LoggingFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new LoggingFilter());
 
-        // *1* make sure you sett all dispatcher types if you want the filter to log upon
+        // *1* Make sure you sett all dispatcher types if you want the filter to log upon.
         registrationBean.setDispatcherTypes(EnumSet.allOf(DispatcherType.class));
 
-        // *2* this should put your filter above any other filter
+        // *2* This should put your filter above any other filter.
+        // Adding "+1" to make it just below the TRACING_FILTER_ORDER level, so that spanId and traceId are added.
         registrationBean.setOrder(TraceWebServletAutoConfiguration.TRACING_FILTER_ORDER + 1);
 
         return registrationBean;
