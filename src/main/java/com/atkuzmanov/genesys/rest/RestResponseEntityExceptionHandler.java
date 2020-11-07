@@ -17,6 +17,19 @@ import java.lang.reflect.InvocationTargetException;
 
 import static com.atkuzmanov.genesys.controllers.ResponseHeadersUtil.tracingResponseHeaders;
 
+/**
+ * RE: Logging REST Exceptions with Spring
+ * - <https://objectpartners.com/2014/10/21/logging-rest-exceptions-with-spring/>
+ *
+ * RE: Difficulty in missing errors
+ * RE: Spring-Boot: Missing logs on HTTP 500
+ * > If you don't handle the exception at all then it will become an error dispatch, i.e. filters are executed a second time with the DispatcherType.ERROR trying to delegate to an error page. By default you don't get any from Spring, iirc.
+ * >
+ * >  Error dispatch is a tricky beast to get right, especially with Logbook. See #32, #155 and #334. Past experiences can be best summarized as Don't use ERROR dispatch.
+ * >
+ * >  Instead I'd suggest to use custom @ExceptionHandlers or something like https://github.com/zalando/problem-spring-web.
+ * - <https://github.com/zalando/logbook/issues/488>
+ */
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
@@ -31,7 +44,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     /**
-     * Handle failures commonly thrown from code
+     * Handle failures commonly thrown from code.
      */
     @ExceptionHandler({InvocationTargetException.class, IllegalArgumentException.class, ClassCastException.class,
             ConversionFailedException.class})
@@ -41,7 +54,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     /**
-     * Send a 409 Conflict in case of concurrent modification
+     * Send a 409 Conflict in case of concurrent modification.
      */
     @ExceptionHandler({ObjectOptimisticLockingFailureException.class, OptimisticLockingFailureException.class,
             DataIntegrityViolationException.class})

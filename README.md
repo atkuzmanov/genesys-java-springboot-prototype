@@ -185,6 +185,44 @@ RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 RE: A way to get traceId into an SLF4j MDC
 - <https://github.com/openzipkin/brave/issues/150>
 
+### Exception Handling
+
+RE: Difficulty in missing errors
+
+RE: Spring-Boot: Missing logs on HTTP 500
+> If you don't handle the exception at all then it will become an error dispatch, i.e. filters are executed a second time with the DispatcherType.ERROR trying to delegate to an error page. By default you don't get any from Spring, iirc.
+>  
+>  Error dispatch is a tricky beast to get right, especially with Logbook. See #32, #155 and #334. Past experiences can be best summarized as Don't use ERROR dispatch.
+>  
+>  Instead I'd suggest to use custom @ExceptionHandlers or something like https://github.com/zalando/problem-spring-web.
+- <https://github.com/zalando/logbook/issues/488>
+
+RE: Problems for Spring MVC and Spring WebFlux
+
+- <https://github.com/zalando/problem-spring-web>
+
+RE: Logging REST Exceptions with Spring
+
+- <https://objectpartners.com/2014/10/21/logging-rest-exceptions-with-spring/>
+
+RE: Exception Handling in Spring MVC
+
+- <https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc>
+
+RE: Guide to Spring Boot REST API Error Handling
+
+- <https://www.toptal.com/java/spring-boot-rest-api-error-handling>
+
+RE: Customize HTTP Error Responses in Spring Boot
+- <https://dzone.com/articles/customize-error-responses-in-spring-boot>
+
+RE: Spring Boot Exception Handling for RESTful Services Errors
+- <https://www.springboottutorial.com/spring-boot-exception-handling-for-rest-services>
+
+RE: Error Handling for REST with Spring
+
+- <https://www.baeldung.com/exception-handling-for-rest-with-spring>
+
 ### Logback
 
 - <http://logback.qos.ch/manual/introduction.html>
