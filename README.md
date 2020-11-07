@@ -96,6 +96,15 @@ RE: Filters/Filtering
 - <https://www.mdeditor.tw/pl/2w1V>
 
 
+### Distributed Tracing
+
+RE: Distributed Tracing
+
+- <https://docs.lightstep.com/docs/understand-distributed-tracing>
+
+RE: A way to get traceId into an SLF4j MDC
+- <https://github.com/openzipkin/brave/issues/150>
+
 ---
 
 # References
