@@ -95,6 +95,7 @@ RE: Difficulty injecting Request scope object into @Aspect
 RE: Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
 
 - <https://stackoverflow.com/questions/41222405/adding-the-traceid-from-spring-cloud-sleuth-to-response>
+- <https://cloud.spring.io/spring-cloud-sleuth/2.0.x/single/spring-cloud-sleuth.html#__literal_tracingfilter_literal>
 
 RE: Filters/Filtering
 
