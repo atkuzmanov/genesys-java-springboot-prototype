@@ -124,6 +124,10 @@ RE: Zipkin
 
 - <https://howtodoinjava.com/spring-cloud/spring-cloud-zipkin-sleuth-tutorial/>
 
+- <https://medium.com/swlh/distributed-tracing-in-micoservices-using-spring-zipkin-sleuth-and-elk-stack-5665c5fbecf>
+
+- <https://examples.javacodegeeks.com/spring-cloud-zipkin-and-sleuth-example/>
+
 RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 
 - <https://medium.com/@d.lopez.j/spring-boot-setting-a-unique-id-per-request-dd648efef2b>
@@ -142,6 +146,10 @@ RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 
 RE: A way to get traceId into an SLF4j MDC
 - <https://github.com/openzipkin/brave/issues/150>
+
+### Logback
+
+- <http://logback.qos.ch/manual/introduction.html>
 
 ---
 
