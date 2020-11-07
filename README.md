@@ -75,6 +75,7 @@ RE: AOP
 - <https://www.javaguides.net/2019/05/spring-boot-spring-aop-logging-example-tutorial.html>
 - <https://stackoverflow.com/questions/30335563/spring-boot-logger-aspects>
 - <http://blog.marcinchwedczuk.pl/overview-of-spring-annotation-driven-aop>
+- <https://stackoverflow.com/questions/55948389/how-can-i-start-and-stop-a-timer-in-different-classes/55949813#55949813>
 
 RE: Aspect Weaving
 
@@ -101,6 +102,33 @@ RE: Filters/Filtering
 RE: Distributed Tracing
 
 - <https://docs.lightstep.com/docs/understand-distributed-tracing>
+
+- <https://opensource.com/article/18/5/distributed-tracing>
+
+- <https://copyconstruct.medium.com/distributed-tracing-weve-been-doing-it-wrong-39fc92a857df>
+
+- <https://spring.io/blog/2016/02/15/distributed-tracing-with-spring-cloud-sleuth-and-spring-cloud-zipkin>
+
+RE: Sleuth
+
+- <https://docs.spring.io/spring-cloud-sleuth/docs/current-SNAPSHOT/reference/html/getting-started.html#getting-started>
+
+- <https://www.baeldung.com/tracing-services-with-zipkin>
+
+
+RE: Zipkin
+
+- <https://medium.com/swlh/microservices-observability-with-zipkin-and-spring-cloud-sleuth-66508ce6840>
+
+RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
+
+- <https://medium.com/@d.lopez.j/spring-boot-setting-a-unique-id-per-request-dd648efef2b>
+
+- <https://stackoverflow.com/questions/56338075/how-to-create-unique-id-per-request-for-rest-api-in-spring-boot>
+
+- <https://dzone.com/articles/setting-up-mdc-context-with-aop-in-spring-boot-app>
+
+- <https://dzone.com/articles/implementing-correlation-ids-0>
 
 RE: A way to get traceId into an SLF4j MDC
 - <https://github.com/openzipkin/brave/issues/150>
