@@ -103,8 +103,13 @@ RE: Here you can exclude urls, so the response does not get logged twice, once b
 - <https://stackoverflow.com/questions/39212551/how-do-i-exclude-a-specific-url-in-a-filter-in-spring>
 - <https://stackoverflow.com/questions/33864252/spring-mvc-handler-interceptor-with-exclude-path-pattern-with-pathparam>
 
+RE: Bypassing the HttpServletRequest issue
+RE: Adding CachedBodyHttpServletRequest to Spring Boot Filter
+- <https://dfar.io/recording-http-request-body-with-java-spring-boot-and-application-insights/>
+
 RE: Filters/Filtering
 
+- <https://www.baeldung.com/spring-boot-add-filter>
 - <https://www.mdeditor.tw/pl/2w1V>
 
 ### Interceptors/Intercepting
