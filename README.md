@@ -25,6 +25,8 @@ While you have many individual options for just one or the other, the difficulty
 I am referring to combining the following:
 - AOP (Controller Advice, ResponseBodyAdvice etc.)
 - Logging (cross-cutting concern => AOP)
+- SLF4J
+- MDC
 - Filters (Request/Responce Filters etc.)
 - Interceptors (Request/Responce Interceptors etc.)
 - Handlers (Exception Handlers etc.)
@@ -38,8 +40,25 @@ the amount of possible successful combinations grows exponentially small.
 It becomes almost as trying to find a needle in a haystack, as when you have just fixed or made two of them play nice 
 together, the third next thing you need for the next functionality breaks one of the previous two.
 
+### Difficulties capturing Response body
+
+Here is one good alternative using `ResponseBodyAdvice`:
+
+- <https://frandorado.github.io/spring/2018/11/15/log-request-response-with-body-spring.html>
+
+- <https://github.com/frandorado/spring-projects/tree/master/log-request-response-with-body>
+
+
+### References
+
 > References:
 > <https://stackoverflow.com/questions/33744875/spring-boot-how-to-log-all-requests-and-responses-with-exceptions-in-single-pl>
+>
+> <https://frandorado.github.io/spring/2018/11/15/log-request-response-with-body-spring.html>
+>
+> <https://github.com/frandorado/spring-projects/tree/master/log-request-response-with-body>
+>
+> <>
 
 ---
 
