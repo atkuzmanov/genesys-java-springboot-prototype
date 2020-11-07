@@ -96,6 +96,8 @@ RE: Difficulty adding the traceId from Spring Cloud Sleuth to response in Filter
 
 - <https://stackoverflow.com/questions/41222405/adding-the-traceid-from-spring-cloud-sleuth-to-response>
 - <https://cloud.spring.io/spring-cloud-sleuth/2.0.x/single/spring-cloud-sleuth.html#__literal_tracingfilter_literal>
+- <https://blog.michaelstrasser.com/2017/07/using-sleuth-trace-id/>
+- <https://github.com/robert07ravikumar/sleuth-sample/blob/master/src/main/java/com/example/demo/AddResponseHeaderFilter.java>
 
 RE: Filters/Filtering
 
