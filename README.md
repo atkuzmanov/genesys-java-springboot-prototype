@@ -96,7 +96,6 @@ RE: Filters/Filtering
 
 - <https://www.mdeditor.tw/pl/2w1V>
 
-
 ### Distributed Tracing
 
 RE: Distributed Tracing
@@ -115,10 +114,15 @@ RE: Sleuth
 
 - <https://www.baeldung.com/tracing-services-with-zipkin>
 
+- <https://www.baeldung.com/spring-cloud-sleuth-single-application>
 
 RE: Zipkin
 
+- <https://zipkin.io/>
+
 - <https://medium.com/swlh/microservices-observability-with-zipkin-and-spring-cloud-sleuth-66508ce6840>
+
+- <https://howtodoinjava.com/spring-cloud/spring-cloud-zipkin-sleuth-tutorial/>
 
 RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 
@@ -129,6 +133,12 @@ RE: Correlation in Logging; Mapped Diagnostic Context (MDC); Logback; Log4j2;
 - <https://dzone.com/articles/setting-up-mdc-context-with-aop-in-spring-boot-app>
 
 - <https://dzone.com/articles/implementing-correlation-ids-0>
+
+- <https://dzone.com/articles/correlation-id-for-logging-in-microservices>
+
+- <http://www.javabyexamples.com/logging-with-request-correlation-using-mdc>
+
+- <https://stackoverflow.com/questions/43787815/how-to-log-mdc-with-spring-sleuth>
 
 RE: A way to get traceId into an SLF4j MDC
 - <https://github.com/openzipkin/brave/issues/150>

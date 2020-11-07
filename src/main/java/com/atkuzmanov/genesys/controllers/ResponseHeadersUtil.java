@@ -9,6 +9,11 @@ import java.util.Properties;
 
 public class ResponseHeadersUtil {
 
+    /*
+     * See:
+     * https://stackoverflow.com/questions/43787815/how-to-log-mdc-with-spring-sleuth
+     * https://medium.com/@d.lopez.j/spring-boot-setting-a-unique-id-per-request-dd648efef2b
+     */
     public static HttpHeaders tracingResponseHeaders() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("X-Span-Export", MDC.get("X-Span-Export"));
