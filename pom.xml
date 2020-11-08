@@ -208,6 +208,12 @@
                                 <requireMavenVersion>
                                     <version>[${maven.version},)</version>
                                 </requireMavenVersion>
+                                <bannedDependencies>
+                                    <searchTransitive>true</searchTransitive>
+                                    <excludes>
+                                        <exclude>*:commons-logging</exclude>
+                                    </excludes>
+                                </bannedDependencies>
                                 <banDuplicatePomDependencyVersions/>
                                 <dependencyConvergence/>
                                 <requireUpperBoundDeps/>
