@@ -50,6 +50,8 @@ The project comes pre-configured incorporating the following technologies:
 - Maven
     - Enforcer plugin
 - Tomcat
+- Design Patterns
+    - Builder Design Pattern
 
 **Note:** For the relevant versions, please see the [POM file](pom.xml).
 
