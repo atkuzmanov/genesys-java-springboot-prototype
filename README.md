@@ -60,9 +60,9 @@ mvn spring-boot:run
 
 - :white_large_square: Clean up & tidy up
 
-- :black_square_button: Add more useful technologies
+- :white_large_square: Add more useful technologies
 
-:black_square_button: - Not started
+:white_large_square: - Not started
 :eight_pointed_black_star: - In progress
 :white_check_mark: - Done
 
