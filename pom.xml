@@ -23,7 +23,7 @@
         <java.target-jdk.version>11</java.target-jdk.version>
         <release.train.version>Hoxton.SR8</release.train.version>
         <!-- Dependencies -->
-        <aspectjweaver.version>1.9.5</aspectjweaver.version>
+        <aspectjweaver.version>1.9.6</aspectjweaver.version>
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <java-uuid-generator.version>4.0</java-uuid-generator.version>
         <commons-io.version>2.5</commons-io.version>
@@ -39,9 +39,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <!-- Spring Cloud Sleuth requires a Spring Cloud BOM -->
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Cloud Sleuth requires a Spring Cloud BOM -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -49,6 +49,12 @@
                 <version>${release.train.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- RE: Aspect weaving https://www.baeldung.com/aspectj -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -118,12 +124,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!-- RE: Aspect weaving https://www.baeldung.com/aspectj -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectjweaver.version}</version>
         </dependency>
         <!-- Logging -->
         <dependency>
@@ -204,6 +204,8 @@
                                 <requireMavenVersion>
                                     <version>[${maven.version},)</version>
                                 </requireMavenVersion>
+                                <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
                             </rules>
                             <fail>true</fail>
                         </configuration>
