@@ -61,13 +61,15 @@ mvn spring-boot:run
 
 ## TODOs & WIP
 
-- :white_large_square: Clean up & tidy up
+- :white_large_square: Clean up & tidy up.
 
-- :white_large_square: Add more useful technologies
+- :eight_pointed_black_star: Create a demo application.
 
-:white_large_square: - Not started
-:eight_pointed_black_star: - In progress
-:white_check_mark: - Done
+- :white_large_square: Add more useful technologies.
+
+:white_large_square: - Not started.
+:eight_pointed_black_star: - In progress.
+:white_check_mark: - Done.
 
 ---
 
