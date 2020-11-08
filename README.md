@@ -45,13 +45,13 @@ The project comes pre-configured incorporating the following technologies:
     - SLF4J
     - MDC
 - Distributed Tracing
-    - Sleuth
-    - Zipkin
-- Maven
-    - Enforcer plugin
-- Tomcat
-- Design Patterns
-    - Builder Design Pattern
+    - [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
+    - [Zipkin](https://zipkin.io/)
+- [Maven](https://maven.apache.org/index.html)
+    - [Enforcer plugin](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
+- [Apache Tomcat](http://tomcat.apache.org/)
+- [Design Patterns](https://www.oodesign.com/)
+    - [Builder Design Pattern](https://www.oodesign.com/builder-pattern.html)
 
 **Note:** For the relevant versions, please see the [POM file](pom.xml).
 
