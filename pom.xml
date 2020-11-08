@@ -22,6 +22,8 @@
     <properties>
         <java.version>11</java.version>
         <release.train.version>Hoxton.SR8</release.train.version>
+        <maven.version>3.5.4</maven.version>
+        <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     </properties>
 
     <parent>
@@ -181,7 +183,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0-M3</version>
+                <version>${maven-enforcer-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>enforce-versions</id>
@@ -194,7 +196,7 @@
                                     <version>[${java.version},)</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
-                                    <version>[3.5.4,)</version>
+                                    <version>[${maven.version},)</version>
                                 </requireMavenVersion>
                             </rules>
                             <fail>true</fail>
