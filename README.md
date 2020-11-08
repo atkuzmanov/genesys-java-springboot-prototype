@@ -62,10 +62,8 @@ mvn spring-boot:run
 
 - [ ] Add more useful technologies
 
-:white_medium_square: - Not started
-
+:black_square_button: - Not started
 :eight_pointed_black_star: - In progress
-
 :white_check_mark: - Done
 
 ---
