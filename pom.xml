@@ -193,9 +193,9 @@
                                 <requireJavaVersion>
                                     <version>[${java.version},)</version>
                                 </requireJavaVersion>
-<!--                                <requireMavenVersion>-->
-<!--                                    <version>[3.5.4,)</version>-->
-<!--                                </requireMavenVersion>-->
+                                <requireMavenVersion>
+                                    <version>[3.5.4,)</version>
+                                </requireMavenVersion>
                             </rules>
                             <fail>true</fail>
                         </configuration>
