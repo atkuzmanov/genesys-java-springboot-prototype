@@ -236,4 +236,10 @@ RE: Structured Logging
 - <https://www.schibsted.pl/blog/logback-pattern-gdpr/>
 - <https://blog.10pines.com/2020/03/02/log-custom-json-with-log4j2/>
 
+### Maven
+
+RE: Maven Enforcer Plugin
+- <https://blogs.oracle.com/developers/mastering-maven-the-enforcer-plugin>
+- <https://maven.apache.org/enforcer/maven-enforcer-plugin/>
+
 ---

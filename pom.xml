@@ -186,6 +186,9 @@
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                 </configuration>
             </plugin>
+            <!-- RE: Maven Enforcer Plugin
+                 - <https://blogs.oracle.com/developers/mastering-maven-the-enforcer-plugin>
+                 - <https://maven.apache.org/enforcer/maven-enforcer-plugin/> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -206,6 +209,7 @@
                                 </requireMavenVersion>
                                 <banDuplicatePomDependencyVersions/>
                                 <dependencyConvergence/>
+                                <requireUpperBoundDeps/>
                             </rules>
                             <fail>true</fail>
                         </configuration>
