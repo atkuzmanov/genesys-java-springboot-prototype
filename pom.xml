@@ -168,8 +168,9 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- See: https://github.com/spring-projects/spring-framework/issues/22814 -->
-                    <!-- See: https://github.com/spring-projects/spring-framework/issues/25382 -->
+                    <!-- RE: Illegal reflective access
+                         - <https://github.com/spring-projects/spring-framework/issues/22814>
+                         - <https://github.com/spring-projects/spring-framework/issues/25382> -->
                     <jvmArguments>--illegal-access=deny</jvmArguments>
                 </configuration>
             </plugin>

@@ -242,6 +242,11 @@ RE: Maven Enforcer Plugin
 - <https://blogs.oracle.com/developers/mastering-maven-the-enforcer-plugin>
 - <https://maven.apache.org/enforcer/maven-enforcer-plugin/>
 
+RE:--illegal-access=deny
+RE: Illegal reflective access
+- <https://github.com/spring-projects/spring-framework/issues/22814>
+- <https://github.com/spring-projects/spring-framework/issues/25382>
+
 ### Spring application.properties
 
 RE: spring.jpa.open-in-view Warning
