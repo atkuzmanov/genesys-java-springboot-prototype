@@ -217,9 +217,37 @@ RE: Error Handling for REST with Spring
 
 - <https://www.baeldung.com/exception-handling-for-rest-with-spring>
 
-### Logback
+### Structured Logging
 
+RE: Logback + Logstash + Configuration
 - <http://logback.qos.ch/manual/introduction.html>
+- <https://github.com/mafr/structured-logging/blob/master/spring-boot/logback-spring.xml>
+- <https://github.com/mafr/structured-logging>
+- <https://stackoverflow.com/questions/57104502/how-do-i-wrap-some-of-the-methods-of-logstash-logback-encoder-into-an-inner-fiel>
+- <https://stackoverflow.com/questions/51729062/how-to-add-custom-field-to-log-logback-logstash>
+- <https://github.com/logstash/logstash-logback-encoder/blob/master/src/test/resources/logback-test.xml>
+- <https://zenidas.wordpress.com/recipes/extending-logstash-logback-encoder/>
+- <https://stackoverflow.com/questions/61735308/how-to-configure-custom-patternlayout-of-a-loggingeventcompositejsonencoder>
+- <https://stackoverflow.com/questions/59718108/how-can-i-change-a-key-name-in-the-json-output-using-logback>
+
+RE: Logging in JSON general
+- <https://stackoverflow.com/questions/53730449/is-there-a-recommended-way-to-get-spring-boot-to-json-format-logs-with-logback>
+- <https://www.baeldung.com/spring-boot-logging>
+- <https://www.baeldung.com/java-log-json-output>
+- <https://docs.spring.io/spring-boot/docs/1.5.x/reference/html/howto-logging.html>
+
+RE: JSON Logging for Spring Boot + Logstash
+- <http://development.wombatsecurity.com/development/2018/12/20/json-logging-for-spring-boot/>
+- <https://www.innoq.com/en/blog/structured-logging/>
+- <https://sadique.io/blog/2016/06/30/json-logging-for-spring-applications/>
+- <https://gquintana.github.io/2017/12/01/Structured-logging-with-SL-FJ-and-Logback.html>
+
+RE: Structured Logging
+- <https://medium.com/@krishankantsinghal/structured-logging-why-and-how-to-achieve-in-java-33974d22accb>
+- <https://medium.com/@d.lopez.j/easily-connecting-your-spring-boot-applications-to-the-elastic-stack-with-log4j2-1809e81c6a2e>
+- <https://medium.com/hprog99/spring-boot-logs-with-elasticsearch-logstash-and-kibana-elk-c61a378f3cb4>
+- <https://www.schibsted.pl/blog/logback-pattern-gdpr/>
+- <https://blog.10pines.com/2020/03/02/log-custom-json-with-log4j2/>
 
 ---
 

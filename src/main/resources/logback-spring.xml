@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+RE: Logback + Logstash + Configuration
+- <http://logback.qos.ch/manual/introduction.html>
+- <https://github.com/mafr/structured-logging/blob/master/spring-boot/logback-spring.xml>
+- <https://github.com/mafr/structured-logging>
+-->
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <property resource="application.properties"/>
