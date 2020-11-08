@@ -17,23 +17,36 @@ The project comes pre-configured incorporating the following technologies:
 
 - Java
 - Spring Boot
-    - Aspect Oriented Programming (AOP)
-    - Web & REST
+    - Spring Cloud
+- Aspect Oriented Programming (AOP)
+    - Spring Boot AOP
+    - AspectJ
+- Web & REST
+    - Spring MVC
         - Controllers
         - Filters
         - Exception Handling
-        - Thymeleaf
-- Maven
-    - Enforcer plugin
+    - Spring Thymeleaf
+- Testing
+    - Unit Testing
+    - Integration Testing
+- Data
+    - MySQL
+    - JPA
+    - DAO
 - Logging
     - Structured Logging in JSON format
+    - Logback
+    - Logstash
     - SLF4J
     - MDC
 - Distributed Tracing
     - Sleuth
     - Zipkin
+- Maven
+    - Enforcer plugin    
 
-**Note:** For versions, please see the [POM file](pom.xml).
+**Note:** For the relevant versions, please see the [POM file](pom.xml).
 
 ---
 
@@ -59,7 +72,7 @@ mvn spring-boot:run
 
 ---
 
-## TODOs & WIP
+## TODOs, WIP & FUTURE DEVELOPMENT
 
 - :white_large_square: Clean up & tidy up.
 
