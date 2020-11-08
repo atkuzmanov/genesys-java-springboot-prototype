@@ -27,7 +27,11 @@ The project comes pre-configured incorporating the following technologies:
         - Filters
         - Exception Handling
     - Spring Thymeleaf
+        - HTML
+        - CSS
 - Testing
+    - Spring Boot Test
+    - JUnit
     - Unit Testing
     - Integration Testing
 - Data
@@ -44,7 +48,8 @@ The project comes pre-configured incorporating the following technologies:
     - Sleuth
     - Zipkin
 - Maven
-    - Enforcer plugin    
+    - Enforcer plugin
+- Tomcat
 
 **Note:** For the relevant versions, please see the [POM file](pom.xml).
 
