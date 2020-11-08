@@ -58,9 +58,9 @@ mvn spring-boot:run
 
 ## TODOs & WIP
 
-- [ ] Clean up & tidy up
+- :white_large_square: Clean up & tidy up
 
-- [ ] Add more useful technologies
+- :black_square_button: Add more useful technologies
 
 :black_square_button: - Not started
 :eight_pointed_black_star: - In progress
