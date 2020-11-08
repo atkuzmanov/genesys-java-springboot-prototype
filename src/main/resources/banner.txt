@@ -9,5 +9,7 @@ ${AnsiBackground.233}
      ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 ${AnsiColor.2}      App: ${info.app.name} (v${info.app.version})
 ${AnsiColor.2}      URL: ${info.app.url}
+${AnsiColor.2}      Java JDK Target version: ${java.target-jdk.version}
+${AnsiColor.2}      Java version: ${java.version}
 ${AnsiColor.2}      Spring Boot version: ${spring-boot.formatted-version}
 ${AnsiColor.DEFAULT}${AnsiBackground.DEFAULT}

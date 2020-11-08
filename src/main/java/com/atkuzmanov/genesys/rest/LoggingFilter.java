@@ -41,7 +41,8 @@ public class LoggingFilter extends OncePerRequestFilter {
      * - <https://www.programmergate.com/how-to-exclude-a-url-from-a-filter/>
      * TODO: Possible improvement - extract excluded urls to properties configuration for different profiles.
      */
-    private static final List<String> EXCLUDE_URL = Arrays.asList("/health", "/httptrace", "/info", "/updateTimestamp");
+    private static final List<String> EXCLUDE_URL = Arrays.asList("/health", "/httptrace", "/info",
+            "/all", "/addTimestamp", "/updateTimestamp", "/delete");
 
     @Bean
     public FilterRegistrationBean<LoggingFilter> initFilter() {
