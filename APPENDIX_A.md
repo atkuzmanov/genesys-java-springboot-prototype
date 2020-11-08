@@ -242,4 +242,10 @@ RE: Maven Enforcer Plugin
 - <https://blogs.oracle.com/developers/mastering-maven-the-enforcer-plugin>
 - <https://maven.apache.org/enforcer/maven-enforcer-plugin/>
 
+### Spring application.properties
+
+RE: spring.jpa.open-in-view Warning
+- <https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot>
+- <https://www.baeldung.com/spring-open-session-in-view>
+
 ---
