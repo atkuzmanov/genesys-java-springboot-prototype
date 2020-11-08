@@ -6,7 +6,7 @@
 
 ## Description
 
-This is a project to be used as a `base` or a `cookie-cutter` if you will.
+This is a project to be used as a `base` or a `cookie cutter` if you will.
 
 This version of the project is for building a Java Spring Boot Web and REST applications from scratch.
 
@@ -53,6 +53,20 @@ mvn clean install
 ```
 mvn spring-boot:run
 ```
+
+---
+
+## TODOs & WIP
+
+- [ ] Clean up & tidy up
+
+- [ ] Add more useful technologies
+
+:white_medium_square: - Not started
+
+:eight_pointed_black_star: - In progress
+
+:white_check_mark: - Done
 
 ---
 
