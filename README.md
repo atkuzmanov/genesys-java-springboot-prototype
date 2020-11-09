@@ -2,7 +2,7 @@
 
 ![GeneSys Logo v1.0](GeneSys_Logo_v1.0%20Big%20Dark.png)
 
-**```"Genesis + System = GeneSys"```**   
+***```"Genesis + System = GeneSys"```***   
 \- atkuzmanov
 
 ---
