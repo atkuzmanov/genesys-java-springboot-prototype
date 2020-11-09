@@ -1,6 +1,6 @@
 # GeneSys
 
-![GeneSys Logo v1.0](GeneSys_Logo_v1.0%20Big%20Dark.png)
+![GeneSys Logo v1.0](src/main/resources/logos/GeneSys_Logo_v1.1 Big Dark.png)
 
 ***```"Genesis + System = GeneSys"```***   
 \- atkuzmanov
