@@ -8,7 +8,6 @@ ${AnsiBackground.233}
     ╚██████╔╝███████╗██║ ╚████║███████╗███████║   ██║   ███████║
      ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝   ╚═╝   ╚══════╝
 ${AnsiColor.2}      "Genesis + System = GeneSys" - atkuzmanov
-${AnsiColor.2}
 ${AnsiColor.2}      App: ${info.app.name} (v${info.app.version})
 ${AnsiColor.2}      URL: ${info.app.url}
 ${AnsiColor.2}      Java JDK Target version: ${java.target-jdk.version}
