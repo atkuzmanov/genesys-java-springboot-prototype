@@ -1,0 +1,12 @@
+{
+  "app": "GeneSys",
+  "logMsgId": "77b1400d-a13c-4759-b140-0da13cc759aa",
+  "@timestamp": "2020-11-11T11:20:30.724Z",
+  "@version": "1",
+  "logger": "org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext",
+  "level": "WARN",
+  "thread": "main",
+  "message": "Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'timestampRepository' defined in com.atkuzmanov.genesys.dao.TimestampRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot resolve reference to bean 'jpaMappingContext' while setting bean property 'mappingContext'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jpaMappingContext': Invocation of init method failed; nested exception is javax.persistence.PersistenceException: [PersistenceUnit: default] Unable to build Hibernate SessionFactory; nested exception is org.hibernate.exception.JDBCConnectionException: Unable to open JDBC Connection for DDL execution",
+  "method": "refresh",
+  "class": "org.springframework.context.support.AbstractApplicationContext"
+}
