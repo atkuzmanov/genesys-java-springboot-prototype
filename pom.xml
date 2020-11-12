@@ -36,6 +36,8 @@
         <commons-io.version>2.5</commons-io.version>
         <mysql-connector-java.version>8.0.21</mysql-connector-java.version>
         <lombok-version>1.18.16</lombok-version>
+        <guava-version>30.0-jre</guava-version>
+        <guice-version>4.2.3</guice-version>
         <!-- Plugins -->
         <maven.version>3.5.4</maven.version>
         <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
@@ -181,7 +183,19 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>30.0-jre</version>
+            <version>${guava-version}</version>
+        </dependency>
+        <!-- Guice: Google Dependency Injection framework https://github.com/google/guice -->
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>${guice-version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 
