@@ -177,6 +177,12 @@
             <version>${lombok-version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Guava: Google Core Libraries for Java https://github.com/google/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.0-jre</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -53,6 +53,8 @@ The project comes pre-configured incorporating the following technologies:
 - [Design Patterns](https://www.oodesign.com/)
     - [Builder Design Pattern](https://www.oodesign.com/builder-pattern.html)
 - [Lombok](https://www.projectlombok.org/)
+- [Google Guava](https://github.com/google/guava)
+- []()
 
 **Note:** For the relevant versions, please see the [POM file](pom.xml).
 
